@@ -1,0 +1,31 @@
+const clientesData = [
+  {id: 0, name: 'José dos Santos', registered: '01/01/2019', /*role: 'Guest',*/ status: 'Pendente'},
+  {id: 1, name: 'João Silva', registered: '01/01/2019', /*role: 'Member',*/ status: 'Ativo'},
+  {id: 2, name: 'Alexandra Azevedo', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Excluido'},
+  {id: 3, name: 'Maria do Carmo', registered: '01/01/2019', /*role: 'Admin',*/ status: 'Inativo'},
+  {id: 4, name: 'Anderson Sales', registered: '01/01/2019', /*role: 'Member',*/ status: 'Pendente'},
+  {id: 5, name: 'Robson Luiz', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Ativo'},
+  {id: 6, name: 'José Leonardo', registered: '01/01/2019', /*role: 'Member',*/ status: 'Ativo'},
+  {id: 7, name: 'Brayan Silva', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Excluido'},
+  {id: 8, name: 'Maiara Santos', registered: '01/01/2019', /*role: 'Admin',*/ status: 'Inativo'},
+  {id: 9, name: 'Vanessa da Silva', registered: '01/01/2019', /*role: 'Member',*/ status: 'Pendente'},
+  {id: 10, name: 'Agapetus Tadeáš', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Ativo'},
+  {id: 11, name: 'Carwyn Fachtna', registered: '01/01/2019', /*role: 'Member',*/ status: 'Ativo'},
+  {id: 12, name: 'Nehemiah Tatius', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Excluido'},
+  {id: 13, name: 'Ebbe Gemariah', registered: '01/01/2019', /*role: 'Admin',*/ status: 'Inativo'},
+  {id: 14, name: 'Eustorgios Amulius', registered: '01/01/2019', /*role: 'Member',*/ status: 'Pendente'},
+  {id: 15, name: 'Leopold Gáspár', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Ativo'},
+  {id: 16, name: 'Pompeius René', registered: '01/01/2019', /*role: 'Member',*/ status: 'Ativo'},
+  {id: 17, name: 'Paĉjo Jadon', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Excluido'},
+  {id: 18, name: 'Micheal Mercurius', registered: '01/01/2019', /*role: 'Admin',*/ status: 'Inativo'},
+  {id: 19, name: 'Ganesha Dubhghall', registered: '01/01/2019', /*role: 'Member',*/ status: 'Pendente'},
+  {id: 20, name: 'Hiroto Šimun', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Ativo'},
+  {id: 21, name: 'Vishnu Serghei', registered: '01/01/2019', /*role: 'Member',*/ status: 'Ativo'},
+  {id: 22, name: 'Zbyněk Phoibos', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Excluido'},
+  {id: 23, name: 'Einar Randall', registered: '01/01/2019', /*role: 'Admin',*/ status: 'Inativo'},
+  {id: 24, name: 'Félix Troels', registered: '01/01/2019', /*role: 'Staff',*/ status: 'Ativo'},
+  {id: 25, name: 'Aulus Agmundr', registered: '01/01/2019', /*role: 'Member',*/ status: 'Pendente'},
+  {id: 42, name: 'Ford Prefex', registered: '01/01/2019', /*role: 'Alien',*/ status: 'Don\'t panic!'}
+]
+
+export default clientesData

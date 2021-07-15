@@ -1,0 +1,20 @@
+.container-btn-entrar {
+    height: 50%;
+    width: 28%;
+}
+
+.btn-entrar {
+    background-color: #579AF2;
+    color: #fff;
+    border: none;
+}
+
+.btn-entrar:active {
+    background-color: #327AD9; 
+    box-shadow: none;
+}
+
+.btn-entrar:hover {
+    background-color: #327AD9;
+    color: #fff;
+}

@@ -1,0 +1,38 @@
+.logo {
+    width: 35%;
+    margin-bottom: 3em
+}
+
+.title-entrar {
+    color: #888888
+}
+
+.btn-entrar {
+    background-color: #3B8FFF; 
+    border: none; 
+    width: 100%;
+}
+
+.btn-cadastro {
+    background-color: #fff !important;
+    border: none !important; 
+    color: #023373;
+}
+
+.btn-esqueci-senha {
+    color: #023373;
+}
+
+@media screen and (max-width: 992px) {
+    .btn-cadastro {
+        background-color: #0461D9 !important;
+        color: #fff;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .logo {
+        width: 80%;
+    }
+}
