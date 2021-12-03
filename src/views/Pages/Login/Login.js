@@ -55,17 +55,17 @@ class Login extends Component {
       <div className="app flex-colum justify-content-center align-items-center">
         <img
           className="logo"
-          src={require("../../../assets/img/brand/logo.png")}
+          src={require("../../../assets/img/brand/logo-smtt.png")}
           alt="logo"
         ></img>
         <Container>
           <Row className="justify-content-center">
-            <Col md="8">
+            <Col md="4">
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
                     <Form onSubmit={this._login}>
-                      <h1 className="title-entrar">Entrar</h1>
+                      <h1 className="title-entrar">Colidiu</h1>
                       {/* <p className="text-muted">Sign In to your account</p> */}
                       <p className="text-muted">Entre na sua conta</p>
                       <InputGroup className="mb-3">
@@ -121,8 +121,8 @@ class Login extends Component {
                           <Button
                             type="submit"
                             style={{
-                              backgroundColor: "#FBC210",
-                              color: "#000",
+                              backgroundColor: "#263238",
+                              color: "#FFF",
                             }}
                             className="px-4 btn-entrar"
                           >

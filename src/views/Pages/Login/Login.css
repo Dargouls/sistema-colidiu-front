@@ -1,6 +1,11 @@
 .logo {
-    width: 35%;
-    margin-bottom: 3em
+    width: 12%;
+    margin-bottom: 2em;
+}
+
+.app{
+    background-image: url('../../../assets/img/brand/bg-img.png');
+    background-size: cover
 }
 
 .title-entrar {
