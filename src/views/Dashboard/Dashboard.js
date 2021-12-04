@@ -491,7 +491,7 @@ class Dashboard extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" sm="6" lg="4">
-            <Card className="text-white bg-info">
+            <Card className="text-white" style={{backgroundColor: '#F9BC00'}}>
               <CardBody className="pb-0">
                 {/* <ButtonGroup className="float-right">
                   <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
@@ -507,7 +507,7 @@ class Dashboard extends Component {
                   </ButtonDropdown>
                 </ButtonGroup> */}
                 <div className="text-value">182</div>
-                <div>Clientes cadastrados</div>
+                <div>Indice de acidentes anual</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: "70px" }}>
                 <Line
@@ -520,7 +520,7 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" sm="6" lg="4">
-            <Card className="text-white bg-primary">
+            <Card className="text-white " style={{backgroundColor: '#F9BC00'}}>
               <CardBody className="pb-0">
                 {/* <ButtonGroup className="float-right">
                   <Dropdown id='card2' isOpen={this.state.card2} toggle={() => { this.setState({ card2: !this.state.card2 }); }}>
@@ -548,7 +548,7 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" sm="6" lg="4">
-            <Card className="text-white bg-warning">
+            <Card className="text-white" style={{backgroundColor: '#F9BC00'}}>
               <CardBody className="pb-0">
                 {/* <ButtonGroup className="float-right">
                   <Dropdown id='card3' isOpen={this.state.card3} toggle={() => { this.setState({ card3: !this.state.card3 }); }}>

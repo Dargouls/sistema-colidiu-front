@@ -37,9 +37,9 @@ export default {
     //   },
     // },
     {
-      name: "Painel",
+      name: "Registrar Ocorrência",
       url: "/dashboard",
-      icon: "icon-speedometer",
+      icon: "icon-magnifier-add",
     },
     // {
     //   name: 'Serviços',
@@ -52,7 +52,7 @@ export default {
     //   icon: 'fa fa-briefcase',
     // },
     {
-      name: "Solicitações",
+      name: "Imprimar - Guia/GR",
       url: "/solicitacoes",
       icon: "fa fa-users",
       // children: [
@@ -68,10 +68,10 @@ export default {
       //   },
       // ],
     },
-    // {
-    //   name: 'Base',
-    //   url: '/base',
-    //   icon: 'icon-puzzle',
+    {
+      name: 'Imprimir Colidiu',
+      url: '/base',
+      icon: 'icon-printer'
     //   children: [
     //     {
     //       name: 'Breadcrumbs',
@@ -82,17 +82,17 @@ export default {
     //       name: 'Cards',
     //       url: '/base/cards',
     //       icon: 'icon-puzzle',
-    //     },
-    //     {
-    //       name: 'Carousels',
-    //       url: '/base/carousels',
-    //       icon: 'icon-puzzle',
-    //     },
-    //     {
-    //       name: 'Collapses',
-    //       url: '/base/collapses',
-    //       icon: 'icon-puzzle',
-    //     },
+    },
+    {
+      name: 'Complementar ocorrência',
+      url: '/base/carousels',
+      icon: 'icon-puzzle',
+    },
+    {
+      name: 'Consultar histórico do veículo',
+      url: '/base/collapses',
+      icon: 'icon-magnifier-add',
+    },
     //     {
     //       name: 'Dropdowns',
     //       url: '/base/dropdowns',

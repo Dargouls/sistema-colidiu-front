@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { irect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 
@@ -38,26 +38,26 @@ class DefaultLayout extends Component {
 
   render() {
     return (
-      <div className="app">
-        <AppHeader fixed>
-          <Suspense  fallback={this.loading()}>
+      <div className="app" >
+        <AppHeader fixed style={{backgroundColor: '#263238', borderColor: '#263238'}}>
+          <Suspense  fallback={this.loading()} >
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
           </Suspense>
         </AppHeader>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
-            <AppSidebarHeader />
-            <AppSidebarForm />
-            <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
+        <div className="app-body" >
+          <AppSidebar fixed display="lg" >
+            <AppSidebarHeader style={{background: '#263238'}}/>
+            <AppSidebarForm style={{background: '#263238'}}/>
+            <Suspense style={{background: '#263238'}}>
+            <AppSidebarNav navConfig={navigation} {...this.props} router={router} style={{backgroundColor: "#263238"}}/>
             </Suspense>
-            <AppSidebarFooter />
-            <AppSidebarMinimizer />
+            <AppSidebarFooter style={{backgroundColor: "#263238"}} />
+            <AppSidebarMinimizer style={{background: '#263238'}} />
           </AppSidebar>
-          <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router}/>
-            <Container fluid>
-              <Suspense fallback={this.loading()}>
+          <main className="main" style={{background:  "linear-gradient(#f9bc00, #000)", opacity: 0.7}}>
+            <AppBreadcrumb appRoutes={routes} router={router} style={{backgroundColor: '#263238'}} />
+            <Container fluid >
+              <Suspense fallback={this.loading()} >
                 <Switch>
                   {routes.map((route, idx) => {
                     return route.component ? (
@@ -71,7 +71,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <irect from="/" to="/dashboard" />
                 </Switch>
               </Suspense>
             </Container>
@@ -82,7 +82,7 @@ class DefaultLayout extends Component {
             </Suspense>
           </AppAside> */}
         </div>
-        <AppFooter>
+        <AppFooter style={{background: "#263238", borderColor: '#263238'}}>
           <Suspense fallback={this.loading()}>
             <DefaultFooter />
           </Suspense>
