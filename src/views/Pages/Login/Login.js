@@ -138,6 +138,11 @@ class Login extends Component {
                           <Button color="link" className="px-0 btn-esqueci-senha">Esqueceu a senha?</Button>
                         </Col> */}
                       </Row>
+                      <Row>
+                        <Col xs="12">
+                          <a href="/permission">Não tem conta? Cadastre-se</a>
+                        </Col>
+                      </Row>
                     </Form>
                   </CardBody>
                 </Card>

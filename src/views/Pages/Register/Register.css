@@ -3,6 +3,11 @@
     width: 28%;
 }
 
+.app{
+    background-image: url('../../../assets/img/brand/bg-img.png');
+    background-size: cover
+}
+
 .btn-entrar {
     background-color: #579AF2;
     color: #fff;

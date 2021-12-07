@@ -31,7 +31,7 @@ class Register extends Component {
   _cadastro = async e => {
     e.preventDefault();
     
-    const { nome, email, senha, confirmarSenha, telefone } = this.props;
+    const { cpf, nome, email, senha, confirmarSenha, telefone } = this.props;
     
     // let cadastro = await this.props.cadastro(nome, email, senha, confirmarSenha, telefone);
     
@@ -54,11 +54,28 @@ class Register extends Component {
                       <div className="container-btn-entrar d-flex flex-row justify-content-around align-items-center">
                         <span className="d-md-down-none">Possui uma conta? </span>
                         <Link to="/login">
-                          <Button className="btn-entrar" color="primary">Entrar</Button>
+                      <Button className="btn-entrar" style={{backgroundColor: "#fbc210" }}>Entrar</Button>
                         </Link>
                       </div>
                     </div>
                     <p className="text-muted">Crie sua conta</p>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="icon-user"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input 
+                        type="text" 
+                        placeholder="CPF" 
+                        autoComplete="username"
+                        value={this.props.cpf}
+                        onChange={ event => this.props.changeNomeUsuario(event.target.value) }
+                        invalid={this.props.msgNomeInvalid != "" && this.props.msgNomeInvalid != "sucess"} 
+                        valid={this.props.msgNomeInvalid == "sucess"} 
+                      />
+                      <FormFeedback>{this.props.msgNomeInvalid}</FormFeedback>
+                    </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -75,21 +92,6 @@ class Register extends Component {
                         valid={this.props.msgNomeInvalid == "sucess"} 
                       />
                       <FormFeedback>{this.props.msgNomeInvalid}</FormFeedback>
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>@</InputGroupText>
-                      </InputGroupAddon>
-                      <Input 
-                        type="email" 
-                        placeholder="Email" 
-                        autoComplete="email" 
-                        value={this.props.email}
-                        onChange={ event => this.props.changeEmailUsuario(event.target.value) }
-                        invalid={this.props.msgEmailInvalid != "" && this.props.msgEmailInvalid != "sucess"} 
-                        valid={this.props.msgEmailInvalid == "sucess"} 
-                      />
-                      <FormFeedback>{this.props.msgEmailInvalid}</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -118,6 +120,37 @@ class Register extends Component {
                       </InputMask>
                       <FormFeedback>{this.props.msgTelefoneInvalid}</FormFeedback>
                     </InputGroup>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>@</InputGroupText>
+                      </InputGroupAddon>
+                      <Input 
+                        type="email" 
+                        placeholder="Email" 
+                        autoComplete="email" 
+                        value={this.props.email}
+                        onChange={ event => this.props.changeEmailUsuario(event.target.value) }
+                        invalid={this.props.msgEmailInvalid != "" && this.props.msgEmailInvalid != "sucess"} 
+                        valid={this.props.msgEmailInvalid == "sucess"} 
+                      />
+                      <FormFeedback>{this.props.msgEmailInvalid}</FormFeedback>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                      <InputGroupText><i className="icon-user"></i></InputGroupText>
+                      </InputGroupAddon>
+                      <Input 
+                        type="rg" 
+                        placeholder="RG" 
+                        autoComplete="rg" 
+                        value={this.props.email}
+                        onChange={ event => this.props.changeEmailUsuario(event.target.value) }
+                        invalid={this.props.msgEmailInvalid != "" && this.props.msgEmailInvalid != "sucess"} 
+                        valid={this.props.msgEmailInvalid == "sucess"} 
+                      />
+                      <FormFeedback>{this.props.msgEmailInvalid}</FormFeedback>
+                    </InputGroup>
+                    
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -152,7 +185,7 @@ class Register extends Component {
                       />
                       <FormFeedback>{this.props.msgConfirmarSenhaInvalid}</FormFeedback>
                     </InputGroup>
-                    <Button type="submit" color="success" block>Criar Conta</Button>
+                    <Button type="submit" style={{backgroundColor: '#263238', color: '#FFF'}} block>Criar Conta</Button>
                   </Form>
                 </CardBody>
               </Card>
