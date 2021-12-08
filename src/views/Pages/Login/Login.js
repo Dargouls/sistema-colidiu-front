@@ -140,7 +140,7 @@ class Login extends Component {
                       </Row>
                       <Row>
                         <Col xs="12">
-                          <a href="/permission">Não tem conta? Cadastre-se</a>
+                          <Link to="/permission">Não tem conta? Cadastre-se</Link>
                         </Col>
                       </Row>
                     </Form>

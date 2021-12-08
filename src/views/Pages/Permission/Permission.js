@@ -76,18 +76,20 @@ class Login extends Component {
                     <Row>
                       <Col xs="12">
                         
-                        <Button
-                          type="submit"
-                          href="/register"
-                          style={{
-                            backgroundColor: "#263238",
-                            color: "#FFF",
-                            marginBottom: 10
-                          }}
-                          className="px-4 btn-entrar"
-                          >
-                          Aceitar
-                        </Button>
+                        <Link to='/register'>
+                          <Button
+                            type="submit"
+                            
+                            style={{
+                              backgroundColor: "#263238",
+                              color: "#FFF",
+                              marginBottom: 10
+                            }}
+                            className="px-4 btn-entrar"
+                            >
+                            Aceitar
+                          </Button>
+                        </Link>
                       </Col>
                     </Row>
                   <Row>
