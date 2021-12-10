@@ -7,9 +7,11 @@ import InputMask from 'react-input-mask';
 import './Register.css';
 
 import { 
-  // cadastro,
+  registerUser,
   resetCamposUsuario, 
   changeNomeUsuario, 
+  changeCpfUsuario,
+  changeRgUsuario,
   changeEmailUsuario, 
   changeSenhaUsuario,
   changeConfirmarSenhaUsuario,
@@ -28,16 +30,16 @@ class Register extends Component {
     this.props.resetCamposUsuario();
   }
 
-  _cadastro = async e => {
+  _registerUser = async e => {
     e.preventDefault();
     
-    const { cpf, nome, email, senha, confirmarSenha, telefone } = this.props;
+    const { cpf, nome, rg,  email, senha, confirmarSenha, telefone } = this.props;
     
-    // let cadastro = await this.props.cadastro(nome, email, senha, confirmarSenha, telefone);
+    let register = await this.props.registerUser(nome, cpf, rg, email, senha, confirmarSenha, telefone);
     
-    // if(cadastro == 'sucess') {
-    //   return this.props.history.push('/login');
-    // }
+    if(register == 'sucess') {
+      return this.props.history.push('/login');
+    }
   };
 
   render() {
@@ -48,7 +50,7 @@ class Register extends Component {
             <Col md="9" lg="9" xl="9">
               <Card className="mx-4">
                 <CardBody className="p-4">
-                  <Form onSubmit={this._cadastro}>
+                  <Form onSubmit={this._registerUser}>
                     <div className="d-flex flex-row justify-content-between">
                       <h1>Cadastro</h1>
                       <div className="container-btn-entrar d-flex flex-row justify-content-around align-items-center">
@@ -68,13 +70,13 @@ class Register extends Component {
                       <Input 
                         type="text" 
                         placeholder="CPF" 
-                        autoComplete="username"
+                        autoComplete="CPF"
                         value={this.props.cpf}
-                        onChange={ event => this.props.changeNomeUsuario(event.target.value) }
-                        invalid={this.props.msgNomeInvalid != "" && this.props.msgNomeInvalid != "sucess"} 
-                        valid={this.props.msgNomeInvalid == "sucess"} 
+                        onChange={ event => this.props.changeCpfUsuario(event.target.value) }
+                        // invalid={this.props.msgCpfInvalid != "" && this.props.msgCpfInvalid != "sucess"} 
+                        valid={this.props.msgCpfInvalid == "sucess"} 
                       />
-                      <FormFeedback>{this.props.msgNomeInvalid}</FormFeedback>
+                      <FormFeedback>{this.props.msgCpfInvalid}</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -143,12 +145,12 @@ class Register extends Component {
                         type="rg" 
                         placeholder="RG" 
                         autoComplete="rg" 
-                        value={this.props.email}
-                        onChange={ event => this.props.changeEmailUsuario(event.target.value) }
-                        invalid={this.props.msgEmailInvalid != "" && this.props.msgEmailInvalid != "sucess"} 
-                        valid={this.props.msgEmailInvalid == "sucess"} 
+                        value={this.props.rg}
+                        onChange={ event => this.props.changeRgUsuario(event.target.value) }
+                        // invalid={this.props.msgRgInvalid != "" && this.props.msgRgInvalid != "sucess"} 
+                        valid={this.props.msgRgInvalid == "sucess"} 
                       />
-                      <FormFeedback>{this.props.msgEmailInvalid}</FormFeedback>
+                      <FormFeedback>{this.props.msgRgInvalid}</FormFeedback>
                     </InputGroup>
                     
                     <InputGroup className="mb-3">
@@ -199,12 +201,16 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
   nome: state.UsuarioReducer.nome,
+  cpf: state.UsuarioReducer.cpf,
+  rg: state.UsuarioReducer.rg,
   email: state.UsuarioReducer.email,
   senha: state.UsuarioReducer.senha,
   confirmarSenha: state.UsuarioReducer.confirmarSenha,
   telefone: state.UsuarioReducer.telefone,
 
   msgNomeInvalid: state.UsuarioReducer.msgNomeInvalid,
+  msgCpfInvalid: state.UsuarioReducer.msgCpfInvalid,
+  msgRgInvalid: state.UsuarioReducer.msgRgInvalid,
   msgEmailInvalid: state.UsuarioReducer.msgEmailInvalid,
   msgSenhaInvalid: state.UsuarioReducer.msgSenhaInvalid,
   msgConfirmarSenhaInvalid: state.UsuarioReducer.msgConfirmarSenhaInvalid,
@@ -212,9 +218,11 @@ const mapStateToProps = state => ({
 });
 
 const mapActionToProps = {
-  // cadastro,
+  registerUser,
   resetCamposUsuario, 
   changeNomeUsuario, 
+  changeCpfUsuario, 
+  changeRgUsuario, 
   changeEmailUsuario, 
   changeSenhaUsuario,
   changeConfirmarSenhaUsuario,

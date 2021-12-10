@@ -77,9 +77,7 @@ class Login extends Component {
                       <Col xs="12">
                         
                         <Link to='/register'>
-                          <Button
-                            type="submit"
-                            
+                          <Button                            
                             style={{
                               backgroundColor: "#263238",
                               color: "#FFF",
@@ -94,6 +92,7 @@ class Login extends Component {
                     </Row>
                   <Row>
                     <Col xs="12">
+                    <Link to='/'>
                       <Button
                         type="submit"
                         style={{
@@ -104,6 +103,7 @@ class Login extends Component {
                       >
                         Voltar
                       </Button>
+                      </Link>
                     </Col>
                   </Row>
                   </CardBody>
