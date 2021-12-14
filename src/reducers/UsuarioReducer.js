@@ -2,6 +2,8 @@ import * as types from '../actions/actionTypes';
 
 const INITIAL_STATE = {
     nome: "",
+    cpf: "",
+    rg: "",
     email: "",
     senha: "",
     confirmarSenha: "",// Utilizado apenas no cadastro do usuário
@@ -11,6 +13,8 @@ const INITIAL_STATE = {
 
     // Mensagens utilizadas nas validações dos formulários de login e cadastro
     msgNomeInvalid: "",
+    msgCpfInvalid: "",
+    msgRgInvalid: "",
     msgEmailInvalid: "",
     msgSenhaInvalid: "",
     msgConfirmarSenhaInvalid: "",
@@ -22,7 +26,11 @@ export default (state = INITIAL_STATE, action) => {
         
         case types.CHANGE_NOME_USUARIO:
             return { ...state, nome: action.payload }
-
+        case types.CHANGE_CPF_USUARIO:
+            return { ...state, nome: action.payload }
+        case types.CHANGE_RG_USUARIO:
+            return { ...state, nome: action.payload }
+        
 		case types.CHANGE_EMAIL_USUARIO:
             return { ...state, email: action.payload }
         
@@ -31,6 +39,10 @@ export default (state = INITIAL_STATE, action) => {
 
         case types.CHANGE_MSG_NOME_INVALID_USUARIO: 
             return { ...state, msgNomeInvalid: action.payload }
+        case types.CHANGE_MSG_CPF_INVALID_USUARIO: 
+            return { ...state, msgCpfInvalid: action.payload }
+        case types.CHANGE_MSG_RG_INVALID_USUARIO: 
+            return { ...state, msgRgInvalid: action.payload }
 
         case types.CHANGE_MSG_EMAIL_INVALID_USUARIO: 
             return { ...state, msgEmailInvalid: action.payload }
@@ -45,7 +57,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, msgTelefoneInvalid: action.payload }
 
         case types.RESET_CAMPOS_USUARIO:
-            return { ...state, nome: "", email: "", senha: "", confirmarSenha: "", telefone: "", msgNomeInvalid: "", msgEmailInvalid: "", msgSenhaInvalid: "", msgConfirmarSenhaInvalid: "", msgTelefoneInvalid: "" }
+            return { ...state, nome: "", cpf: "", rg: "", email: "", senha: "", confirmarSenha: "", telefone: "", msgNomeInvalid: "", msgEmailInvalid: "", msgSenhaInvalid: "", msgConfirmarSenhaInvalid: "", msgTelefoneInvalid: "" }
 
         case types.CHANGE_CONFIRMAR_SENHA_USUARIO:
             return { ...state, confirmarSenha: action.payload }

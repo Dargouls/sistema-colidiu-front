@@ -73,7 +73,7 @@ class Register extends Component {
                         autoComplete="CPF"
                         value={this.props.cpf}
                         onChange={ event => this.props.changeCpfUsuario(event.target.value) }
-                        // invalid={this.props.msgCpfInvalid != "" && this.props.msgCpfInvalid != "sucess"} 
+                        invalid={this.props.msgCpfInvalid != "" && this.props.msgCpfInvalid != "sucess"} 
                         valid={this.props.msgCpfInvalid == "sucess"} 
                       />
                       <FormFeedback>{this.props.msgCpfInvalid}</FormFeedback>

@@ -11,8 +11,10 @@ const actionCreator = (type, payload = null) => ({ type, payload });
 export const changeNomeUsuario = (nome) =>
   actionCreator(types.CHANGE_NOME_USUARIO, nome);
 
-export const changeCpfUsuario = (cpf) =>
-  actionCreator(types.CHANGE_CPF_USUARIO, cpf);
+export const changeCpfUsuario = (cpf) => {
+  console.log("CPF", cpf)
+  // actionCreator(types.CHANGE_CPF_USUARIO, cpf);
+}
 
 export const changeRgUsuario = (rg) =>
   actionCreator(types.CHANGE_RG_USUARIO, rg);
