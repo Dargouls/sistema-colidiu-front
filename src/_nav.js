@@ -38,19 +38,19 @@ export default {
     // },
     {
       name: "Registrar Ocorrência",
-      url: "/dashboard",
+      url: "/registro-ocorrencia",
       icon: "icon-magnifier-add",
     },
-    {
-      name: "Forms",
-      url: "/forms",
-      icon: "icon-magnifier-add",
-    },
-    {
-      name: "Carrousel",
-      url: "/carrousel",
-      icon: "icon-magnifier-add",
-    },
+    // {
+    //   name: "Forms",
+    //   url: "/forms",
+    //   icon: "icon-magnifier-add",
+    // },
+    // {
+    //   name: "Carrousel",
+    //   url: "/carrousel",
+    //   icon: "icon-magnifier-add",
+    // },
     // {
     //   name: 'Serviços',
     //   url: '/servicos',

@@ -62,18 +62,40 @@ class Forms extends Component {
 
                     {/* BEM VINDO */}
                     
+                      <div style={{textAlign: 'justify', padding: 15}}>
                       <FormGroup>
-                        <Label>Bem vindo ao Colidiu!</Label>
-                        <div className="controls">
-                          <FormText>Este sistema permite somente o registro de boletins de acidentes que ocasionaram apenas danos materiais, não sendo possível a inserção e cadastro de pessoas feridas.
+                        <Label>
+                          <span style={{fontSize: 25, fontWeight: 'bold'}}>
+                            Bem vindo ao Colidiu!
+                          </span>
+                          </Label>
+                          <FormText>
+
+                            <p style={{fontSize: 15}}>
+                            Este sistema permite somente o registro de boletins de acidentes que ocasionaram apenas danos materiais, não sendo possível a inserção e cadastro de pessoas feridas.
+                            </p>
+                            <p style={{fontSize: 15}}>
                             Poderão ser registrados acidentes ocorridos no interior de condomínios, postos de combustíveis, estacionamentos de mercados, lojas, shoppings, etc, e o endereço informado no registro do acidente deve ser o mesmo do estabelecimento ou condomínio. Devendo na descrição dos fatos, relatar que o acidente se deu dentro de tal área.
-                            Observe abaixo os passos do processo de registro do Colidiu: 
-                            1º Passo - Insira Dados e receba e-mail de confirmação. 
-                            2º Passo - Pague a GR e receba e-mail de confirmação. 
-                            3º Passo - Imprima o BATEU e receba e-mail de confirmação.
+                            </p>
+                            <p style={{fontSize: 15}}>
+                            Observe abaixo os passos do processo de registro do Colidiu:
+                            </p>
+
+                            <p style={{fontSize: 15}}>
+                            1º Passo - Insira Dados e receba e-mail de confirmação.
+                            </p>
+
+                            <p style={{fontSize: 15}}>
+                            2º Passo - Pague a GR e receba e-mail de confirmação.
+                            </p>
+
+                            <p style={{fontSize: 15}}>
+                            3º Passo - Imprima o e receba e-mail de confirmação.`
+                            </p>
+                          
                           </FormText>
-                        </div>
                       </FormGroup>
+                        </div>
 
 
                     {/* DADOS DO VEICULO */}
@@ -143,9 +165,9 @@ class Forms extends Component {
 
                       {/* DADOS DO VEICULO */}
                     </Form>
-                      <div className="form-actions">
+                      <div className="form-actions" style={{justifyContent: 'flex-end', display: 'flex'}}>
+                        <Button color="secondary" style={{marginRight: 10}}>Cancelar</Button>
                         <Button type="submit" color="primary">Próximo</Button>
-                        <Button color="secondary">Cancelar</Button>
                       </div>
                   </CardBody>
                 </Collapse>

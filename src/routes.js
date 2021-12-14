@@ -26,7 +26,7 @@ const routes = [
   // Rotas utilizadas pela aplicação - ZeroTime
   { path: "/", exact: true, name: "Início" },
   { path: "/dashboard", name: "Painel", component: Dashboard },
-  { path: "/forms", name: "Painel", component: Forms },
+  { path: "/registro-ocorrencia", name: "Painel", component: Forms },
   { path: "/carrousel", name: "Painel", component: Carrousel },
   { path: "/servicos", exact: true, name: "Serviços", component: Servicos },
   {
