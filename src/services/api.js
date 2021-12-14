@@ -22,5 +22,5 @@ import axios from "axios";
 // import { create } from 'apisauce';
 
 export const api = axios.create({
-  baseURL: "https://app-idoso.herokuapp.com",
+  baseURL: "https://back-colidiu.herokuapp.com",
 });

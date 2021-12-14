@@ -12,9 +12,9 @@ export const changeNomeUsuario = (nome) =>
   actionCreator(types.CHANGE_NOME_USUARIO, nome);
 
 export const changeCpfUsuario = (cpf) => {
-  console.log("CPF", cpf)
+  console.log("CPF", cpf);
   // actionCreator(types.CHANGE_CPF_USUARIO, cpf);
-}
+};
 
 export const changeRgUsuario = (rg) =>
   actionCreator(types.CHANGE_RG_USUARIO, rg);
@@ -90,7 +90,6 @@ export const login = (email, senha) => async (dispatch) => {
     const response = await api.post("/login/adm", body);
 
     if (response.data.token) {
-      console.log("AQUI");
       setToken("Token");
       return "Autenticado";
     } else {
@@ -103,133 +102,34 @@ export const login = (email, senha) => async (dispatch) => {
   }
 };
 
-export const registerUser = (nome, cpf, rg,  email, senha, confirmarSenha, telefone) => async dispatch => {
+export const registerUser =
+  (nome, cpf, rg, email, senha, confirmarSenha, telefone) =>
+  async (dispatch) => {
+    const body = {
+      name: nome,
+      cpf,
+      rg,
+      email,
+      password: senha,
+      telephone: telefone,
+    };
 
-    let aconteceuErro = false;
+    const response = await api.post("/users", body);
 
-    // Se existe algum campo está vazio ele retorna uma mensagem
-    // Nos campos email e telefone é realizada uma verificação para verificar se o campo é válido
-    // Se nenhum erro ocorrer no campo, ele define a mensagem de campo invalido como vazio
-    if(!nome) {
-        dispatch(changeMsgNomeInvalidUsuario("Digite o seu nome"));
-        aconteceuErro = true;
-    } else {
-        dispatch(changeMsgNomeInvalidUsuario(""));
-    }
-    // if(!cpf) {
-    //     dispatch(changeMsgCpfInvalidUsuario("Digite o seu CPF"));
-    //     aconteceuErro = true;
-    // } else {
-    //     dispatch(changeMsgCpfInvalidUsuario(""));
-    // }
-    // if(!rg) {
-    //     dispatch(changeMsgRgInvalidUsuario("Digite o seu RG"));
-    //     aconteceuErro = true;
-    // } else {
-    //     dispatch(changeMsgRgInvalidUsuario(""));
-    // }
-    if(!email) {
-        dispatch(changeMsgEmailInvalidUsuario("Digite o seu email"));
-        aconteceuErro = true;
-    } else if (!validarEmail(email)) {
-        dispatch(changeMsgEmailInvalidUsuario("Este email não é válido"));
-        aconteceuErro = true;
-    } else {
-        dispatch(changeMsgEmailInvalidUsuario(""));
-    }
-    if(!senha) {
-        dispatch(changeMsgSenhaInvalidUsuario("Digite a sua senha"));
-        aconteceuErro = true;
-    } else if (senha.length < 6) {
-        dispatch(changeMsgSenhaInvalidUsuario("A senha deve conter no mínimo 6 caracteres"));
-        aconteceuErro = true;
-    } else {
-        dispatch(changeMsgSenhaInvalidUsuario(""));
-    }
-    if(!confirmarSenha) {
-        dispatch(changeMsgConfirmarSenhaInvalidUsuario("Confirme a sua senha"));
-        aconteceuErro = true;
-    } else {
-        dispatch(changeMsgConfirmarSenhaInvalidUsuario(""));
-    }
-    if(!telefone) {
-        dispatch(changeMsgTelefoneInvalidUsuario("Digite o seu telefone"));
-        aconteceuErro = true;
-    } else if (!validarTelefone(telefone)) {
-        dispatch(changeMsgTelefoneInvalidUsuario("Esse telefone não é válido"));
-        aconteceuErro = true;
-    } else {
-        dispatch(changeMsgTelefoneInvalidUsuario(""));
-    }
-
-    // Se aconteceu algum erro por falta de preenchimento dos campos ou validação ele para o processamento
-    if (aconteceuErro == true) {
+    // Se não tiver nenhum erro e o status for de sucesso, o cadastro foi efetuado corretamente
+    if (response.status == 200 && response.originalError == null) {
+      if (response.data.token) {
+        toast.success(response.data.mensagem);
+        setToken("Token");
+        return true;
+      } else {
+        toast.warn(response.data.mensagem);
         return false;
+      }
+      // Exibe o erro padrão enviado pelo servidor se por acaso algum campo não foi preenchido corretamente
+      // OBS.: Verificação de Precução, pois todos os campos já são validados pela aplicação antes da requisição ser enviada
     } else {
-
-        // Verifica se o campo confirmar senha é igual ao da senha
-        if (senha != confirmarSenha) {
-            return dispatch(changeMsgConfirmarSenhaInvalidUsuario("Esta senha é diferente da informada anteriormente"));
-        } else {
-
-            const body = {
-                nome,
-                cpf,
-                rg,
-                email,
-                senha,
-                telefone
-            }
-
-            console.log("Body:",body)
-            const response = await api.post("/users", body);
-            // Se não tiver nenhum erro e o status for de sucesso, o cadastro foi efetuado corretamente
-            if(response.status == 200 && response.originalError == null && response.data.event == "sucess") {
-                toast.success(response.data.msg);
-                return response.data.event;
-
-            // Exibe o erro padrão enviado pelo servidor se por acaso algum campo não foi preenchido corretamente
-            // OBS.: Verificação de Precução, pois todos os campos já são validados pela aplicação antes da requisição ser enviada
-            } else if (response.status == 400 && response.originalError != null && response.data.event == "erro_path_null") {
-                toast.warn(response.data.msg);
-                return false;
-
-            // Exibe os erros emitidos pela API já tratados
-            } else if (response.status == 400 && response.originalError != null && response.data.event == "erro_create_processed") {
-              if (!!response.data.msg["erro_validate_nome"]) dispatch(changeMsgNomeInvalidUsuario(response.data.msg["erro_validate_nome"]));
-              // if (!!response.data.msg["erro_validate_cpf"]) dispatch(changeMsgCpfInvalidUsuario(response.data.msg["erro_validate_cpf"]));
-              // if (!!response.data.msg["erro_validate_rg"]) dispatch(changeMsgRgInvalidUsuario(response.data.msg["erro_validate_rg"]));
-              if (!!response.data.msg["erro_validate_email"]) dispatch(changeMsgEmailInvalidUsuario(response.data.msg["erro_validate_email"]));
-                if (!!response.data.msg["erro_unique_violated_email"]) dispatch(changeMsgEmailInvalidUsuario(response.data.msg["erro_unique_violated_email"]));
-                if (!!response.data.msg["erro_validate_senha"]) dispatch(changeMsgSenhaInvalidUsuario(response.data.msg["erro_validate_senha"]));
-                if (!!response.data.msg["erro_validate_telefone"]) dispatch(changeMsgTelefoneInvalidUsuario(response.data.msg["erro_validate_telefone"]));
-
-            // Exibe o erro padrão da API
-            } else if (response.status == 400 && response.originalError != null && response.data.event == "erro_create_default") {
-                toast.error(response.data.msg);
-                return false;
-
-            // Exibe um erro padrão se a API não retornar nada
-            } else {
-                toast.error("Não foi possivel efetuar o cadastro, tente novamente!");
-                return false;
-            }
-        }
+      toast.error("Não foi possivel efetuar o cadastro, tente novamente!");
+      return false;
     }
-};
-
-// Verifica se o telefone é válido
-const validarTelefone = (telefone) => {
-  let regexp = new RegExp(
-    "^\\([0-9]{2}\\)(([0-9]{5}-[0-9]{4})|([0-9]{5}-[0-9]{3}))$"
-  );
-
-  return regexp.test(telefone);
-};
-// Verifica se o email é válido
-const validarEmail = (email) => {
-  let regexp =
-    /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
-  return regexp.test(email);
-};
+  };

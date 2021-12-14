@@ -1,26 +1,95 @@
-import React, { Component } from 'react';
-import { Button, Card, CardBody, Col, Container, Form, FormFeedback, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import { Link, Redirect, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Form,
+  FormFeedback,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Row,
+} from "reactstrap";
+import { Link, Redirect, Switch } from "react-router-dom";
 
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
-import './Register.css';
+import "./Register.css";
 
-import { 
+import {
   registerUser,
-  resetCamposUsuario, 
-  changeNomeUsuario, 
+  resetCamposUsuario,
+  changeNomeUsuario,
   changeCpfUsuario,
   changeRgUsuario,
-  changeEmailUsuario, 
+  changeEmailUsuario,
   changeSenhaUsuario,
   changeConfirmarSenhaUsuario,
-  changeTelefoneUsuario 
-} from '../../../actions/UsuarioActions';
+  changeTelefoneUsuario,
+} from "../../../actions/UsuarioActions";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: {
+        cpf: "",
+        nome: "",
+        rg: "",
+        email: "",
+        senha: "",
+        confirmarSenha: "",
+        telefone: "",
+      },
+      validation: {
+        cpf: "",
+        nome: "",
+        rg: "",
+        email: "",
+        senha: "",
+        confirmarSenha: "",
+        telefone: "",
+      },
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, position) {
+    // Validação e-mail
+    if (this.state.user.email) {
+      this.setState({
+        ...this.state,
+        validation: {
+          ...this.state.validation,
+          email: validEmail(this.state.user.email) ? "sucess" : "error",
+        },
+      });
+    }
+
+    if (this.state.user.telefone) {
+      this.setState({
+        ...this.state,
+        validation: {
+          ...this.state.validation,
+          telefone: validTelfone(this.state.user.telefone) ? "sucess" : "error",
+        },
+      });
+    }
+
+    this.setState({
+      user: {
+        ...this.state.user,
+        [position]: event.target.value,
+      },
+    });
+  }
 
   componentDidMount() {
     this.props.resetCamposUsuario();
@@ -30,15 +99,24 @@ class Register extends Component {
     this.props.resetCamposUsuario();
   }
 
-  _registerUser = async e => {
+  _registerUser = async (e) => {
     e.preventDefault();
-    
-    const { cpf, nome, rg,  email, senha, confirmarSenha, telefone } = this.props;
-    
-    let register = await this.props.registerUser(nome, cpf, rg, email, senha, confirmarSenha, telefone);
-    
-    if(register == 'sucess') {
-      return this.props.history.push('/login');
+
+    const { cpf, nome, rg, email, senha, confirmarSenha, telefone } =
+      this.state.user;
+
+    let register = await this.props.registerUser(
+      nome,
+      cpf,
+      rg,
+      email,
+      senha,
+      confirmarSenha,
+      telefone
+    );
+
+    if (register) {
+      this.props.history.push("/");
     }
   };
 
@@ -54,9 +132,16 @@ class Register extends Component {
                     <div className="d-flex flex-row justify-content-between">
                       <h1>Cadastro</h1>
                       <div className="container-btn-entrar d-flex flex-row justify-content-around align-items-center">
-                        <span className="d-md-down-none">Possui uma conta? </span>
+                        <span className="d-md-down-none">
+                          Possui uma conta?{" "}
+                        </span>
                         <Link to="/login">
-                      <Button className="btn-entrar" style={{backgroundColor: "#fbc210" }}>Entrar</Button>
+                          <Button
+                            className="btn-entrar"
+                            style={{ backgroundColor: "#fbc210" }}
+                          >
+                            Entrar
+                          </Button>
                         </Link>
                       </div>
                     </div>
@@ -67,16 +152,18 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input 
-                        type="text" 
-                        placeholder="CPF" 
+                      <Input
+                        type="text"
+                        placeholder="CPF"
                         autoComplete="CPF"
-                        value={this.props.cpf}
-                        onChange={ event => this.props.changeCpfUsuario(event.target.value) }
-                        invalid={this.props.msgCpfInvalid != "" && this.props.msgCpfInvalid != "sucess"} 
-                        valid={this.props.msgCpfInvalid == "sucess"} 
+                        value={this.state.user.cpf}
+                        onChange={(event) => {
+                          this.handleChange(event, "cpf");
+                        }}
+                        invalid={this.state.validation.cpf === "error"}
+                        valid={this.state.validation.cpf === "sucess"}
                       />
-                      <FormFeedback>{this.props.msgCpfInvalid}</FormFeedback>
+                      <FormFeedback>Campo inválido!</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -84,14 +171,16 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input 
-                        type="text" 
-                        placeholder="Nome" 
+                      <Input
+                        type="text"
+                        placeholder="Nome"
                         autoComplete="username"
-                        value={this.props.nome}
-                        onChange={ event => this.props.changeNomeUsuario(event.target.value) }
-                        invalid={this.props.msgNomeInvalid != "" && this.props.msgNomeInvalid != "sucess"} 
-                        valid={this.props.msgNomeInvalid == "sucess"} 
+                        value={this.state.user.nome}
+                        onChange={(event) => {
+                          this.handleChange(event, "nome");
+                        }}
+                        invalid={this.state.validation.nome === "error"}
+                        valid={this.state.validation.nome === "sucess"}
                       />
                       <FormFeedback>{this.props.msgNomeInvalid}</FormFeedback>
                     </InputGroup>
@@ -103,70 +192,80 @@ class Register extends Component {
                       </InputGroupAddon>
                       <InputMask
                         mask="(99)99999-9999"
-                        value={this.props.telefone}
-                        onChange={ event => this.props.changeTelefoneUsuario(event.target.value) }
+                        value={this.state.user.telefone}
+                        onChange={(event) => {
+                          this.handleChange(event, "telefone");
+                        }}
                         maskChar=""
                       >
-                        {
-                          (inputProps) => (
-                            <Input 
-                              { ...inputProps }
-                              type="text" 
-                              placeholder="Telefone" 
-                              autoComplete="telefone" 
-                              invalid={this.props.msgTelefoneInvalid != "" && this.props.msgTelefoneInvalid != "sucess"} 
-                              valid={this.props.msgTelefoneInvalid == "sucess"}
-                            />
-                          )
-                        }
+                        {(inputProps) => (
+                          <Input
+                            {...inputProps}
+                            type="text"
+                            placeholder="Telefone"
+                            autoComplete="telefone"
+                            invalid={this.state.validation.telefone === "error"}
+                            valid={this.state.validation.telefone === "sucess"}
+                          />
+                        )}
                       </InputMask>
-                      <FormFeedback>{this.props.msgTelefoneInvalid}</FormFeedback>
+                      <FormFeedback>
+                        {this.props.msgTelefoneInvalid}
+                      </FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input 
-                        type="email" 
-                        placeholder="Email" 
-                        autoComplete="email" 
-                        value={this.props.email}
-                        onChange={ event => this.props.changeEmailUsuario(event.target.value) }
-                        invalid={this.props.msgEmailInvalid != "" && this.props.msgEmailInvalid != "sucess"} 
-                        valid={this.props.msgEmailInvalid == "sucess"} 
+                      <Input
+                        type="email"
+                        placeholder="Email"
+                        autoComplete="email"
+                        value={this.state.user.email}
+                        onChange={(event) => {
+                          this.handleChange(event, "email");
+                        }}
+                        invalid={this.state.validation.email === "error"}
+                        valid={this.state.validation.email === "sucess"}
                       />
                       <FormFeedback>{this.props.msgEmailInvalid}</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
-                      <InputGroupText><i className="icon-user"></i></InputGroupText>
+                        <InputGroupText>
+                          <i className="icon-user"></i>
+                        </InputGroupText>
                       </InputGroupAddon>
-                      <Input 
-                        type="rg" 
-                        placeholder="RG" 
-                        autoComplete="rg" 
-                        value={this.props.rg}
-                        onChange={ event => this.props.changeRgUsuario(event.target.value) }
-                        // invalid={this.props.msgRgInvalid != "" && this.props.msgRgInvalid != "sucess"} 
-                        valid={this.props.msgRgInvalid == "sucess"} 
+                      <Input
+                        type="rg"
+                        placeholder="RG"
+                        autoComplete="rg"
+                        value={this.state.user.rg}
+                        onChange={(event) => {
+                          this.handleChange(event, "rg");
+                        }}
+                        invalid={this.state.validation.rg === "error"}
+                        valid={this.state.validation.rg === "sucess"}
                       />
                       <FormFeedback>{this.props.msgRgInvalid}</FormFeedback>
                     </InputGroup>
-                    
+
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input 
-                        type="password" 
-                        placeholder="Senha" 
-                        autoComplete="new-password" 
-                        value={this.props.senha}
-                        onChange={ event => this.props.changeSenhaUsuario(event.target.value) }
-                        invalid={this.props.msgSenhaInvalid != "" && this.props.msgSenhaInvalid != "sucess"} 
-                        valid={this.props.msgSenhaInvalid == "sucess"} 
+                      <Input
+                        type="password"
+                        placeholder="Senha"
+                        autoComplete="new-password"
+                        value={this.state.user.senha}
+                        onChange={(event) => {
+                          this.handleChange(event, "senha");
+                        }}
+                        invalid={this.state.validation.senha === "error"}
+                        valid={this.state.validation.senha === "sucess"}
                       />
                       <FormFeedback>{this.props.msgSenhaInvalid}</FormFeedback>
                     </InputGroup>
@@ -176,18 +275,32 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input 
-                        type="password" 
-                        placeholder="Confirmar senha" 
-                        autoComplete="new-password" 
-                        value={this.props.confirmarSenha}
-                        onChange={ event => this.props.changeConfirmarSenhaUsuario(event.target.value) }
-                        invalid={this.props.msgConfirmarSenhaInvalid != "" && this.props.msgConfirmarSenhaInvalid != "sucess"} 
-                        valid={this.props.msgConfirmarSenhaInvalid == "sucess"} 
+                      <Input
+                        type="password"
+                        placeholder="Confirmar senha"
+                        autoComplete="new-password"
+                        value={this.state.user.confirmarSenha}
+                        onChange={(event) => {
+                          this.handleChange(event, "confirmarSenha");
+                        }}
+                        invalid={
+                          this.state.validation.confirmarSenha === "error"
+                        }
+                        valid={
+                          this.state.validation.confirmarSenha === "sucess"
+                        }
                       />
-                      <FormFeedback>{this.props.msgConfirmarSenhaInvalid}</FormFeedback>
+                      <FormFeedback>
+                        {this.props.msgConfirmarSenhaInvalid}
+                      </FormFeedback>
                     </InputGroup>
-                    <Button type="submit" style={{backgroundColor: '#263238', color: '#FFF'}} block>Criar Conta</Button>
+                    <Button
+                      type="submit"
+                      style={{ backgroundColor: "#263238", color: "#FFF" }}
+                      block
+                    >
+                      Criar Conta
+                    </Button>
                   </Form>
                 </CardBody>
               </Card>
@@ -199,7 +312,7 @@ class Register extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   nome: state.UsuarioReducer.nome,
   cpf: state.UsuarioReducer.cpf,
   rg: state.UsuarioReducer.rg,
@@ -219,14 +332,27 @@ const mapStateToProps = state => ({
 
 const mapActionToProps = {
   registerUser,
-  resetCamposUsuario, 
-  changeNomeUsuario, 
-  changeCpfUsuario, 
-  changeRgUsuario, 
-  changeEmailUsuario, 
+  resetCamposUsuario,
+  changeNomeUsuario,
+  changeCpfUsuario,
+  changeRgUsuario,
+  changeEmailUsuario,
   changeSenhaUsuario,
   changeConfirmarSenhaUsuario,
-  changeTelefoneUsuario 
+  changeTelefoneUsuario,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Register);
+
+// Verifica se o telefone é válido
+const validTelfone = (telefone) => {
+  let regexp = new RegExp(
+    "^\\([0-9]{2}\\)(([0-9]{5}-[0-9]{4})|([0-9]{5}-[0-9]{3}))$"
+  );
+
+  return regexp.test(telefone);
+};
+// Verifica se o email é válido
+const validEmail = (email) => {
+  return email.includes("@");
+};
