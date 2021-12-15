@@ -34,7 +34,8 @@ class Forms extends Component {
     this.state = {
       collapse: true,
       fadeIn: true,
-      timeout: 300
+      timeout: 300,
+      forms: 1
     };
   }
 
@@ -46,7 +47,25 @@ class Forms extends Component {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
 
+  handleNextForm(){
+    this.setState((prevState) => {return { forms: prevState.forms + 1} })
+  }
+  handlePrevForm(){
+    this.setState((prevState) => {
+      if(this.state.forms >=2){
+        return { forms: prevState.forms - 1} 
+      }else {
+        console.log("Não volta!!!!")
+        return;
+      }
+    })
+  }
+
   render() {
+
+    
+
+
     return (
       <div className="animated fadeIn">            
         <Row>
@@ -58,10 +77,12 @@ class Forms extends Component {
                 </CardHeader>
                 <Collapse isOpen={this.state.collapse} id="collapseExample">
                   <CardBody>
+                  
                     <Form className="form-horizontal">
 
                     {/* BEM VINDO */}
                     
+                    {this.state.forms === 1 && 
                       <div style={{textAlign: 'justify', padding: 15}}>
                       <FormGroup>
                         <Label>
@@ -96,13 +117,14 @@ class Forms extends Component {
                           </FormText>
                       </FormGroup>
                         </div>
+                    }
 
 
-                    {/* DADOS DO VEICULO */}
+                    {this.state.forms === 2 &&
 
-                      {/* <FormGroup>
+                      <>
                         <FormGroup>
-                        <Label htmlFor="name">Cidade</Label>
+                          <Label htmlFor="name">Cidade</Label>
                           <Input type="text" id="name" placeholder='Digite o nome da cidade' required />
                         </FormGroup>
 
@@ -140,35 +162,116 @@ class Forms extends Component {
                         </FormGroup>
 
 
-                      <FormGroup>
+                        <FormGroup>
+                          <Label>Feriado</Label>
+                          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: 200}}>
 
-                        <Label>Feriado</Label>
-                        <FormGroup check className="radio">
-                          <Input className="form-check-input" type="radio" id="radio1" name="radios" value="option1" />
-                          <Label check className="form-check-label" htmlFor="radio1">Sim</Label>
-                        </FormGroup>
-                        <FormGroup check className="radio">
-                          <Input className="form-check-input" type="radio" id="radio2" name="radios" value="option2" />
-                          <Label check className="form-check-label" htmlFor="radio2">Não</Label>
-                        </FormGroup>
-                        </FormGroup>
-                      </FormGroup>
+                          <FormGroup check className="radio">
+                            <Input className="form-check-input" type="radio" id="radio1" name="radios" value="option1" />
+                            <Label check className="form-check-label" htmlFor="radio1">Sim</Label>
+                          </FormGroup>
+                          <FormGroup check className="radio">
+                            <Input className="form-check-input" type="radio" id="radio2" name="radios" value="option2" />
+                            <Label check className="form-check-label" htmlFor="radio2">Não</Label>
+                          </FormGroup>
+                          </div>
 
-                      <FormGroup row>
-                        <Col md="3">
-                          <Label htmlFor="file-input">Upload Image</Label>
-                        </Col>
-                        <Col xs="12" md="9">
-                          <Input type="file" id="file-input" name="file-input" />
-                        </Col>
-                      </FormGroup> */}
+                        <FormGroup row>
+                          <Col md="3">
+                            <Label htmlFor="file-input">Upload Image</Label>
+                          </Col>
+                          <Col xs="12" md="9">
+                            <Input type="file" id="file-input" name="file-input" />
+                          </Col>
+                        </FormGroup>
+                       
+                        </FormGroup>
+                      </>
+                    }
 
-                      {/* DADOS DO VEICULO */}
-                    </Form>
+                      {this.state.forms === 3 && 
+                        <>
+
+                          <Label>
+                            <span style={{fontSize: 20, fontWeight: 'bold'}}>Dados do veículo</span>
+                          </Label>
+                          <FormGroup>
+                          <Label htmlFor="ccyear">Tipo de veículo</Label>
+                          <Input type="select" name="ccyear" id="ccyear">
+                            <option>Automóvel</option>
+                            <option>Bicicleta</option>
+                            <option>Caminhão</option>
+                            <option>Charrete</option>
+                            <option>Motocicleta</option>
+                            <option>Patinete</option>
+                            <option>Patins</option>
+                            <option>Ônibus</option>
+                          </Input>
+                        </FormGroup>
+
+
+                        <FormGroup>
+                          <Label htmlFor="name">Número de ocupantes</Label>
+                          <Input type="text" id="name" placeholder='Digite a quantidade de ocupantes' required />
+                        </FormGroup>
+
+
+                        <FormGroup>
+                          <Label htmlFor="ccyear">Veículo no momento do ato</Label>
+                          <Input type="select" name="ccyear" id="ccyear">
+                            <option>Estacionado</option>
+                            <option>Movimento</option>
+                            <option>Parado</option>
+                            
+                          </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                          <Label htmlFor="ccyear">Categoria</Label>
+                          <Input type="select" name="ccyear" id="ccyear">
+                            <option>Aluguel</option>
+                            <option>Particular</option>
+                            <option>Parado</option>
+                          </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                          <Label htmlFor="ccyear">Possui seguro?</Label>
+                          <Input type="select" name="ccyear" id="ccyear">
+                            <option>Sim</option>
+                            <option>Não</option>
+                            <option>Não informado</option>
+                          </Input>
+                        </FormGroup>
+
+
+
+                        <Label>
+                          <span style={{fontSize: 20, fontWeight: 'bold'}}>Seus dados</span>
+                        </Label>
+                      
+                        <FormGroup>
+                        <Label htmlFor="ccyear">Nome</Label>
+                        <Input type="select" name="ccyear" id="ccyear">
+                          <option>Aluguel</option>
+                          <option>Particular</option>
+                          <option>Parado</option>
+                        </Input>
+                        </FormGroup>
+                        </>
+
+                        
+                      }
+
+
                       <div className="form-actions" style={{justifyContent: 'flex-end', display: 'flex'}}>
-                        <Button color="secondary" style={{marginRight: 10}}>Cancelar</Button>
-                        <Button type="submit" color="primary">Próximo</Button>
+                        {this.state.forms >= 2 &&
+                          <Button color="secondary" style={{marginRight: 10}} onClick={() => this.handlePrevForm()}>Voltar</Button>
+                        }
+                        <Button  color="primary" onClick={() => this.handleNextForm()}>Próximo</Button>
                       </div>
+                    </Form>
+                    
                   </CardBody>
                 </Collapse>
               </Card>
