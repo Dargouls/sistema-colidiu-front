@@ -2,7 +2,7 @@ import React from "react";
 
 // Componentes utilizadas na aplicação
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
-const Forms = React.lazy(() => import("./views/Base/Forms"));
+const RegisterOcorrencia = React.lazy(() => import("./views/Pages/RegisterOcorrencia"));
 const Carrousel = React.lazy(() => import("./views/Base/Carousels"));
 const Servicos = React.lazy(() => import("./views/Servicos/Servicos"));
 const Profissionais = React.lazy(() =>
@@ -26,7 +26,7 @@ const routes = [
   // Rotas utilizadas pela aplicação - ZeroTime
   { path: "/", exact: true, name: "Início" },
   { path: "/dashboard", name: "Painel", component: Dashboard },
-  { path: "/registro-ocorrencia", name: "Painel", component: Forms },
+  { path: "/registro-ocorrencia", name: "Painel", component: RegisterOcorrencia },
   { path: "/carrousel", name: "Painel", component: Carrousel },
   { path: "/servicos", exact: true, name: "Serviços", component: Servicos },
   {

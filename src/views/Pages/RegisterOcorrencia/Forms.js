@@ -39,7 +39,7 @@ class Forms extends Component {
       collapse: true,
       fadeIn: true,
       timeout: 300,
-      forms: 5
+      forms: 1
     };
   }
 

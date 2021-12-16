@@ -18,7 +18,7 @@ class DefaultFooter extends Component {
           <a href="#!">SMTT</a> &copy; 2021.
         </span>
         <span className="ml-auto">
-          Powered by <a href="#!">Luiz Carlos</a>
+          {/* Powered by <a href="#!">Luiz Carlos</a> */}
         </span>
       </React.Fragment>
     );
