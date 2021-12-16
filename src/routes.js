@@ -3,6 +3,9 @@ import React from "react";
 // Componentes utilizadas na aplicação
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const RegisterOcorrencia = React.lazy(() => import("./views/Pages/RegisterOcorrencia"));
+const GuiaGR = React.lazy(() => import("./views/Pages/GuiaGR/GuiaGR"));
+const Colidiu = React.lazy(() => import("./views/Pages/Colidiu/Colidiu"));
+const ComplementarOcorrencia = React.lazy(() => import("./views/Pages/ComplementarOcorrencia/ComplementarOcorrencia"));
 const Carrousel = React.lazy(() => import("./views/Base/Carousels"));
 const Servicos = React.lazy(() => import("./views/Servicos/Servicos"));
 const Profissionais = React.lazy(() =>
@@ -25,10 +28,13 @@ const Solicitacao = React.lazy(() =>
 const routes = [
   // Rotas utilizadas pela aplicação - ZeroTime
   { path: "/", exact: true, name: "Início" },
-  { path: "/dashboard", name: "Painel", component: Dashboard },
+  // { path: "/dashboard", name: "Painel", component: Dashboard },
   { path: "/registro-ocorrencia", name: "Painel", component: RegisterOcorrencia },
-  { path: "/carrousel", name: "Painel", component: Carrousel },
-  { path: "/servicos", exact: true, name: "Serviços", component: Servicos },
+  { path: "/guia", name: "Painel", component: GuiaGR },
+  { path: "/colidiu", name: "Painel", component: Colidiu },
+  { path: "/ocorrencia-pesquisar", name: "Painel", component: ComplementarOcorrencia },
+  // { path: "/carrousel", name: "Painel", component: Carrousel },
+  // { path: "/servicos", exact: true, name: "Serviços", component: Servicos },
   {
     path: "/profissionais",
     exact: true,

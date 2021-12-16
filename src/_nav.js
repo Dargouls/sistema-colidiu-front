@@ -62,8 +62,8 @@ export default {
     //   icon: 'fa fa-briefcase',
     // },
     {
-      name: "Imprimar - Guia/GR",
-      url: "/solicitacoes",
+      name: "Imprimir - Guia/GR",
+      url: "/guia",
       icon: "fa fa-users",
       // children: [
       //   {
@@ -80,7 +80,7 @@ export default {
     },
     {
       name: 'Imprimir Colidiu',
-      url: '/base',
+      url: '/colidiu',
       icon: 'icon-printer'
     //   children: [
     //     {
@@ -95,7 +95,7 @@ export default {
     },
     {
       name: 'Complementar ocorrência',
-      url: '/base/carousels',
+      url: 'ocorrencia-pesquisar',
       icon: 'icon-puzzle',
     },
     {
