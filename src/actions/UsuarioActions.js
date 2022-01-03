@@ -63,8 +63,6 @@ export const resetCamposUsuario = () =>
 export const login = (email, senha) => async (dispatch) => {
   let aconteceuErro = false;
 
-  // Se aconteceu algum campo está vazio ele retorna uma mensagem
-  // Se não, ele define a mensagem de campo invalido como vazio
   if (!email) {
     dispatch(changeMsgEmailInvalidUsuario("Digite o seu email"));
     aconteceuErro = true;
@@ -78,8 +76,6 @@ export const login = (email, senha) => async (dispatch) => {
     dispatch(changeMsgSenhaInvalidUsuario(""));
   }
 
-  // Se aconteceu algum erro ele para a requisição
-  // Se não, ele continua
   if (aconteceuErro) {
     return false;
   } else {
@@ -87,7 +83,8 @@ export const login = (email, senha) => async (dispatch) => {
       email,
       password: senha,
     };
-    const response = await api.post("/login/adm", body);
+
+    const response = await api.post("/login", body);
 
     if (response.data.token) {
       setToken("Token");
