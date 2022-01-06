@@ -9,7 +9,12 @@ import {
   Form,
   Row,
 } from 'reactstrap';
+
+import { toast } from "react-toastify";
+
 import { estados } from './estados';
+
+import { api } from "../../../services/api"
 
 import { Welcome, Accident, Vehicle, MoreInformation, Witness } from './Cards/index'
 import { Link } from 'react-router-dom';
@@ -23,6 +28,7 @@ class Forms extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddVehicle = this.handleAddVehicle.bind(this);
     this.handleAddWitness = this.handleAddWitness.bind(this);
+    this.sendRegister = this.sendRegister.bind(this);
     this.toggle = this.toggle.bind(this);
     this.toggleFade = this.toggleFade.bind(this);
     this.state = {
@@ -61,6 +67,17 @@ class Forms extends Component {
     };
   }
 
+  async sendRegister() {
+    try {
+      const response = await api.post("/occurrences", this.state);
+      if (response.messagem) {
+        toast.success("Registro de ocorrência cadastrado com sucesso!")
+      }
+    } catch {
+      toast.error("Ocorreu algum erro, tente novamente!")
+    }
+  }
+
   handleAddVehicle(vehicle) {
     console.log('ArrayVehicle:', [...this.state.array_vehicle, vehicle])
     this.setState({ array_vehicle: [...this.state.array_vehicle, vehicle] })
@@ -68,7 +85,7 @@ class Forms extends Component {
 
   handleAddWitness(witness) {
     console.log('ArrayWitness:', [...this.state.array_witness, witness])
-    this.setState({ array_witness: [...this.state.array_witness, witness]})
+    this.setState({ array_witness: [...this.state.array_witness, witness] })
   }
 
   handleInputChange(e) {
@@ -155,10 +172,10 @@ class Forms extends Component {
                       {this.state.forms >= 2 &&
                         <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.handlePrevForm()}>Voltar</Button>
                       }
-                      {this.state.forms < 6 ? 
+                      {this.state.forms < 6 ?
                         <Button color="primary" onClick={() => this.handleNextForm()}>Próximo</Button>
-                        : 
-                        <Button color="primary" onClick={() => alert('Dados cadastrados com sucesso!')}>Enviar</Button>
+                        :
+                        <Button color="primary" onClick={this.sendRegister}>Enviar</Button>
                       }
                     </div>
                   </Form>

@@ -10,12 +10,12 @@ import {
 import { estados } from '../../estados';
 
 class MoreInformation extends Component {
-
     constructor(props) {
         super(props);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.resetInput = this.resetInput.bind(this);
         this.save = this.save.bind(this);
+        
         this.state = {
             type_vehicle: '',
             number_occupants: '',
@@ -43,6 +43,7 @@ class MoreInformation extends Component {
             email: '',
         }
     }
+
 
     save() {
         this.props.setState(this.state);
@@ -479,7 +480,7 @@ class MoreInformation extends Component {
                             color="primary"
                             onClick={this.save}
                         >
-                            Adicionar Veíuculo
+                            Adicionar Veículo
                         </Button>
                     </div>
 
