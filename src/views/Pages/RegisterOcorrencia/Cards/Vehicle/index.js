@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Col,
   FormGroup,
   Input,
   Label,
@@ -136,7 +135,6 @@ class Vehicle extends Component {
             value={this.props.state.rg}
           />
         </FormGroup>
-
 
         <FormGroup>
           <Label>UF RG</Label>

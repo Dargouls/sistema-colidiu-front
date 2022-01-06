@@ -1,27 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Badge,
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Col,
   Collapse,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Fade,
   Form,
-  FormGroup,
-  FormText,
-  FormFeedback,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButtonDropdown,
-  InputGroupText,
-  Label,
   Row,
 } from 'reactstrap';
 import { estados } from './estados';
@@ -36,6 +21,8 @@ class Forms extends Component {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAddVehicle = this.handleAddVehicle.bind(this);
+    this.handleAddWitness = this.handleAddWitness.bind(this);
     this.toggle = this.toggle.bind(this);
     this.toggleFade = this.toggleFade.bind(this);
     this.state = {
@@ -70,7 +57,18 @@ class Forms extends Component {
       phone: '',
       email: '',
       array_vehicle: [],
+      array_witness: [],
     };
+  }
+
+  handleAddVehicle(vehicle) {
+    console.log('ArrayVehicle:', [...this.state.array_vehicle, vehicle])
+    this.setState({ array_vehicle: [...this.state.array_vehicle, vehicle] })
+  }
+
+  handleAddWitness(witness) {
+    console.log('ArrayWitness:', [...this.state.array_witness, witness])
+    this.setState({ array_witness: [...this.state.array_witness, witness]})
   }
 
   handleInputChange(e) {
@@ -136,12 +134,14 @@ class Forms extends Component {
                     {this.state.forms == 4 &&
                       <MoreInformation
                         state={this.state}
+                        setState={this.handleAddVehicle}
                         onChange={(e) => this.handleInputChange(e)} />
                     }
 
                     {this.state.forms === 5 &&
                       <Witness
                         state={this.state}
+                        setState={this.handleAddWitness}
                         onChange={(e) => this.handleInputChange(e)} />
                     }
 
@@ -155,7 +155,11 @@ class Forms extends Component {
                       {this.state.forms >= 2 &&
                         <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.handlePrevForm()}>Voltar</Button>
                       }
-                      <Button color="primary" onClick={() => this.handleNextForm()}>Próximo</Button>
+                      {this.state.forms < 6 ? 
+                        <Button color="primary" onClick={() => this.handleNextForm()}>Próximo</Button>
+                        : 
+                        <Button color="primary" onClick={() => alert('Dados cadastrados com sucesso!')}>Enviar</Button>
+                      }
                     </div>
                   </Form>
 
