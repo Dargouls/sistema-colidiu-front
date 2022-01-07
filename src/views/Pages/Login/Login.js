@@ -14,6 +14,7 @@ import {
   FormFeedback,
   Row,
   Form,
+  Spinner
 } from "reactstrap";
 
 import { connect } from "react-redux";
@@ -27,6 +28,15 @@ import {
 import "./Login.css";
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+    };
+  }
+
   componentDidMount() {
     // this.props.resetCamposUsuario()
     // window.addEventListener("keyup", e=>{
@@ -39,12 +49,14 @@ class Login extends Component {
   }
 
   _login = async (e) => {
+    this.setState({ loading: true });
     e.preventDefault();
 
     const { email, senha } = this.props;
 
     let autenticacao = await this.props.login(email, senha);
-
+    
+    this.setState({loading: false});
     if (autenticacao === "Autenticado") {
       this.props.history.push("/");
     }
@@ -118,25 +130,20 @@ class Login extends Component {
                       </InputGroup>
                       <Row>
                         <Col xs="12">
-                          <Button
-                            type="submit"
-                            style={{
-                              backgroundColor: "#263238",
-                              color: "#FFF",
-                            }}
-                            className="px-4 btn-entrar"
-                          >
-                            Entrar
-                          </Button>
+                          {this.state.loading ?
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
+                              <Spinner />
+                            </div>
+                            :
+                            <Button
+                              type="submit"
+                              style={{ backgroundColor: "#263238", color: "#FFF", }}
+                              className="px-4 btn-entrar"
+                            >
+                              Entrar
+                            </Button>
+                          }
                         </Col>
-                        {/* <Col xs="12" className="d-lg-none d-xl-none mt-1">
-                          <Link to="/register">
-                            <Button color="primary" className="px-4 btn-cadastro">Cadastre-se</Button>
-                          </Link>
-                        </Col> */}
-                        {/* <Col xs="12" lg="6" className="text-center">
-                          <Button color="link" className="px-0 btn-esqueci-senha">Esqueceu a senha?</Button>
-                        </Col> */}
                       </Row>
                       <Row>
                         <Col xs="12">
@@ -148,17 +155,6 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                {/* <Card className="text-white py-5 d-md-down-none" style={{ width: '44%', backgroundColor: "#327AD9" }}>
-                  <CardBody className="text-center">
-                    <div>
-                      <h2>Cadastrar</h2>
-                      <p>Comece a usufruir dessa comodidade agora mesmo.</p>
-                      <Link to="/register">
-                        <Button className="mt-3 btn-cadastro" active tabIndex={-1}>Cadastre-se agora!</Button>
-                      </Link>
-                    </div>
-                  </CardBody>
-                </Card> */}
               </CardGroup>
             </Col>
           </Row>

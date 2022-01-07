@@ -25,7 +25,7 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.type_vehicle}
           >
-            <option>Selecione</option>
+            <option></option>
             <option>Automóvel</option>
             <option>Bicicleta</option>
             <option>Caminhão</option>
@@ -57,7 +57,7 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.state_vehicle}
           >
-            <option>Selecione</option>
+            <option></option>
             <option>Estacionado</option>
             <option>Movimento</option>
             <option>Parado</option>
@@ -72,7 +72,7 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.category_vehicle}
           >
-            <option>Selecione</option>
+            <option></option>
             <option>Aluguel</option>
             <option>Particular</option>
             <option>Parado</option>
@@ -87,6 +87,7 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.safe_vehicle}
           >
+            <option></option>
             <option>Sim</option>
             <option>Não</option>
             <option>Não informado</option>
@@ -117,7 +118,6 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.sex}
           >
-            <option>Selecione</option>
             <option>Masculino</option>
             <option>Feminino</option>
             <option>Não informado</option>

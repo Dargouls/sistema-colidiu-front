@@ -1,30 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Badge,
   Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Col,
-  Collapse,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Fade,
-  Form,
   FormGroup,
-  FormText,
-  FormFeedback,
   Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButtonDropdown,
-  InputGroupText,
   Label,
-  Row,
 } from 'reactstrap';
 
+import { toast } from "react-toastify";
 import { Link } from 'react-router-dom';
 import { estados } from '../../estados'
 
@@ -52,12 +34,13 @@ class Witness extends Component {
     }
   }
 
-  save(){
+  save() {
     this.props.setState(this.state);
+    toast.success("Dados inseridos com successo!")
     this.resetInputs();
   }
 
-  resetInputs(){
+  resetInputs() {
     this.setState(
       {
         name_witness: '',
@@ -119,7 +102,7 @@ class Witness extends Component {
             value={this.state.sex_witness}
             onChange={this.handleInputChange}
           >
-            <option>Selecione</option>
+            <option></option>
             <option>Masculino</option>
             <option>Feminino</option>
             <option>Não informado</option>
@@ -196,6 +179,7 @@ class Witness extends Component {
                 value={this.state.uf_witness}
                 onChange={this.handleInputChange}
               >
+                <option></option>
                 {estados.UF.map((item, index) => {
                   return <option key={index}>{item.nome}</option>
                 })}
@@ -319,7 +303,7 @@ class Witness extends Component {
             </Button>
           </div>
 
-          <Button color="primary" >Limpar</Button>
+          <Button color="primary" onClick={this.resetInput}>Limpar</Button>
         </div>
       </>
     );

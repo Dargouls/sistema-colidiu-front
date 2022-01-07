@@ -12,10 +12,12 @@ import {
   InputGroupAddon,
   InputGroupText,
   Row,
+  Spinner
 } from "reactstrap";
 import { Link, Redirect, Switch } from "react-router-dom";
 
 import InputMask from "react-input-mask";
+import { toast } from "react-toastify";
 
 import "./Register.css";
 
@@ -38,6 +40,7 @@ class Register extends Component {
     super(props);
 
     this.state = {
+      loading: false,
       user: {
         cpf: "",
         nome: "",
@@ -101,10 +104,13 @@ class Register extends Component {
 
   _registerUser = async (e) => {
     e.preventDefault();
-
+    if (this.state.user.senha !== this.state.user.confirmarSenha) {
+      return toast.warning("Senhas digitadas não são correspondentes!")
+    }
     const { cpf, nome, rg, email, senha, confirmarSenha, telefone } =
       this.state.user;
 
+    this.setState({ loading: !this.state.loading })
     let register = await this.props.registerUser(
       nome,
       cpf,
@@ -114,8 +120,8 @@ class Register extends Component {
       confirmarSenha,
       telefone
     );
-
     if (register) {
+      this.setState({ loading: !this.state.loading })
       this.props.history.push("/");
     }
   };
@@ -154,6 +160,7 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input
                         type="text"
+                        required
                         placeholder="CPF"
                         autoComplete="CPF"
                         value={this.state.user.cpf}
@@ -175,6 +182,7 @@ class Register extends Component {
                         type="text"
                         placeholder="Nome"
                         autoComplete="username"
+                        required
                         value={this.state.user.nome}
                         onChange={(event) => {
                           this.handleChange(event, "nome");
@@ -196,12 +204,14 @@ class Register extends Component {
                         onChange={(event) => {
                           this.handleChange(event, "telefone");
                         }}
+                        required
                         maskChar=""
                       >
                         {(inputProps) => (
                           <Input
                             {...inputProps}
                             type="text"
+                            required
                             placeholder="Telefone"
                             autoComplete="telefone"
                             invalid={this.state.validation.telefone === "error"}
@@ -219,6 +229,7 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input
                         type="email"
+                        required
                         placeholder="Email"
                         autoComplete="email"
                         value={this.state.user.email}
@@ -241,6 +252,7 @@ class Register extends Component {
                         placeholder="RG"
                         autoComplete="rg"
                         value={this.state.user.rg}
+                        required
                         onChange={(event) => {
                           this.handleChange(event, "rg");
                         }}
@@ -260,6 +272,7 @@ class Register extends Component {
                         type="password"
                         placeholder="Senha"
                         autoComplete="new-password"
+                        required
                         value={this.state.user.senha}
                         onChange={(event) => {
                           this.handleChange(event, "senha");
@@ -279,6 +292,7 @@ class Register extends Component {
                         type="password"
                         placeholder="Confirmar senha"
                         autoComplete="new-password"
+                        required
                         value={this.state.user.confirmarSenha}
                         onChange={(event) => {
                           this.handleChange(event, "confirmarSenha");
@@ -294,13 +308,19 @@ class Register extends Component {
                         {this.props.msgConfirmarSenhaInvalid}
                       </FormFeedback>
                     </InputGroup>
-                    <Button
-                      type="submit"
-                      style={{ backgroundColor: "#263238", color: "#FFF" }}
-                      block
-                    >
-                      Criar Conta
-                    </Button>
+                    {this.state.loading ?
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
+                        <Spinner />
+                      </div>
+                      :
+                      <Button
+                        type="submit"
+                        style={{ backgroundColor: "#263238", color: "#FFF" }}
+                        block
+                      >
+                        Criar Conta
+                      </Button>
+                    }
                   </Form>
                 </CardBody>
               </Card>

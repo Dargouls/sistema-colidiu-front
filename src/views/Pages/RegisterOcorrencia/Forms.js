@@ -8,18 +8,36 @@ import {
   Collapse,
   Form,
   Row,
+  Spinner
 } from 'reactstrap';
 
 import { toast } from "react-toastify";
-
-import { estados } from './estados';
-
 import { api } from "../../../services/api"
-
 import { Welcome, Accident, Vehicle, MoreInformation, Witness } from './Cards/index'
-import { Link } from 'react-router-dom';
-
 import Confirmation from './Cards/Confirmation';
+
+// const Cards = [
+//   <Welcome />,
+//   <Accident
+//     state={this.state}
+//     onChange={(e) => this.handleInputChange(e)}
+//   />,
+//   <Vehicle
+//     state={this.state}
+//     onChange={(e) => this.handleInputChange(e)}
+//   />,
+//   <MoreInformation
+//     state={this.state}
+//     onChange={(e) => this.handleInputChange(e)}
+//     setState={this.handleAddVehicle}
+//   />,
+//   <Witness
+//     state={this.state}
+//     onChange={(e) => this.handleInputChange(e)}
+//     setState={this.handleAddVehicle}
+//   />,
+//   <Confirmation/>
+// ]
 
 class Forms extends Component {
   constructor(props) {
@@ -107,14 +125,11 @@ class Forms extends Component {
     this.setState((prevState) => { return { forms: prevState.forms + 1 } })
   }
   handlePrevForm() {
-    this.setState((prevState) => {
-      if (this.state.forms >= 2) {
-        return { forms: prevState.forms - 1 }
-      } else {
-        console.log("Não volta!!!!")
-        return;
-      }
-    })
+    if (this.state.forms > 1) {
+      this.setState({forms: this.state.forms - 1});
+    } else {
+      return;
+    }
   }
 
   render() {

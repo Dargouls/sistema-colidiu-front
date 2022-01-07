@@ -36,7 +36,7 @@ class Accident extends Component {
                         onChange={this.props.onChange}
                         value={this.props.state.type_accident}
                     >
-                        <option>Selecione o tipo de acidente</option>
+                        <option></option>
                         <option>Abalroamento Lateral</option>
                         <option>Abalroamento Transversal</option>
                         <option>Acidente Complexo</option>
@@ -65,7 +65,7 @@ class Accident extends Component {
                         onChange={this.props.onChange}
                         value={this.props.state.zone}
                     >
-                        <option>Selecione o tipo de zona</option>
+                        <option></option>
                         <option>Urbana</option>
                         <option>Rural</option>
                     </Input>
@@ -79,7 +79,7 @@ class Accident extends Component {
                         onChange={this.props.onChange}
                         value={this.props.state.zone}
                     >
-                        <option>Selecione</option>
+                        <option></option>
                         <option>Sim</option>
                         <option>Não</option>
                     </Input>
@@ -92,6 +92,7 @@ class Accident extends Component {
                             name="image"
                             onChange={this.props.onChange}
                             value={this.props.state.image}
+                            required
                         />
                     </FormGroup>
                 </FormGroup>

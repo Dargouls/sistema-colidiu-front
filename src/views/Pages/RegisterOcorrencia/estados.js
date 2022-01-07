@@ -1,6 +1,5 @@
 export const  estados = {
     "UF": [
-        {"nome": "Selecione o estado", "sigla": ""},
         {"nome": "Acre", "sigla": "AC"},
         {"nome": "Alagoas", "sigla": "AL"},
         {"nome": "Amapá", "sigla": "AP"},

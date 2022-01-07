@@ -88,10 +88,11 @@ export const login = (email, senha) => async (dispatch) => {
 
     if (response.data.token) {
       setToken("Token");
+      toast.success("Logado com sucesso!");
       return "Autenticado";
     } else {
       if (response.data.mensagem) {
-        toast.error("Desculpe, mas você não é um administrador!");
+        toast.error("Desculpe, senha e/ou email inválido!");
       } else {
         toast.error("Desculpe, ocorreu algum erro contacte um administrador.");
       }

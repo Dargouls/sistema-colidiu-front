@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import {
     Col,
     FormGroup,
@@ -15,7 +16,6 @@ class MoreInformation extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.resetInput = this.resetInput.bind(this);
         this.save = this.save.bind(this);
-        
         this.state = {
             type_vehicle: '',
             number_occupants: '',
@@ -44,9 +44,9 @@ class MoreInformation extends Component {
         }
     }
 
-
     save() {
         this.props.setState(this.state);
+        toast.success("Dados inseridos com sucesso!")
         this.resetInput();
     }
 
@@ -103,7 +103,8 @@ class MoreInformation extends Component {
                         value={this.state.type_vehicle}
                         onChange={this.handleInputChange}
                     >
-                        <option>Selecione</option>
+                        
+                        <option></option>
                         <option>Automóvel</option>
                         <option>Bicicleta</option>
                         <option>Caminhão</option>
@@ -137,7 +138,7 @@ class MoreInformation extends Component {
                                 onChange={this.handleInputChange}
                                 value={this.state.color_vehicle}
                             >
-                                <option>Selecione</option>
+                                <option></option>
                                 <option>BRANCO</option>
                                 <option>PRETO</option>
                                 <option>CINZA</option>
@@ -168,7 +169,7 @@ class MoreInformation extends Component {
                         value={this.state.state_vehicle}
                         onChange={this.handleInputChange}
                     >
-                        <option>Selecione</option>
+                        <option></option>
                         <option>Estacionado</option>
                         <option>Movimento</option>
                         <option>Parado</option>
@@ -183,7 +184,7 @@ class MoreInformation extends Component {
                         value={this.state.category_vehicle}
                         onChange={this.handleInputChange}
                     >
-                        <option>Selecione</option>
+                        <option></option>
                         <option>Aluguel</option>
                         <option>Particular</option>
                         <option>Parado</option>
@@ -198,6 +199,7 @@ class MoreInformation extends Component {
                         value={this.state.safe_vehicle}
                         onChange={this.handleInputChange}
                     >
+                        <option></option>
                         <option>Sim</option>
                         <option>Não</option>
                         <option>Não informado</option>
@@ -212,7 +214,7 @@ class MoreInformation extends Component {
                         value={this.state.transport_charge_vehicle}
                         onChange={this.handleInputChange}
                     >
-                        <option>Selecione</option>
+                        <option></option>
                         <option>Bruta</option>
                         <option>Granel</option>
                         <option>Não</option>
@@ -268,6 +270,7 @@ class MoreInformation extends Component {
                         value={this.state.sex}
                         onChange={this.handleInputChange}
                     >
+                        <option></option>
                         <option>Masculino</option>
                         <option>Feminino</option>
                         <option>Não informado</option>
@@ -308,6 +311,7 @@ class MoreInformation extends Component {
                         value={this.state.uf_rg}
                         onChange={this.handleInputChange}
                     >
+                        <option></option>
                         {estados.UF.map((item, index) => {
                             return <option key={index}>{item.nome}</option>
                         })}
@@ -336,7 +340,7 @@ class MoreInformation extends Component {
                 </Label>
 
                 <FormGroup>
-                    <Label>{this.state.data_conductor ? "True" : "False"}</Label>
+                    <Label>CEP</Label>
                     <Input
                         type="text"
                         name="cep"
@@ -362,6 +366,7 @@ class MoreInformation extends Component {
                                 value={this.state.uf}
                                 onChange={this.handleInputChange}
                             >
+                                <option></option>
                                 {estados.UF.map((item, index) => {
                                     return <option key={index}>{item.nome}</option>
                                 })}
@@ -484,7 +489,7 @@ class MoreInformation extends Component {
                         </Button>
                     </div>
 
-                    <Button color="primary" >Limpar</Button>
+                    <Button color="primary" onClick={this.resetInput}>Limpar</Button>
 
                 </div>
             </>
