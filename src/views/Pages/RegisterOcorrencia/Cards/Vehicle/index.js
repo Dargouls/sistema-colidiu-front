@@ -8,11 +8,14 @@ import {
   FormFeedback,
 } from "reactstrap";
 import { estados } from "../../estados";
+import { toast } from "react-toastify";
 
 class Vehicle extends Component {
   constructor(props) {
     super(props);
     this.handleForm = this.handleForm.bind(this);
+    this.handleWarning = this.handleWarning.bind(this);
+
     // this.handleNextForm = this.props.handleNextForm(this);
     this.state = {
       onchange: false,
@@ -24,10 +27,125 @@ class Vehicle extends Component {
     this.setState({ onchange: true });
     let data = this.props.state;
 
-    if (data.number_occupants === "") {
+    //adicioanr os dados
+    if (data.type_vehicle === "") {
+      this.handleWarning("type_vehicle");
       return;
     }
+    if (data.number_occupants === "") {
+      this.handleWarning("number_occupants");
+      return;
+    }
+    if (data.state_vehicle === "") {
+      this.handleWarning("state_vehicle");
+      return;
+    }
+    if (data.category_vehicle === "") {
+      this.handleWarning("category_vehicle");
+      return;
+    }
+    if (data.category_vehicle === "") {
+      this.handleWarning("category_vehicle");
+      return;
+    }
+    if (data.safe_vehicle === "") {
+      this.handleWarning("safe_vehicle");
+      return;
+    }
+    if (data.name === "") {
+      this.handleWarning("name");
+      return;
+    }
+    if (data.sex === "") {
+      this.handleWarning("sex");
+      return;
+    }
+    if (data.rg === "") {
+      this.handleWarning("rg");
+      return;
+    }
+    if (data.uf_rg === "") {
+      this.handleWarning("uf_rg");
+      return;
+    }
+    if (data.cnh === "") {
+      this.handleWarning("cnh");
+      return;
+    }
+    if (data.cpf === "") {
+      this.handleWarning("cpf");
+      return;
+    }
+    if (data.birth_date === "") {
+      this.handleWarning("birth_date");
+      return;
+    }
+    if (data.cep === "") {
+      this.handleWarning("cep");
+      return;
+    }
+    if (data.uf === "") {
+      this.handleWarning("cep");
+      return;
+    }
+    if (data.municipality === "") {
+      this.handleWarning("municipality");
+      return;
+    }
+    if (data.address === "") {
+      this.handleWarning("address");
+      return;
+    }
+    if (data.number_address === "") {
+      this.handleWarning("number_address");
+      return;
+    }
+    if (data.complement_address === "") {
+      this.handleWarning("complement_address");
+      return;
+    }
+    if (data.district === "") {
+      this.handleWarning("district");
+      return;
+    }
+    if (data.phone === "") {
+      this.handleWarning("phone");
+      return;
+    }
+    if (data.email === "") {
+      this.handleWarning("email");
+      return;
+    }
+
     this.props.handleNextForm();
+  }
+
+  handleWarning(type) {
+    const names = {
+      type_vehicle: "Tipo de veículo",
+      number_occupants: "Número de ocupantes",
+      state_vehicle: "Estado do veículo",
+      category_vehicle: "Categoria do veículo",
+      safe_vehicle: "Seguro do veículo",
+      name: "Seu nome",
+      sex: "Seu sexo",
+      rg: "Seu RG",
+      uf_rg: "Estado do RG",
+      cnh: "Número da CNH",
+      cpf: "Seu CPF",
+      birth_date: "Data de nascimento",
+      cep: "Seu CEP",
+      uf: "Seu estado",
+      municipality: "Seu municipío",
+      address: "Seu endereço",
+      number_address: "O número do endereço",
+      complement_address: "Complemento do endeço",
+      district: "O bairro",
+      phone: "O telefone",
+      email: "O e-mail",
+    };
+
+    toast.warn(`${names[type]} é obrigatório`);
   }
 
   render() {
@@ -44,8 +162,10 @@ class Vehicle extends Component {
             type="select"
             name="type_vehicle"
             onChange={this.props.onChange}
-            required
             value={this.props.state.type_vehicle}
+            invalid={
+              this.props.state.type_vehicle === "" && this.state.onchange
+            }
           >
             <option></option>
             <option>Automóvel</option>
@@ -57,6 +177,8 @@ class Vehicle extends Component {
             <option>Patins</option>
             <option>Ônibus</option>
           </Input>
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -68,7 +190,6 @@ class Vehicle extends Component {
             type="text"
             name="number_occupants"
             placeholder="Digite a quantidade de ocupantes"
-            required
             onChange={this.props.onChange}
             value={this.props.state.number_occupants}
           />
@@ -82,12 +203,17 @@ class Vehicle extends Component {
             name="state_vehicle"
             onChange={this.props.onChange}
             value={this.props.state.state_vehicle}
+            invalid={
+              this.props.state.state_vehicle === "" && this.state.onchange
+            }
           >
             <option></option>
             <option>Estacionado</option>
             <option>Movimento</option>
             <option>Parado</option>
           </Input>
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -97,12 +223,17 @@ class Vehicle extends Component {
             name="category_vehicle"
             onChange={this.props.onChange}
             value={this.props.state.category_vehicle}
+            invalid={
+              this.props.state.category_vehicle === "" && this.state.onchange
+            }
           >
             <option></option>
             <option>Aluguel</option>
             <option>Particular</option>
             <option>Parado</option>
           </Input>
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -112,12 +243,17 @@ class Vehicle extends Component {
             name="safe_vehicle"
             onChange={this.props.onChange}
             value={this.props.state.safe_vehicle}
+            invalid={
+              this.props.state.safe_vehicle === "" && this.state.onchange
+            }
           >
             <option></option>
             <option>Sim</option>
             <option>Não</option>
             <option>Não informado</option>
           </Input>
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <Label>
@@ -129,11 +265,14 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="name"
-            placeholder="Digite a quantidade de ocupantes"
+            placeholder="Digite o seu name"
             required
             onChange={this.props.onChange}
             value={this.props.state.name}
+            invalid={this.props.state.name === "" && this.state.onchange}
           />
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -143,11 +282,15 @@ class Vehicle extends Component {
             name="sex"
             onChange={this.props.onChange}
             value={this.props.state.sex}
+            invalid={this.props.state.sex === "" && this.state.onchange}
           >
+            <option></option>
             <option>Masculino</option>
             <option>Feminino</option>
             <option>Não informado</option>
           </Input>
+
+          <FormFeedback>Selecione o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -159,7 +302,10 @@ class Vehicle extends Component {
             required
             onChange={this.props.onChange}
             value={this.props.state.rg}
+            invalid={this.props.state.rg === "" && this.state.onchange}
           />
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -170,12 +316,15 @@ class Vehicle extends Component {
             placeholder="Selecione o estado"
             onChange={this.props.onChange}
             value={this.props.state.uf_rg}
+            invalid={this.props.state.uf_rg === "" && this.state.onchange}
           >
             <option></option>
             {estados.UF.map((item, index) => {
               return <option key={index}>{item.nome}</option>;
             })}
           </Input>
+
+          <FormFeedback>Selecione o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -184,10 +333,12 @@ class Vehicle extends Component {
             type="text"
             name="cnh"
             placeholder="Digite o sua CNH"
-            required
             onChange={this.props.onChange}
             value={this.props.state.cnh}
+            invalid={this.props.state.cnh === "" && this.state.onchange}
           />
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
         <div
           style={{
@@ -206,7 +357,10 @@ class Vehicle extends Component {
               required
               onChange={this.props.onChange}
               value={this.props.state.cpf}
+              invalid={this.props.state.cpf === "" && this.state.onchange}
             />
+
+            <FormFeedback>Preencha o campo!</FormFeedback>
           </FormGroup>
 
           <FormGroup>
@@ -214,10 +368,14 @@ class Vehicle extends Component {
             <Input
               type="date"
               name="birth_date"
-              required
               onChange={this.props.onChange}
               value={this.props.state.birth_date}
+              invalid={
+                this.props.state.birth_date === "" && this.state.onchange
+              }
             />
+
+            <FormFeedback>Preencha o campo!</FormFeedback>
           </FormGroup>
         </div>
 
@@ -231,10 +389,12 @@ class Vehicle extends Component {
             type="text"
             name="cep"
             placeholder="Digite o CEP"
-            required
             onChange={this.props.onChange}
             value={this.props.state.cep}
+            invalid={this.props.state.cep === "" && this.state.onchange}
           />
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -243,10 +403,12 @@ class Vehicle extends Component {
             type="text"
             name="uf"
             placeholder="Digite o Estado"
-            required
             onChange={this.props.onChange}
             value={this.props.state.uf}
+            invalid={this.props.state.uf === "" && this.state.onchange}
           />
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label>Municipio</Label>
@@ -257,7 +419,12 @@ class Vehicle extends Component {
             required
             onChange={this.props.onChange}
             value={this.props.state.municipality}
+            invalid={
+              this.props.state.municipality === "" && this.state.onchange
+            }
           />
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
         <div
           style={{
@@ -274,10 +441,12 @@ class Vehicle extends Component {
                 type="text"
                 name="address"
                 placeholder="Digite o Endereço"
-                required
                 onChange={this.props.onChange}
                 value={this.props.state.address}
+                invalid={this.props.state.address === "" && this.state.onchange}
               />
+
+              <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
           </div>
           <FormGroup>
@@ -286,10 +455,13 @@ class Vehicle extends Component {
               type="text"
               name="number_address"
               placeholder="Digite o número"
-              required
               onChange={this.props.onChange}
               value={this.props.state.number_address}
+              invalid={
+                this.props.state.number_address === "" && this.state.onchange
+              }
             />
+            <FormFeedback>Preencha o campo!</FormFeedback>
           </FormGroup>
         </div>
         <div
@@ -310,7 +482,12 @@ class Vehicle extends Component {
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.complement_address}
+                invalid={
+                  this.props.state.complement_address === "" &&
+                  this.state.onchange
+                }
               />
+              <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
           </div>
 
@@ -324,7 +501,11 @@ class Vehicle extends Component {
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.district}
+                invalid={
+                  this.props.state.district === "" && this.state.onchange
+                }
               />
+              <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
           </div>
         </div>
@@ -343,10 +524,12 @@ class Vehicle extends Component {
                 type="text"
                 name="phone"
                 placeholder="(82) 99999-9999"
-                required
                 onChange={this.props.onChange}
                 value={this.props.state.phone}
+                invalid={this.props.state.phone === "" && this.state.onchange}
               />
+
+              <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
           </div>
 
@@ -357,10 +540,11 @@ class Vehicle extends Component {
                 type="text"
                 name="email"
                 placeholder="seuemail@email.com"
-                required
                 onChange={this.props.onChange}
                 value={this.props.state.email}
+                invalid={this.props.state.email === "" && this.state.onchange}
               />
+              <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
           </div>
         </div>

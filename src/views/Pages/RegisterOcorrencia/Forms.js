@@ -73,10 +73,10 @@ class Forms extends Component {
 
   async sendRegister() {
     try {
-      console.log("State:", this.state);
       const response = await api.post("/occurrences", this.state);
+      console.log("State:", response);
 
-      if (response.messagem) {
+      if (response.mensagem) {
         toast.success("Registro de ocorrência cadastrado com sucesso!");
       }
     } catch {
@@ -187,17 +187,6 @@ class Forms extends Component {
                         handlePrevForm={this.handlePrevForm}
                       />
                     )}
-
-                    {/* <div className="form-actions" style={{ justifyContent: 'flex-end', display: 'flex' }}>
-                      {this.state.forms >= 2 &&
-                        <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.handlePrevForm()}>Voltar</Button>
-                      }
-                      {this.state.forms < 6 ?
-                        <Button color="primary" onClick={() => this.handleNextForm()}>Próximo</Button>
-                        :
-                        <Button color="primary" onClick={this.sendRegister}>Enviar</Button>
-                      }
-                    </div> */}
                   </Form>
                 </CardBody>
               </Collapse>
