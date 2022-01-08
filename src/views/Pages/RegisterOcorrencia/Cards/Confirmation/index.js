@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     FormGroup,
     Label,
+    Button
 } from 'reactstrap';
 
 class Confirmation extends Component {
@@ -36,6 +37,10 @@ class Confirmation extends Component {
                 <Label>
                     <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados da Pessoa e do Veículo</span>
                 </Label>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
+                    <Button color="primary" onClick={() => this.handleForm()}>Confimar</Button>
+                </div>
             </>
         );
     }

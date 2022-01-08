@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     Col,
+    Button,
     FormGroup,
     Input,
     Label,
@@ -9,7 +10,26 @@ import {
 class Accident extends Component {
     constructor(props) {
         super(props);
+        this.handleForm = this.handleForm.bind(this);
+        // this.handleNextForm = this.props.handleNextForm(this);
+        this.state = {
+            onchange: false,
+        }
     }
+
+    handleForm() {
+        // this.props.handleNextForm
+        this.setState({ onchange: true });
+        let data = this.props.state;
+
+        //adicioanr os dados
+        // if (data.number_occupants === "") {
+        //     return;
+        // }
+        console.log('chamooooou')
+        this.props.handleNextForm()
+    }
+
 
     render() {
         return (
@@ -96,6 +116,10 @@ class Accident extends Component {
                         />
                     </FormGroup>
                 </FormGroup>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
+                    <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
+                </div>
             </>
         );
     }

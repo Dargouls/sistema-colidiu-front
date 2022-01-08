@@ -13,6 +13,7 @@ import { estados } from '../../estados'
 class Witness extends Component {
   constructor(props) {
     super(props);
+    this.handleForm = this.handleForm.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.resetInputs = this.resetInputs.bind(this);
     this.save = this.save.bind(this);
@@ -32,6 +33,17 @@ class Witness extends Component {
       phone_witness: '',
       email_witness: '',
     }
+  }
+
+  handleForm() {
+    // this.props.handleNextForm
+    this.setState({ onchange: true });
+    let data = this.props.state;
+
+    if (data.number_occupants === "") {
+      return;
+    }
+    this.props.handleNextForm()
   }
 
   save() {
@@ -304,6 +316,10 @@ class Witness extends Component {
           </div>
 
           <Button color="primary" onClick={this.resetInput}>Limpar</Button>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
+          <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
         </div>
       </>
     );

@@ -16,34 +16,14 @@ import { api } from "../../../services/api"
 import { Welcome, Accident, Vehicle, MoreInformation, Witness } from './Cards/index'
 import Confirmation from './Cards/Confirmation';
 
-// const Cards = [
-//   <Welcome />,
-//   <Accident
-//     state={this.state}
-//     onChange={(e) => this.handleInputChange(e)}
-//   />,
-//   <Vehicle
-//     state={this.state}
-//     onChange={(e) => this.handleInputChange(e)}
-//   />,
-//   <MoreInformation
-//     state={this.state}
-//     onChange={(e) => this.handleInputChange(e)}
-//     setState={this.handleAddVehicle}
-//   />,
-//   <Witness
-//     state={this.state}
-//     onChange={(e) => this.handleInputChange(e)}
-//     setState={this.handleAddVehicle}
-//   />,
-//   <Confirmation/>
-// ]
 
 class Forms extends Component {
   constructor(props) {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleNextForm = this.handleNextForm.bind(this);
+    this.handlePrevForm = this.handlePrevForm.bind(this);
     this.handleAddVehicle = this.handleAddVehicle.bind(this);
     this.handleAddWitness = this.handleAddWitness.bind(this);
     this.sendRegister = this.sendRegister.bind(this);
@@ -54,6 +34,7 @@ class Forms extends Component {
       fadeIn: true,
       timeout: 300,
       forms: 1,
+      nextPage: false,
       city: 'Maceió',
       type_accident: '',
       zone: '',
@@ -87,7 +68,9 @@ class Forms extends Component {
 
   async sendRegister() {
     try {
+      console.log("State:", this.state)
       const response = await api.post("/occurrences", this.state);
+
       if (response.messagem) {
         toast.success("Registro de ocorrência cadastrado com sucesso!")
       }
@@ -126,7 +109,7 @@ class Forms extends Component {
   }
   handlePrevForm() {
     if (this.state.forms > 1) {
-      this.setState({forms: this.state.forms - 1});
+      this.setState({ forms: this.state.forms - 1 });
     } else {
       return;
     }
@@ -147,40 +130,57 @@ class Forms extends Component {
                   <Form className="form-horizontal">
 
                     {this.state.forms === 1 &&
-                      <Welcome />
+                      <Welcome
+                        handleNextForm={this.handleNextForm}
+                      />
                     }
 
                     {this.state.forms === 2 &&
                       <Accident
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
+                        handleNextForm={this.handleNextForm}
+                        handlePrevForm={this.handlePrevForm}
                       />
                     }
 
                     {this.state.forms === 3 &&
                       <Vehicle
                         state={this.state}
-                        onChange={(e) => this.handleInputChange(e)} />
+                        onChange={(e) => this.handleInputChange(e)}
+                        handleNextForm={this.handleNextForm}
+                        handlePrevForm={this.handlePrevForm}
+                      />
                     }
 
                     {this.state.forms == 4 &&
                       <MoreInformation
                         state={this.state}
                         setState={this.handleAddVehicle}
-                        onChange={(e) => this.handleInputChange(e)} />
+                        onChange={(e) => this.handleInputChange(e)}
+                        handleNextForm={this.handleNextForm}
+                        handlePrevForm={this.handlePrevForm}
+                      />
+
                     }
 
                     {this.state.forms === 5 &&
                       <Witness
                         state={this.state}
                         setState={this.handleAddWitness}
-                        onChange={(e) => this.handleInputChange(e)} />
+                        onChange={(e) => this.handleInputChange(e)}
+                        handleNextForm={this.handleNextForm}
+                        handlePrevForm={this.handlePrevForm}
+                      />
                     }
 
                     {this.state.forms === 6 &&
                       <Confirmation
                         state={this.state}
-                        onChange={(e) => this.handleInputChange(e)} />
+                        onChange={(e) => this.handleInputChange(e)}
+                        handleNextForm={this.handleNextForm}
+                        handlePrevForm={this.handlePrevForm}
+                      />
                     }
 
                     <div className="form-actions" style={{ justifyContent: 'flex-end', display: 'flex' }}>

@@ -13,6 +13,7 @@ import { estados } from '../../estados';
 class MoreInformation extends Component {
     constructor(props) {
         super(props);
+        this.handleForm = this.handleForm.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.resetInput = this.resetInput.bind(this);
         this.save = this.save.bind(this);
@@ -42,6 +43,17 @@ class MoreInformation extends Component {
             phone: '',
             email: '',
         }
+    }
+    
+    handleForm() {
+        // this.props.handleNextForm
+        this.setState({ onchange: true });
+        let data = this.props.state;
+
+        if (data.number_occupants === "") {
+            return;
+        }
+        this.props.handleNextForm()
     }
 
     save() {
@@ -103,7 +115,7 @@ class MoreInformation extends Component {
                         value={this.state.type_vehicle}
                         onChange={this.handleInputChange}
                     >
-                        
+
                         <option></option>
                         <option>Automóvel</option>
                         <option>Bicicleta</option>
@@ -491,6 +503,10 @@ class MoreInformation extends Component {
 
                     <Button color="primary" onClick={this.resetInput}>Limpar</Button>
 
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
+                    <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
                 </div>
             </>
         );

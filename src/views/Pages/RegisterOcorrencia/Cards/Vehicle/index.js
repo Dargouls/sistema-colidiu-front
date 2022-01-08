@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
 import {
+  Form,
+  Button,
   FormGroup,
   Input,
   Label,
+  FormFeedback
 } from 'reactstrap';
 import { estados } from '../../estados';
 
 class Vehicle extends Component {
   constructor(props) {
     super(props);
+    this.handleForm = this.handleForm.bind(this);
+    // this.handleNextForm = this.props.handleNextForm(this);
+    this.state = {
+      onchange: false,
+    }
+  }
+
+  handleForm() {
+    // this.props.handleNextForm
+    this.setState({ onchange: true });
+    let data = this.props.state;
+
+    if (data.number_occupants === "") {
+      return;
+    }
+    this.props.handleNextForm()
   }
 
   render() {
     return (
-      <>
+      <Form>
         <Label>
           <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados do veículo</span>
         </Label>
@@ -23,6 +42,7 @@ class Vehicle extends Component {
             type="select"
             name="type_vehicle"
             onChange={this.props.onChange}
+            required
             value={this.props.state.type_vehicle}
           >
             <option></option>
@@ -40,6 +60,9 @@ class Vehicle extends Component {
         <FormGroup>
           <Label>Número de ocupantes</Label>
           <Input
+            invalid={
+              this.props.state.number_occupants === "" && this.state.onchange
+            }
             type="text"
             name="number_occupants"
             placeholder='Digite a quantidade de ocupantes'
@@ -47,6 +70,9 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.number_occupants}
           />
+          <FormFeedback>
+            {`Preencha o campo!`}
+          </FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -145,6 +171,7 @@ class Vehicle extends Component {
             onChange={this.props.onChange}
             value={this.props.state.uf_rg}
           >
+            <option></option>
             {estados.UF.map((item, index) => {
               return <option key={index}>{item.nome}</option>
             })}
@@ -313,7 +340,11 @@ class Vehicle extends Component {
             </FormGroup>
           </div>
         </div>
-      </>
+        <div style={{display: 'flex', justifyContent: 'flex-end' }}>
+        <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
+          <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
+        </div>
+      </Form>
     );
   }
 }
