@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Form,
   Button,
   FormGroup,
   Input,
   Label,
-  FormFeedback
-} from 'reactstrap';
-import { estados } from '../../estados';
+  FormFeedback,
+} from "reactstrap";
+import { estados } from "../../estados";
 
 class Vehicle extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Vehicle extends Component {
     // this.handleNextForm = this.props.handleNextForm(this);
     this.state = {
       onchange: false,
-    }
+    };
   }
 
   handleForm() {
@@ -27,14 +27,16 @@ class Vehicle extends Component {
     if (data.number_occupants === "") {
       return;
     }
-    this.props.handleNextForm()
+    this.props.handleNextForm();
   }
 
   render() {
     return (
       <Form>
         <Label>
-          <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados do veículo</span>
+          <span style={{ fontSize: 20, fontWeight: "bold" }}>
+            Dados do veículo
+          </span>
         </Label>
         <FormGroup>
           <Label>Tipo de veículo</Label>
@@ -65,14 +67,12 @@ class Vehicle extends Component {
             }
             type="text"
             name="number_occupants"
-            placeholder='Digite a quantidade de ocupantes'
+            placeholder="Digite a quantidade de ocupantes"
             required
             onChange={this.props.onChange}
             value={this.props.state.number_occupants}
           />
-          <FormFeedback>
-            {`Preencha o campo!`}
-          </FormFeedback>
+          <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
         <FormGroup>
@@ -121,7 +121,7 @@ class Vehicle extends Component {
         </FormGroup>
 
         <Label>
-          <span style={{ fontSize: 20, fontWeight: 'bold' }}>Seus dados</span>
+          <span style={{ fontSize: 20, fontWeight: "bold" }}>Seus dados</span>
         </Label>
 
         <FormGroup>
@@ -129,7 +129,7 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="name"
-            placeholder='Digite a quantidade de ocupantes'
+            placeholder="Digite a quantidade de ocupantes"
             required
             onChange={this.props.onChange}
             value={this.props.state.name}
@@ -155,7 +155,7 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="rg"
-            placeholder='Digite o seu RG'
+            placeholder="Digite o seu RG"
             required
             onChange={this.props.onChange}
             value={this.props.state.rg}
@@ -173,7 +173,7 @@ class Vehicle extends Component {
           >
             <option></option>
             {estados.UF.map((item, index) => {
-              return <option key={index}>{item.nome}</option>
+              return <option key={index}>{item.nome}</option>;
             })}
           </Input>
         </FormGroup>
@@ -183,20 +183,26 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="cnh"
-            placeholder='Digite o sua CNH'
+            placeholder="Digite o sua CNH"
             required
             onChange={this.props.onChange}
             value={this.props.state.cnh}
           />
         </FormGroup>
-        <div style={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between', width: '70%' }}>
-
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "70%",
+          }}
+        >
           <FormGroup>
             <Label>CPF</Label>
             <Input
               type="text"
               name="cpf"
-              placeholder='Digite o sua cpf'
+              placeholder="Digite o sua cpf"
               required
               onChange={this.props.onChange}
               value={this.props.state.cpf}
@@ -207,7 +213,7 @@ class Vehicle extends Component {
             <Label>Data de nascimento</Label>
             <Input
               type="date"
-              name='birth_date'
+              name="birth_date"
               required
               onChange={this.props.onChange}
               value={this.props.state.birth_date}
@@ -216,7 +222,7 @@ class Vehicle extends Component {
         </div>
 
         <Label>
-          <span style={{ fontSize: 20, fontWeight: 'bold' }}>Endereço</span>
+          <span style={{ fontSize: 20, fontWeight: "bold" }}>Endereço</span>
         </Label>
 
         <FormGroup>
@@ -224,7 +230,7 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="cep"
-            placeholder='Digite o CEP'
+            placeholder="Digite o CEP"
             required
             onChange={this.props.onChange}
             value={this.props.state.cep}
@@ -236,7 +242,7 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="uf"
-            placeholder='Digite o Estado'
+            placeholder="Digite o Estado"
             required
             onChange={this.props.onChange}
             value={this.props.state.uf}
@@ -247,21 +253,27 @@ class Vehicle extends Component {
           <Input
             type="text"
             name="municipality"
-            placeholder='Digite o Municipio'
+            placeholder="Digite o Municipio"
             required
             onChange={this.props.onChange}
             value={this.props.state.municipality}
           />
         </FormGroup>
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-
-          <div style={{ width: '80%' }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: "80%" }}>
             <FormGroup>
               <Label>Endereço</Label>
               <Input
                 type="text"
                 name="address"
-                placeholder='Digite o Endereço'
+                placeholder="Digite o Endereço"
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.address}
@@ -273,21 +285,28 @@ class Vehicle extends Component {
             <Input
               type="text"
               name="number_address"
-              placeholder='Digite o número'
-              required onChange={this.props.onChange}
+              placeholder="Digite o número"
+              required
+              onChange={this.props.onChange}
               value={this.props.state.number_address}
             />
           </FormGroup>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-
-          <div style={{ width: '45%' }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: "45%" }}>
             <FormGroup>
               <Label>Complemento</Label>
               <Input
                 type="text"
                 name="complement_address"
-                placeholder='Digite o complemento'
+                placeholder="Digite o complemento"
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.complement_address}
@@ -295,30 +314,35 @@ class Vehicle extends Component {
             </FormGroup>
           </div>
 
-          <div style={{ width: '45%' }}>
+          <div style={{ width: "45%" }}>
             <FormGroup>
               <Label>Bairro</Label>
               <Input
                 type="text"
                 name="district"
-                placeholder='Digite o Bairro'
+                placeholder="Digite o Bairro"
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.district}
               />
             </FormGroup>
           </div>
-
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-
-          <div style={{ width: '45%' }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: "45%" }}>
             <FormGroup>
               <Label>Telefone Celular</Label>
               <Input
                 type="text"
                 name="phone"
-                placeholder='(82) 99999-9999'
+                placeholder="(82) 99999-9999"
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.phone}
@@ -326,13 +350,13 @@ class Vehicle extends Component {
             </FormGroup>
           </div>
 
-          <div style={{ width: '45%' }}>
+          <div style={{ width: "45%" }}>
             <FormGroup>
               <Label>Email</Label>
               <Input
                 type="text"
                 name="email"
-                placeholder='seuemail@email.com'
+                placeholder="seuemail@email.com"
                 required
                 onChange={this.props.onChange}
                 value={this.props.state.email}
@@ -340,9 +364,17 @@ class Vehicle extends Component {
             </FormGroup>
           </div>
         </div>
-        <div style={{display: 'flex', justifyContent: 'flex-end' }}>
-        <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
-          <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            color="secondary"
+            style={{ marginRight: 10 }}
+            onClick={() => this.props.handlePrevForm()}
+          >
+            Voltar
+          </Button>
+          <Button color="primary" onClick={() => this.handleForm()}>
+            Próximo
+          </Button>
         </div>
       </Form>
     );

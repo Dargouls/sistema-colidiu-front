@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Button,
   Card,
@@ -8,14 +8,19 @@ import {
   Collapse,
   Form,
   Row,
-  Spinner
-} from 'reactstrap';
+  Spinner,
+} from "reactstrap";
 
 import { toast } from "react-toastify";
-import { api } from "../../../services/api"
-import { Welcome, Accident, Vehicle, MoreInformation, Witness } from './Cards/index'
-import Confirmation from './Cards/Confirmation';
-
+import { api } from "../../../services/api";
+import {
+  Welcome,
+  Accident,
+  Vehicle,
+  MoreInformation,
+  Witness,
+} from "./Cards/index";
+import Confirmation from "./Cards/Confirmation";
 
 class Forms extends Component {
   constructor(props) {
@@ -35,32 +40,32 @@ class Forms extends Component {
       timeout: 300,
       forms: 1,
       nextPage: false,
-      city: 'Maceió',
-      type_accident: '',
-      zone: '',
-      feriado: '',
-      image: '',
-      type_vehicle: '',
-      number_occupants: '',
-      state_vehicle: '',
-      category_vehicle: '',
-      safe_vehicle: '',
-      name: '',
-      sex: '',
-      rg: '',
-      uf_rg: '',
-      cnh: '',
-      cpf: '',
-      birth_date: '',
-      cep: '',
-      uf: '',
-      municipality: '',
-      address: '',
-      number_address: '',
-      complement_address: '',
-      district: '',
-      phone: '',
-      email: '',
+      city: "Maceió",
+      type_accident: "",
+      zone: "",
+      feriado: "",
+      image: "",
+      type_vehicle: "",
+      number_occupants: "",
+      state_vehicle: "",
+      category_vehicle: "",
+      safe_vehicle: "",
+      name: "",
+      sex: "",
+      rg: "",
+      uf_rg: "",
+      cnh: "",
+      cpf: "",
+      birth_date: "",
+      cep: "",
+      uf: "",
+      municipality: "",
+      address: "",
+      number_address: "",
+      complement_address: "",
+      district: "",
+      phone: "",
+      email: "",
       array_vehicle: [],
       array_witness: [],
     };
@@ -68,31 +73,31 @@ class Forms extends Component {
 
   async sendRegister() {
     try {
-      console.log("State:", this.state)
+      console.log("State:", this.state);
       const response = await api.post("/occurrences", this.state);
 
       if (response.messagem) {
-        toast.success("Registro de ocorrência cadastrado com sucesso!")
+        toast.success("Registro de ocorrência cadastrado com sucesso!");
       }
     } catch {
-      toast.error("Ocorreu algum erro, tente novamente!")
+      toast.error("Ocorreu algum erro, tente novamente!");
     }
   }
 
   handleAddVehicle(vehicle) {
-    console.log('ArrayVehicle:', [...this.state.array_vehicle, vehicle])
-    this.setState({ array_vehicle: [...this.state.array_vehicle, vehicle] })
+    console.log("ArrayVehicle:", [...this.state.array_vehicle, vehicle]);
+    this.setState({ array_vehicle: [...this.state.array_vehicle, vehicle] });
   }
 
   handleAddWitness(witness) {
-    console.log('ArrayWitness:', [...this.state.array_witness, witness])
-    this.setState({ array_witness: [...this.state.array_witness, witness] })
+    console.log("ArrayWitness:", [...this.state.array_witness, witness]);
+    this.setState({ array_witness: [...this.state.array_witness, witness] });
   }
 
   handleInputChange(e) {
-    console.log(`Campo: ${e.target.name} || ${e.target.value}`)
+    console.log(`Campo: ${e.target.name} || ${e.target.value}`);
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -101,11 +106,15 @@ class Forms extends Component {
   }
 
   toggleFade() {
-    this.setState((prevState) => { return { fadeIn: !prevState } });
+    this.setState((prevState) => {
+      return { fadeIn: !prevState };
+    });
   }
 
   handleNextForm() {
-    this.setState((prevState) => { return { forms: prevState.forms + 1 } })
+    this.setState((prevState) => {
+      return { forms: prevState.forms + 1 };
+    });
   }
   handlePrevForm() {
     if (this.state.forms > 1) {
@@ -128,32 +137,29 @@ class Forms extends Component {
               <Collapse isOpen={this.state.collapse} id="collapseExample">
                 <CardBody>
                   <Form className="form-horizontal">
+                    {this.state.forms === 1 && (
+                      <Welcome handleNextForm={this.handleNextForm} />
+                    )}
 
-                    {this.state.forms === 1 &&
-                      <Welcome
-                        handleNextForm={this.handleNextForm}
-                      />
-                    }
-
-                    {this.state.forms === 2 &&
+                    {this.state.forms === 2 && (
                       <Accident
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
                         handleNextForm={this.handleNextForm}
                         handlePrevForm={this.handlePrevForm}
                       />
-                    }
+                    )}
 
-                    {this.state.forms === 3 &&
+                    {this.state.forms === 3 && (
                       <Vehicle
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
                         handleNextForm={this.handleNextForm}
                         handlePrevForm={this.handlePrevForm}
                       />
-                    }
+                    )}
 
-                    {this.state.forms == 4 &&
+                    {this.state.forms === 4 && (
                       <MoreInformation
                         state={this.state}
                         setState={this.handleAddVehicle}
@@ -161,10 +167,9 @@ class Forms extends Component {
                         handleNextForm={this.handleNextForm}
                         handlePrevForm={this.handlePrevForm}
                       />
+                    )}
 
-                    }
-
-                    {this.state.forms === 5 &&
+                    {this.state.forms === 5 && (
                       <Witness
                         state={this.state}
                         setState={this.handleAddWitness}
@@ -172,16 +177,16 @@ class Forms extends Component {
                         handleNextForm={this.handleNextForm}
                         handlePrevForm={this.handlePrevForm}
                       />
-                    }
+                    )}
 
-                    {this.state.forms === 6 &&
+                    {this.state.forms === 6 && (
                       <Confirmation
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
                         handleSendRegister={this.sendRegister}
                         handlePrevForm={this.handlePrevForm}
                       />
-                    }
+                    )}
 
                     {/* <div className="form-actions" style={{ justifyContent: 'flex-end', display: 'flex' }}>
                       {this.state.forms >= 2 &&
@@ -194,7 +199,6 @@ class Forms extends Component {
                       }
                     </div> */}
                   </Form>
-
                 </CardBody>
               </Collapse>
             </Card>
