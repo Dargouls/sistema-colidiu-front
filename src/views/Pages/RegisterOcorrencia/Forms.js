@@ -76,8 +76,11 @@ class Forms extends Component {
       const response = await api.post("/occurrences", this.state);
       console.log("State:", response);
 
-      if (response.mensagem) {
+      if (response.data.mensagem) {
         toast.success("Registro de ocorrência cadastrado com sucesso!");
+        setTimeout(() => {
+          this.props.history.push("/");
+        }, 3000)
       }
     } catch {
       toast.error("Ocorreu algum erro, tente novamente!");
