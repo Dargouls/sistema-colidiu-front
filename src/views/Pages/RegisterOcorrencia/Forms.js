@@ -178,12 +178,12 @@ class Forms extends Component {
                       <Confirmation
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
-                        handleNextForm={this.handleNextForm}
+                        handleSendRegister={this.sendRegister}
                         handlePrevForm={this.handlePrevForm}
                       />
                     }
 
-                    <div className="form-actions" style={{ justifyContent: 'flex-end', display: 'flex' }}>
+                    {/* <div className="form-actions" style={{ justifyContent: 'flex-end', display: 'flex' }}>
                       {this.state.forms >= 2 &&
                         <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.handlePrevForm()}>Voltar</Button>
                       }
@@ -192,7 +192,7 @@ class Forms extends Component {
                         :
                         <Button color="primary" onClick={this.sendRegister}>Enviar</Button>
                       }
-                    </div>
+                    </div> */}
                   </Form>
 
                 </CardBody>
