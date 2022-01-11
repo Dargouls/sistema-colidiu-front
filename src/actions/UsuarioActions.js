@@ -2,7 +2,7 @@ import * as types from "../actions/actionTypes";
 
 import { api } from "../services/api";
 
-import { setToken } from "../services/auth";
+import { setToken, setUser } from "../services/auth";
 
 import { toast } from "react-toastify";
 
@@ -88,6 +88,7 @@ export const login = (email, senha) => async (dispatch) => {
 
     if (response.data.token) {
       setToken("Token");
+      setUser(response.data.user);
       toast.success("Logado com sucesso!");
       return "Autenticado";
     } else {

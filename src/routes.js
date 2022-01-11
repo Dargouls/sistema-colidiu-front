@@ -3,6 +3,7 @@ import React from "react";
 // Componentes utilizadas na aplicação
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const RegisterOcorrencia = React.lazy(() => import("./views/Pages/RegisterOcorrencia"));
+const Teste = React.lazy(() => import("./views/Pages/RegisterOcorrencia/Cards/Confirmation"));
 const GuiaGR = React.lazy(() => import("./views/Pages/GuiaGR/GuiaGR"));
 const Colidiu = React.lazy(() => import("./views/Pages/Colidiu/Colidiu"));
 const ComplementarOcorrencia = React.lazy(() => import("./views/Pages/ComplementarOcorrencia/ComplementarOcorrencia"));
@@ -30,6 +31,8 @@ const routes = [
   { path: "/", exact: true, name: "Início" },
   // { path: "/dashboard", name: "Painel", component: Dashboard },
   { path: "/registro-ocorrencia", name: "Painel", component: RegisterOcorrencia },
+  { path: "/teste", name: "Painel", component: Teste},
+
   { path: "/guia", name: "Painel", component: GuiaGR },
   { path: "/colidiu", name: "Painel", component: Colidiu },
   { path: "/ocorrencia-pesquisar", name: "Painel", component: ComplementarOcorrencia },
