@@ -51,7 +51,7 @@ class DefaultLayout extends Component {
     if (user?.permissions === "all") {
       this.setState({items: [...this.state.items, {
         name: "Validar ocorrência",
-        url: "/validar",
+        url: "/ocorrencias",
         icon: "icon-magnifier-add",
       }]})
     }

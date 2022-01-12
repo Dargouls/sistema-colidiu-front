@@ -26,11 +26,5 @@ export default {
       url: '/base/collapses',
       icon: 'icon-magnifier-add',
     },
-    
-    // {
-    //   name: 'teste',
-    //   url: '/teste',
-    //   icon: 'icon-magnifier-add',
-    // },
   ],
 };
