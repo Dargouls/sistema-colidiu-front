@@ -93,6 +93,235 @@ class Witness extends Component {
           <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados dos Envolvidos</span>
           <span> (adicione até 5 pessoas além do que foi informado na aba "Veículo e Você")</span>
         </Label>
+        {this.props.state.array_witness.map((item, index) => (
+          <div key={index} style={{ marginTop: '20px', paddingTop: '30px', borderWidth: 0, borderTopWidth: 3, borderColor: '#c3c3c3', borderStyle: 'dotted', overflow: 'auto', height: 200 }}>
+            <FormGroup>
+              <Label>Nome da Testemunha</Label>
+              <Input
+                type="text"
+                name="name_witness"
+                placeholder='Digite o nome da Testemunha'
+                required
+                value={item.name_witness}
+                disabled
+                
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Sexo</Label>
+              <Input
+                type="select"
+                name="sex_witness"
+                value={item.sex_witness}
+                disabled
+                
+              >
+                <option></option>
+                <option>Masculino</option>
+                <option>Feminino</option>
+                <option>Não informado</option>
+              </Input>
+            </FormGroup>
+
+            <FormGroup>
+              <Label>RG</Label>
+              <Input
+                type="text"
+                name="rg_witness"
+                placeholder='Digite o seu RG'
+                required
+                value={item.rg_witness}
+                disabled
+                
+              />
+            </FormGroup>
+
+            <div style={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between' }}>
+
+              <div style={{ width: '45%' }}>
+                <FormGroup>
+                  <Label>CPF</Label>
+                  <Input
+                    type="text"
+                    name="cpf_witness"
+                    placeholder='Digite o seu CPF'
+                    required
+                    value={item.cpf_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+              <div style={{ width: '45%' }}>
+                <FormGroup>
+                  <Label>Data de nascimento</Label>
+                  <Input
+                    type="date"
+                    name="birth_date_witness"
+                    required
+                    value={item.birth_date_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+            </div>
+
+            <Label>
+              <span style={{ fontSize: 20, fontWeight: 'bold' }}>Endereço do Envolvido</span>
+            </Label>
+
+            <FormGroup>
+              <Label>CEP</Label>
+              <Input
+                type="text"
+                name="cep_witnesss"
+                placeholder='Digite o CEP'
+                required
+                value={item.cep_witnesss}
+                disabled
+                
+              />
+            </FormGroup>
+
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+              <div style={{ width: '45%' }}>
+
+                <FormGroup>
+                  <Label>UF</Label>
+                  <Input
+                    type="select"
+                    name="uf_witness"
+                    placeholder="Selecione o estado"
+                    value={item.uf_witness}
+                    disabled
+                    
+                  >
+                    <option></option>
+                    {estados.UF.map((item, index) => {
+                      return <option key={index}>{item.nome}</option>
+                    })}
+                  </Input>
+                </FormGroup>
+              </div>
+              <div style={{ width: '45%' }}>
+
+                <FormGroup>
+                  <Label>Municipio</Label>
+                  <Input
+                    type="text"
+                    name="municipality_witness"
+                    placeholder='Digite o Municipio'
+                    required
+                    value={item.municipality_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+              <div style={{ width: '80%' }}>
+                <FormGroup>
+                  <Label>Endereço</Label>
+                  <Input
+                    type="text"
+                    name="address_witness"
+                    placeholder='Digite o Endereço'
+                    required
+                    value={item.address_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+              <FormGroup>
+                <Label>Numero</Label>
+                <Input
+                  type="text"
+                  name="number_address_witness"
+                  placeholder='Digite o número'
+                  required
+                  value={item.number_address_witness}
+                  disabled
+                  
+                />
+              </FormGroup>
+            </div>
+
+
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+              <div style={{ width: '45%' }}>
+                <FormGroup>
+                  <Label>Complemento</Label>
+                  <Input
+                    type="text"
+                    name="complement_address_witness"
+                    placeholder='Digite o complemento'
+                    required
+                    value={item.complement_address_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+
+              <div style={{ width: '45%' }}>
+                <FormGroup>
+                  <Label>Bairro</Label>
+                  <Input
+                    type="text"
+                    name="district_address_witness"
+                    placeholder='Digite o Bairro'
+                    required
+                    value={item.district_address_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+              <div style={{ width: '45%' }}>
+                <FormGroup>
+                  <Label>Telefone Celular</Label>
+                  <Input
+                    type="text"
+                    name="phone_witness"
+                    placeholder='(82) 99999-9999'
+                    required
+                    value={item.phone_witness}
+                    disabled
+                    
+                  />
+                </FormGroup>
+              </div>
+
+              <div style={{ width: '45%' }}>
+                <FormGroup>
+                  <Label>Email</Label>
+                  <Input
+                    type="text"
+                    name="email_witness"
+                    placeholder='seuemail@email.com'
+                    required
+                    value={item.email_witness}
+                    disabled
+
+                  />
+                </FormGroup>
+              </div>
+            </div>
+
+          </div>
+        ))}
 
         <FormGroup>
           <Label>Nome da Testemunha</Label>

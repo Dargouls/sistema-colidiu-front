@@ -44,7 +44,7 @@ class MoreInformation extends Component {
             email: '',
         }
     }
-    
+
     handleForm() {
         // this.props.handleNextForm
         this.setState({ onchange: true });
@@ -106,7 +106,395 @@ class MoreInformation extends Component {
                 <Label>
                     <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados dos demais Veículos (adicione até 3 veículos com exceção do que foi informado na aba "Veículo e Você")</span>
                 </Label>
+                {this.props.state.array_vehicle.map((item, index) => (
+                    <div key={index} style={{ marginTop: '20px', paddingTop: '30px', borderWidth: 0, borderTopWidth: 3, borderColor: '#c3c3c3', borderStyle: 'dotted ', overflow: 'auto', height: 200 }}>
 
+                        <FormGroup>
+                            <Label>Tipo de veículo</Label>
+                            <Input
+                                type="select"
+                                name="type_vehicle"
+                                value={item.type_vehicle}
+                                disabled
+                            >
+
+                                <option></option>
+                                <option>Automóvel</option>
+                                <option>Bicicleta</option>
+                                <option>Caminhão</option>
+                                <option>Charrete</option>
+                                <option>Motocicleta</option>
+                                <option>Patinete</option>
+                                <option>Patins</option>
+                                <option>Ônibus</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>Número de ocupantes</Label>
+                            <Input
+                                type="text"
+                                name="number_occupants"
+                                placeholder='Digite a quantidade de ocupantes'
+                                required
+                                value={item.number_occupants}
+                                disabled
+                            />
+                        </FormGroup>
+
+                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Cor</Label>
+                                    <Input
+                                        type="select"
+                                        name="color_vehicle"
+                                        disabled
+                                        value={item.color_vehicle}
+                                    >
+                                        <option></option>
+                                        <option>BRANCO</option>
+                                        <option>PRETO</option>
+                                        <option>CINZA</option>
+                                    </Input>
+                                </FormGroup>
+                            </div>
+
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Marca/Modelo</Label>
+                                    <Input
+                                        type="text"
+                                        name="model_vehicle"
+                                        placeholder='Digite a marca/modelo'
+                                        required
+                                        value={item.model_vehicle}
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+
+                        <FormGroup>
+                            <Label>Veículo no momento do ato</Label>
+                            <Input
+                                type="select"
+                                name="state_vehicle"
+                                value={item.state_vehicle}
+                                disabled
+                            >
+                                <option></option>
+                                <option>Estacionado</option>
+                                <option>Movimento</option>
+                                <option>Parado</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>Categoria</Label>
+                            <Input
+                                type="select"
+                                name="category_vehicle"
+                                value={item.category_vehicle}
+                                disabled
+                            >
+                                <option></option>
+                                <option>Aluguel</option>
+                                <option>Particular</option>
+                                <option>Parado</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>Possui seguro?</Label>
+                            <Input
+                                type="select"
+                                name="safe_vehicle"
+                                value={item.safe_vehicle}
+                                disabled
+                            >
+                                <option></option>
+                                <option>Sim</option>
+                                <option>Não</option>
+                                <option>Não informado</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>Transportava carga?</Label>
+                            <Input
+                                type="select"
+                                name="transport_charge_vehicle"
+                                value={item.transport_charge_vehicle}
+                                disabled
+                            >
+                                <option></option>
+                                <option>Bruta</option>
+                                <option>Granel</option>
+                                <option>Não</option>
+                                <option>Perigosa</option>
+                                <option>Viva</option>
+                            </Input>
+                        </FormGroup>
+
+                        <Label>
+                            <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados do Condutor / Responsável</span>
+                            <span> (O preenchimento destes campos não são obrigatórios)</span>
+                        </Label>
+
+                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                            <div style={{ width: '45%' }}>
+
+                                <FormGroup>
+                                    <Label>Nome</Label>
+                                    <Input
+                                        type="text"
+                                        name="name"
+                                        placeholder='Digite nome'
+                                        required
+                                        value={item.name}
+                                        disabled
+                                        disabled={this.data_conductor}
+                                    />
+                                </FormGroup>
+                            </div>
+
+                            <div style={{ width: '45%' }}>
+
+                                <FormGroup>
+                                    <Label>CPF</Label>
+                                    <Input
+                                        type="text"
+                                        name="cpf"
+                                        placeholder='Digite o CPF'
+                                        required
+                                        value={item.cpf}
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+
+                        <FormGroup>
+                            <Label>Sexo</Label>
+                            <Input
+                                type="select"
+                                name="sex"
+                                value={item.sex}
+                                disabled
+                            >
+                                <option></option>
+                                <option>Masculino</option>
+                                <option>Feminino</option>
+                                <option>Não informado</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>CNH</Label>
+                            <Input
+                                type="text"
+                                name="cnh"
+                                placeholder='Digite o sua CNH'
+                                required
+                                value={item.cnh}
+                                disabled
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>RG</Label>
+                            <Input
+                                type="text"
+                                name="rg"
+                                placeholder='Digite o seu RG'
+                                required
+                                value={item.rg}
+                                disabled
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>UF RG</Label>
+                            <Input
+                                type="select"
+                                name="uf_rg"
+                                placeholder="Selecione o estado"
+                                required
+                                value={item.uf_rg}
+                                disabled
+                            >
+                                <option></option>
+                                {estados.UF.map((item, index) => {
+                                    return <option key={index}>{item.nome}</option>
+                                })}
+                            </Input>
+                        </FormGroup>
+
+                        {/* //OBSERVAÇÃO */}
+                        <FormGroup check className="radio">
+                            <Input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="checkbox1"
+                                name="data_conductor"
+                                value={item.data_conductor}
+                                onChange={() => {
+                                    console.log(this.state.data_conductor)
+                                    this.setState({ data_conductor: !this.state.data_conductor })
+                                }}
+                            />
+                            <Label>Não houve a possibilidade de coletar dados do condutor </Label>
+                        </FormGroup>
+
+                        <Label>
+                            <span style={{ fontSize: 20, fontWeight: 'bold' }}>Endereço do Condutor / Responsável</span>
+                            <span> (O preenchimento destes campos não são obrigatórios)</span>
+                        </Label>
+
+                        <FormGroup>
+                            <Label>CEP</Label>
+                            <Input
+                                type="text"
+                                name="cep"
+                                placeholder='Digite o CEP'
+                                required
+                                value={item.cep}
+                                disabled
+                            />
+                        </FormGroup>
+
+
+                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                            <div style={{ width: '45%' }}>
+
+                                <FormGroup>
+                                    <Label>UF</Label>
+                                    <Input
+                                        type="select"
+                                        name="uf"
+                                        placeholder="Selecione o estado"
+                                        required
+                                        value={item.uf}
+                                        disabled
+                                    >
+                                        <option></option>
+                                        {estados.UF.map((item, index) => {
+                                            return <option key={index}>{item.nome}</option>
+                                        })}
+                                    </Input>
+                                </FormGroup>
+                            </div>
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Municipio</Label>
+                                    <Input
+                                        type="text"
+                                        name="municipality"
+                                        placeholder='Digite o Municipio'
+                                        value={item.municipality}
+                                        required
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                            <div style={{ width: '70%' }}>
+                                <FormGroup>
+                                    <Label>Endereço</Label>
+                                    <Input
+                                        type="text"
+                                        name="address"
+                                        placeholder='Digite o Endereço'
+                                        required
+                                        value={item.address}
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+                            <FormGroup>
+                                <Label>Numero</Label>
+                                <Input
+                                    type="text"
+                                    name="number_address"
+                                    placeholder='Digite o número'
+                                    required
+                                    value={item.number_address}
+                                    disabled
+                                />
+                            </FormGroup>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Complemento</Label>
+                                    <Input
+                                        type="text"
+                                        name="complement_address"
+                                        placeholder='Digite o complemento'
+                                        required
+                                        value={item.complement_address}
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Bairro</Label>
+                                    <Input
+                                        type="text"
+                                        name="district"
+                                        placeholder='Digite o Bairro'
+                                        required
+                                        value={item.district}
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Telefone Celular</Label>
+                                    <Input
+                                        type="text"
+                                        name="phone"
+                                        placeholder='(82) 99999-9999'
+                                        required
+                                        value={item.phone}
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+
+                            <div style={{ width: '45%' }}>
+                                <FormGroup>
+                                    <Label>Email</Label>
+                                    <Input
+                                        type="text"
+                                        name="email"
+                                        value={item.email}
+                                        placeholder='seuemail@email.com'
+                                        required
+                                        disabled
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+
+                    </div>
+                ))}
                 <FormGroup>
                     <Label>Tipo de veículo</Label>
                     <Input

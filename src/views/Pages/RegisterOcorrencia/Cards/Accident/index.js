@@ -50,6 +50,11 @@ class Accident extends Component {
     toast.warn(`${names[type]} é obrigatório`);
   }
 
+
+  componentWillMount() {
+    console.log('state:', this.props.state)
+}
+
   render() {
     return (
       <>
@@ -71,6 +76,7 @@ class Accident extends Component {
           <Label>Tipo de acidente</Label>
 
           <Input
+            disabled={this.props.disabled}
             name="type_accident"
             type="select"
             onChange={this.props.onChange}
@@ -105,6 +111,7 @@ class Accident extends Component {
         <FormGroup>
           <Label>Zona</Label>
           <Input
+            disabled={this.props.disabled}
             type="select"
             name="zone"
             onChange={this.props.onChange}
@@ -122,6 +129,7 @@ class Accident extends Component {
         <FormGroup>
           <Label>Feriado</Label>
           <Input
+            disabled={this.props.disabled}
             type="select"
             name="feriado"
             onChange={this.props.onChange}
@@ -139,6 +147,7 @@ class Accident extends Component {
         <FormGroup>
           <Label>Envio de imagem</Label>
           <Input
+            disabled={this.props.disabled}
             type="file"
             id="file-input"
             name="image"
