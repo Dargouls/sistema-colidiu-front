@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col, Button, FormGroup, Input, Label, FormFeedback } from "reactstrap";
 import { toast } from "react-toastify";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Accident extends Component {
   constructor(props) {
@@ -32,10 +32,6 @@ class Accident extends Component {
       this.handleWarning("feriado");
       return;
     }
-    if (data.image === "") {
-      this.handleWarning("image");
-      return;
-    }
 
     this.props.handleNextForm();
   }
@@ -51,9 +47,8 @@ class Accident extends Component {
     toast.warn(`${names[type]} é obrigatório`);
   }
 
-
   componentWillMount() {
-    console.log('state:', this.props.state)
+    console.log("state:", this.props.state);
   }
 
   render() {
@@ -160,16 +155,13 @@ class Accident extends Component {
           <FormFeedback>Suba uma imagem!</FormFeedback>
         </FormGroup>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          {this.props.disabled ?
+          {this.props.disabled ? (
             <Link to="/ocorrencias">
-              <Button
-                color="secondary"
-                style={{ marginRight: 10 }}
-              >
+              <Button color="secondary" style={{ marginRight: 10 }}>
                 Voltar
               </Button>
             </Link>
-            :
+          ) : (
             <Button
               color="secondary"
               style={{ marginRight: 10 }}
@@ -177,7 +169,7 @@ class Accident extends Component {
             >
               Voltar
             </Button>
-          }
+          )}
           <Button color="primary" onClick={() => this.handleForm()}>
             Próximo
           </Button>
