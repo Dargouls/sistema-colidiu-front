@@ -6,7 +6,9 @@ import {
   Input,
   Label,
   FormFeedback,
+
 } from "reactstrap";
+
 import { estados } from "../../estados";
 import { toast } from "react-toastify";
 
@@ -162,6 +164,7 @@ class Vehicle extends Component {
             type="select"
             name="type_vehicle"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.type_vehicle}
             invalid={
               this.props.state.type_vehicle === "" && this.state.onchange
@@ -191,6 +194,7 @@ class Vehicle extends Component {
             name="number_occupants"
             placeholder="Digite a quantidade de ocupantes"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.number_occupants}
           />
           <FormFeedback>Preencha o campo!</FormFeedback>
@@ -202,6 +206,7 @@ class Vehicle extends Component {
             type="select"
             name="state_vehicle"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.state_vehicle}
             invalid={
               this.props.state.state_vehicle === "" && this.state.onchange
@@ -222,6 +227,7 @@ class Vehicle extends Component {
             type="select"
             name="category_vehicle"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.category_vehicle}
             invalid={
               this.props.state.category_vehicle === "" && this.state.onchange
@@ -242,6 +248,7 @@ class Vehicle extends Component {
             type="select"
             name="safe_vehicle"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.safe_vehicle}
             invalid={
               this.props.state.safe_vehicle === "" && this.state.onchange
@@ -268,6 +275,7 @@ class Vehicle extends Component {
             placeholder="Digite o seu name"
             required
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.name}
             invalid={this.props.state.name === "" && this.state.onchange}
           />
@@ -281,6 +289,7 @@ class Vehicle extends Component {
             type="select"
             name="sex"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.sex}
             invalid={this.props.state.sex === "" && this.state.onchange}
           >
@@ -301,6 +310,7 @@ class Vehicle extends Component {
             placeholder="Digite o seu RG"
             required
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.rg}
             invalid={this.props.state.rg === "" && this.state.onchange}
           />
@@ -315,6 +325,7 @@ class Vehicle extends Component {
             name="uf_rg"
             placeholder="Selecione o estado"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.uf_rg}
             invalid={this.props.state.uf_rg === "" && this.state.onchange}
           >
@@ -334,6 +345,7 @@ class Vehicle extends Component {
             name="cnh"
             placeholder="Digite o sua CNH"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.cnh}
             invalid={this.props.state.cnh === "" && this.state.onchange}
           />
@@ -356,6 +368,7 @@ class Vehicle extends Component {
               placeholder="Digite o sua cpf"
               required
               onChange={this.props.onChange}
+              disabled={this.props.disabled}
               value={this.props.state.cpf}
               invalid={this.props.state.cpf === "" && this.state.onchange}
             />
@@ -369,6 +382,7 @@ class Vehicle extends Component {
               type="date"
               name="birth_date"
               onChange={this.props.onChange}
+              disabled={this.props.disabled}
               value={this.props.state.birth_date}
               invalid={
                 this.props.state.birth_date === "" && this.state.onchange
@@ -390,6 +404,7 @@ class Vehicle extends Component {
             name="cep"
             placeholder="Digite o CEP"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.cep}
             invalid={this.props.state.cep === "" && this.state.onchange}
           />
@@ -404,6 +419,7 @@ class Vehicle extends Component {
             name="uf"
             placeholder="Digite o Estado"
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.uf}
             invalid={this.props.state.uf === "" && this.state.onchange}
           />
@@ -418,6 +434,7 @@ class Vehicle extends Component {
             placeholder="Digite o Municipio"
             required
             onChange={this.props.onChange}
+            disabled={this.props.disabled}
             value={this.props.state.municipality}
             invalid={
               this.props.state.municipality === "" && this.state.onchange
@@ -442,6 +459,7 @@ class Vehicle extends Component {
                 name="address"
                 placeholder="Digite o Endereço"
                 onChange={this.props.onChange}
+                disabled={this.props.disabled}
                 value={this.props.state.address}
                 invalid={this.props.state.address === "" && this.state.onchange}
               />
@@ -456,6 +474,7 @@ class Vehicle extends Component {
               name="number_address"
               placeholder="Digite o número"
               onChange={this.props.onChange}
+              disabled={this.props.disabled}
               value={this.props.state.number_address}
               invalid={
                 this.props.state.number_address === "" && this.state.onchange
@@ -481,6 +500,7 @@ class Vehicle extends Component {
                 placeholder="Digite o complemento"
                 required
                 onChange={this.props.onChange}
+                disabled={this.props.disabled}
                 value={this.props.state.complement_address}
                 invalid={
                   this.props.state.complement_address === "" &&
@@ -500,6 +520,7 @@ class Vehicle extends Component {
                 placeholder="Digite o Bairro"
                 required
                 onChange={this.props.onChange}
+                disabled={this.props.disabled}
                 value={this.props.state.district}
                 invalid={
                   this.props.state.district === "" && this.state.onchange
@@ -525,6 +546,7 @@ class Vehicle extends Component {
                 name="phone"
                 placeholder="(82) 99999-9999"
                 onChange={this.props.onChange}
+                disabled={this.props.disabled}
                 value={this.props.state.phone}
                 invalid={this.props.state.phone === "" && this.state.onchange}
               />
@@ -541,6 +563,7 @@ class Vehicle extends Component {
                 name="email"
                 placeholder="seuemail@email.com"
                 onChange={this.props.onChange}
+                disabled={this.props.disabled}
                 value={this.props.state.email}
                 invalid={this.props.state.email === "" && this.state.onchange}
               />
@@ -549,10 +572,10 @@ class Vehicle extends Component {
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
+
           <Button
             color="secondary"
             style={{ marginRight: 10 }}
-            onClick={() => this.props.handlePrevForm()}
           >
             Voltar
           </Button>

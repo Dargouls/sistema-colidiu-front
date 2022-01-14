@@ -12,14 +12,13 @@ import {
 } from "reactstrap";
 
 import {
-    Welcome,
     Accident,
     Vehicle,
     MoreInformation,
     Witness,
     Confirmation
-
 } from "../RegisterOcorrencia/Cards/index";
+
 
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
@@ -73,6 +72,25 @@ class Validation extends Component {
         }
     }
 
+    async handleSendStatus(status) {
+        // console.log("Status: ", status)
+        let ocorrence = this.props.match.params;
+        // console.log('id', ocorrence)
+        try {
+          const response = await api.put(`/occurrences/${ocorrence?.id}/status`, {
+              status: status
+          })
+          console.log('response: ', response)
+          toast.success("Lista de ocorrências carregadas com sucesso!")
+          this.props.history.push('/ocorrencias')
+          // this.setState({ occurrence: data.occurrence })
+          // this.setState({ loading: true })
+        } catch (error) {
+          toast.error('Ocorreu algum erro, por favor tente novamente mais tarde!')
+          // this.setState({ loading: true })
+        }
+      }
+
     componentWillMount() {
         this.handleGetOcurrence()
     }
@@ -81,7 +99,6 @@ class Validation extends Component {
             <div className="animated fadeIn">
                 <Row>
                     <Col xs="12">
-                        {/* <Fade timeout={this.state.timeout} in={this.state.fadeIn}> */}
                         <Card>
                             <CardHeader>
                                 <i className="fa fa-edit"></i>Registro de ocorrência
@@ -89,55 +106,59 @@ class Validation extends Component {
                             <CardBody>
                                 <Form className="form-horizontal">
                                     {this.state.forms === 1 && (
-                                        <Welcome handleNextForm={this.handleNextForm} />
-                                    )}
-
-
-                                    {this.state.forms === 2 && (
                                         <Accident
                                             state={this.state.occurrence}
                                             onChange={(e) => this.handleInputChange(e)}
                                             handleNextForm={this.handleNextForm}
                                             handlePrevForm={this.handlePrevForm}
+                                            disabled={true}
                                         />
                                     )}
 
-                                    {this.state.forms === 3 && (
+                                    {this.state.forms === 2 && (
                                         <Vehicle
                                             state={this.state.occurrence}
                                             onChange={(e) => this.handleInputChange(e)}
                                             handleNextForm={this.handleNextForm}
                                             handlePrevForm={this.handlePrevForm}
+                                            disabled={true}
                                         />
                                     )}
 
-                                    {this.state.forms === 4 && (
+                                    {this.state.forms === 3 && (
                                         <MoreInformation
                                             state={this.state.occurrence}
                                             handleNextForm={this.handleNextForm}
                                             handlePrevForm={this.handlePrevForm}
+                                            disabled={true}
 
                                         />
                                     )}
-
-                                    {this.state.forms === 5 && (
+                                    {this.state.forms === 4 && (
                                         <Witness
                                             state={this.state.occurrence}
                                             handleNextForm={this.handleNextForm}
                                             handlePrevForm={this.handlePrevForm}
+                                            disabled={true}
                                         />
                                     )}
-
+                                    {this.state.forms === 5 && (
+                                        <Confirmation
+                                            state={this.state.occurrence}
+                                            handleNextForm={this.handleNextForm}
+                                            handlePrevForm={this.handlePrevForm}
+                                            handleSendStatus={(status) => this.handleSendStatus(status) }
+                                            disabled={true}
+                                        />
+                                    )}
                                 </Form>
                             </CardBody>
                         </Card>
-                        {/* </Fade> */}
                     </Col>
                 </Row>
             </div>
         );
     }
 }
-
 
 export default Validation;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Button, FormGroup, Input, Label, FormFeedback } from "reactstrap";
 import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 class Accident extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class Accident extends Component {
 
   componentWillMount() {
     console.log('state:', this.props.state)
-}
+  }
 
   render() {
     return (
@@ -146,7 +147,7 @@ class Accident extends Component {
 
         <FormGroup>
           <Label>Envio de imagem</Label>
-          <Input
+          {/* <Input
             disabled={this.props.disabled}
             type="file"
             id="file-input"
@@ -154,18 +155,29 @@ class Accident extends Component {
             onChange={this.props.onChange}
             value={this.props.state.image}
             invalid={this.props.state.image === "" && this.state.onchange}
-          />
+          /> */}
 
           <FormFeedback>Suba uma imagem!</FormFeedback>
         </FormGroup>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            color="secondary"
-            style={{ marginRight: 10 }}
-            onClick={() => this.props.handlePrevForm()}
-          >
-            Voltar
-          </Button>
+          {this.props.disabled ?
+            <Link to="/ocorrencias">
+              <Button
+                color="secondary"
+                style={{ marginRight: 10 }}
+              >
+                Voltar
+              </Button>
+            </Link>
+            :
+            <Button
+              color="secondary"
+              style={{ marginRight: 10 }}
+              onClick={() => this.props.handlePrevForm()}
+            >
+              Voltar
+            </Button>
+          }
           <Button color="primary" onClick={() => this.handleForm()}>
             Próximo
           </Button>

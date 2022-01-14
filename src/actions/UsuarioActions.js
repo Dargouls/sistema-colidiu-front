@@ -93,7 +93,7 @@ export const login = (email, senha) => async (dispatch) => {
       return "Autenticado";
     } else {
       if (response.data.mensagem) {
-        toast.error("Desculpe, senha e/ou email inválido!");
+        toast.error(response.data.mensagem);
       } else {
         toast.error("Desculpe, ocorreu algum erro contacte um administrador.");
       }
