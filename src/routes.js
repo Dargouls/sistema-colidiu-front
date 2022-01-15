@@ -3,6 +3,7 @@ import React from "react";
 // Componentes utilizadas na aplicação
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const RegisterOcorrencia = React.lazy(() => import("./views/Pages/RegisterOcorrencia"));
+const Home = React.lazy(() => import("./views/Pages/Home/Home"));
 const ListaOcorrencia = React.lazy(() => import("./views/Pages/ListaOcorrencia/ListaOcorrencia"));
 const Validate = React.lazy(() => import("./views/Pages/Validate/Validate"));
 const GuiaGR = React.lazy(() => import("./views/Pages/GuiaGR/GuiaGR"));
@@ -29,7 +30,8 @@ const Solicitacao = React.lazy(() =>
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   // Rotas utilizadas pela aplicação - ZeroTime
-  { path: "/", exact: true, name: "Início" },
+  { path: "/", exact: true, name: "Início", component: Home },
+  { path: "/inicio", name: "Home" , componet: Home},
   // { path: "/dashboard", name: "Painel", component: Dashboard },
   { path: "/registro-ocorrencia", name: "Painel", component: RegisterOcorrencia },
   { path: "/ocorrencias", name: "Painel", component: ListaOcorrencia},

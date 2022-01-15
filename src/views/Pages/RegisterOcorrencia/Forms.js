@@ -50,6 +50,10 @@ class Forms extends Component {
       state_vehicle: "",
       category_vehicle: "",
       safe_vehicle: "",
+      plate: "",
+      renavam: "",
+      pellicle: "",
+      airbag: "", 
       name: "",
       sex: "",
       rg: "",
@@ -138,7 +142,7 @@ class Forms extends Component {
               </CardHeader>
               <Collapse isOpen={this.state.collapse} id="collapseExample">
                 <CardBody>
-                  <Form className="form-horizontal">
+                  <Form className="form-horizontal" method="POST">
                     {this.state.forms === 1 && (
                       <Welcome handleNextForm={this.handleNextForm} />
                     )}

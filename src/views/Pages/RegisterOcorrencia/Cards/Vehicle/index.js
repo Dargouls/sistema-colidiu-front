@@ -54,6 +54,22 @@ class Vehicle extends Component {
       this.handleWarning("safe_vehicle");
       return;
     }
+    if (data.plate === "") {
+      this.handleWarning("plate");
+      return;
+    }
+    if (data.renavam === "") {
+      this.handleWarning("renavam");
+      return;
+    }
+    if (data.pellicle === "") {
+      this.handleWarning("pellicle");
+      return;
+    }
+    if (data.airbag === "") {
+      this.handleWarning("airbag");
+      return;
+    }
     if (data.name === "") {
       this.handleWarning("name");
       return;
@@ -129,6 +145,11 @@ class Vehicle extends Component {
       state_vehicle: "Estado do veículo",
       category_vehicle: "Categoria do veículo",
       safe_vehicle: "Seguro do veículo",
+      plate: "Placa",
+      renavam: "RENAVAM",
+      pellicle: "Película do Veículo",
+      airbag: "Possui Airbag?",
+      plate: "Placa",
       name: "Seu nome",
       sex: "Seu sexo",
       rg: "Seu RG",
@@ -258,6 +279,73 @@ class Vehicle extends Component {
             <option>Sim</option>
             <option>Não</option>
             <option>Não informado</option>
+          </Input>
+
+          <FormFeedback>Preencha o campo!</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label>Placa</Label>
+          <Input
+            type="text"
+            name="plate"
+            placeholder="Digite a placa do veículo"
+            onChange={this.props.onChange}
+            disabled={this.props.disabled}
+            value={this.props.state.plate}
+            invalid={
+              this.props.state.plate === "" && this.state.onchange
+            }
+          />
+          <FormFeedback>Preencha o campo!</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label>Renavam</Label>
+          <Input
+            type="text"
+            name="renavam"
+            placeholder="Digite o RENAVAM do veículo"
+            onChange={this.props.onChange}
+            disabled={this.props.disabled}
+            value={this.props.state.renavam}
+            invalid={
+              this.props.state.renavam === "" && this.state.onchange
+            }
+          />
+          <FormFeedback>Preencha o campo!</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label>Possui Pelicula?</Label>
+          <Input
+            type="select"
+            name="pellicle"
+            onChange={this.props.onChange}
+            disabled={this.props.disabled}
+            value={this.props.state.pellicle}
+            invalid={
+              this.props.state.pellicle === "" && this.state.onchange
+            }
+          >
+            <option></option>
+            <option>Sim</option>
+            <option>Não</option>
+          </Input>
+          <FormFeedback>Preencha o campo!</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label>Acionou o Airbag?</Label>
+          <Input
+            type="select"
+            name="airbag"
+            onChange={this.props.onChange}
+            disabled={this.props.disabled}
+            value={this.props.state.airbag}
+            invalid={
+              this.props.state.airbag === "" && this.state.onchange
+            }
+          >
+            <option></option>
+            <option>Sim</option>
+            <option>Não</option>
           </Input>
 
           <FormFeedback>Preencha o campo!</FormFeedback>

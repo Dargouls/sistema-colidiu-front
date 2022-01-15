@@ -6,9 +6,12 @@ class Confirmation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      checked: false,
     }
   }
+
+  
 
   render() {
     return (
@@ -68,23 +71,23 @@ class Confirmation extends Component {
                   <Label>{`E-mail: ${this.props.state.email}`}</Label>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <Label>{`Placa: `}</Label>
-                  <Label>Possuia Pelicula?</Label>
-                  <Label>Acionou Air-bag</Label>
+                  <Label>{`Placa: ${this.props.state.plate}`}</Label>
+                  <Label>{`Possuia Pelicula? ${this.props.state.pellicle}`}</Label>
+                  <Label>{`Acionou Air-bag? ${this.props.state.airbag}`}</Label>
                   <Label>{`Data de Nascimento: ${this.props.state.birth_date}`}</Label>
                   <Label>{`UF: ${this.props.state.uf}`}</Label>
-                  <Label>Número</Label>
-                  <Label>Telefone Residencial</Label>
+                  {/* <Label>Número</Label>
+                  <Label>Telefone Residencial</Label> */}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <Label>Renavam</Label>
+                  <Label>{`Renavam ${this.props.state.renavam}`}</Label>
                   <Label>{`Veículo no momento do fato: ${this.props.state.state_vehicle}`}</Label>
                   <Label>{`Possui Seguro? : ${this.props.state.safe_vehicle}`}</Label>
                   <Label>{`CPF: ${this.props.state.cpf}`}</Label>
                   <Label>{`UF do RG: ${this.props.state.uf_rg}`}</Label>
                   <Label>{`Municipio: ${this.props.state.municipality}`}</Label>
                   <Label>{`Bairro: ${this.props.state.district}`}</Label>
-                  <Label>Telefone Comercial</Label>
+                  {/* <Label>Telefone Comercial</Label> */}
                 </div>
               </div>
             </FormGroup>
@@ -143,9 +146,13 @@ class Confirmation extends Component {
 
             <FormGroup>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Label>0 testemunhas inseridas</Label>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
-                  <input type="checkbox" value={false} name="check-accept" />
+                  <input
+                    type="checkbox"
+                    name="check-accept"
+                    value={this.state.checked}
+                    onChange={() => this.setState({checked: !this.state.checked})}
+                  />
                   <p> CONFIRMO A VERACIDADE DAS INFORMAÇÕES PRESTADAS</p>
                 </div>
               </div>
@@ -210,7 +217,6 @@ class Confirmation extends Component {
                 <Button onClick={() => this.setState({ modal: !this.state.modal })}>
                   Cancelar
                 </Button>
-                {' '}
                 <Button
                   color="danger"
                   onClick={() => this.props.handleSendStatus("Reprovado")}
@@ -241,6 +247,7 @@ class Confirmation extends Component {
                 <Button
                   color="success"
                   onClick={() => this.props.handleSendStatus("Aprovado")}
+                  disabled={!this.state.checked}
                 >
                   Aprovar
                 </Button>

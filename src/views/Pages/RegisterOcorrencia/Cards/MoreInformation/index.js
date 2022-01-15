@@ -25,6 +25,10 @@ class MoreInformation extends Component {
             state_vehicle: '',
             category_vehicle: '',
             safe_vehicle: '',
+            plate: "",
+            renavam: "",
+            pellicle: "",
+            airbag: "",
             transport_charge_vehicle: '',
             name: '',
             cpf: '',
@@ -72,6 +76,10 @@ class MoreInformation extends Component {
                 state_vehicle: '',
                 category_vehicle: '',
                 safe_vehicle: '',
+                plate: "",
+                renavam: "",
+                pellicle: "",
+                airbag: "",
                 transport_charge_vehicle: '',
                 name: '',
                 cpf: '',
@@ -94,7 +102,7 @@ class MoreInformation extends Component {
     }
 
     handleInputChange(e) {
-        console.log(`Campo: ${e.target.name} || ${e.target.value}`)
+        // console.log(`Campo: ${e.target.name} || ${e.target.value}`)
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -117,7 +125,6 @@ class MoreInformation extends Component {
                                 value={item.type_vehicle}
                                 disabled
                             >
-
                                 <option></option>
                                 <option>Automóvel</option>
                                 <option>Bicicleta</option>
@@ -217,6 +224,54 @@ class MoreInformation extends Component {
                                 <option>Sim</option>
                                 <option>Não</option>
                                 <option>Não informado</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>Placa</Label>
+                            <Input
+                                type="text"
+                                name="plate"
+                                placeholder="Digite a placa do veículo"
+                                disabled
+                                value={item.plate}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Renavam</Label>
+                            <Input
+                                type="text"
+                                name="renavam"
+                                placeholder="Digite o RENAVAM do veículo"
+                                disabled
+                                value={item.renavam}
+                               
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Possui Pelicula?</Label>
+                            <Input
+                                type="select"
+                                name="pellicle"
+                                disabled
+                                value={item.pellicle}
+                            >
+                                <option></option>
+                                <option>Sim</option>
+                                <option>Não</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Acionou o Airbag?</Label>
+                            <Input
+                                type="select"
+                                name="airbag"
+                                disabled
+                                value={item.airbag}
+                            >
+                                <option></option>
+                                <option>Sim</option>
+                                <option>Não</option>
                             </Input>
                         </FormGroup>
 
@@ -604,6 +659,53 @@ class MoreInformation extends Component {
                                 <option>Sim</option>
                                 <option>Não</option>
                                 <option>Não informado</option>
+                            </Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>Placa</Label>
+                            <Input
+                                type="text"
+                                name="plate"
+                                placeholder="Digite a placa do veículo"
+                                onChange={this.handleInputChange}
+                                value={this.state.plate}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Renavam</Label>
+                            <Input
+                                type="text"
+                                name="renavam"
+                                placeholder="Digite o RENAVAM do veículo"
+                                onChange={this.handleInputChange}
+                                value={this.state.renavam}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Possui Pelicula?</Label>
+                            <Input
+                                type="select"
+                                name="pellicle"
+                                onChange={this.handleInputChange}
+                                value={this.state.pellicle}
+                            >
+                                <option></option>
+                                <option>Sim</option>
+                                <option>Não</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Acionou o Airbag?</Label>
+                            <Input
+                                type="select"
+                                name="airbag"
+                                onChange={this.handleInputChange}
+                                value={this.state.airbag}
+                            >
+                                <option></option>
+                                <option>Sim</option>
+                                <option>Não</option>
                             </Input>
                         </FormGroup>
 

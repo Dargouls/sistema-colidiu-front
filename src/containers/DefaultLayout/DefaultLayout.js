@@ -47,7 +47,6 @@ class DefaultLayout extends Component {
   }
   componentDidMount() {
     const user = getUser()
-    // console.log("user nav:", user)
     if (user?.permissions === "all") {
       this.setState({items: [...this.state.items, {
         name: "Validar ocorrência",
@@ -79,10 +78,10 @@ class DefaultLayout extends Component {
             <Container fluid >
               <Suspense fallback={this.loading()} >
                 <Switch>
-                  {routes.map((route, idx) => {
+                  {routes.map((route, index) => {
                     return route.component ? (
                       <Route
-                        key={idx}
+                        key={index}
                         path={route.path}
                         exact={route.exact}
                         name={route.name}

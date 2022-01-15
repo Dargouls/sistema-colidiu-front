@@ -8,16 +8,10 @@ class Welcome extends Component {
                 <FormGroup>
                     <Label>
                         <span style={{ fontSize: 25, fontWeight: 'bold' }}>
-                            Bem vindo ao Colidiu!
+                            Cadastre agora seu Registro de ocorrência!
                         </span>
                     </Label>
                     <FormText>
-                        <p style={{ fontSize: 15 }}>
-                            Este sistema permite somente o registro de boletins de acidentes que ocasionaram apenas danos materiais, não sendo possível a inserção e cadastro de pessoas feridas.
-                        </p>
-                        <p style={{ fontSize: 15 }}>
-                            Poderão ser registrados acidentes ocorridos no interior de condomínios, postos de combustíveis, estacionamentos de mercados, lojas, shoppings, etc, e o endereço informado no registro do acidente deve ser o mesmo do estabelecimento ou condomínio. Devendo na descrição dos fatos, relatar que o acidente se deu dentro de tal área.
-                        </p>
                         <p style={{ fontSize: 15 }}>
                             Observe abaixo os passos do processo de registro do Colidiu:
                         </p>
