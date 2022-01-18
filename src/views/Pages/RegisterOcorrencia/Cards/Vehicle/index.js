@@ -361,7 +361,6 @@ class Vehicle extends Component {
             type="text"
             name="name"
             placeholder="Digite o seu name"
-            required
             onChange={this.props.onChange}
             disabled={this.props.disabled}
             value={this.props.state.name}
@@ -396,7 +395,6 @@ class Vehicle extends Component {
             type="text"
             name="rg"
             placeholder="Digite o seu RG"
-            required
             onChange={this.props.onChange}
             disabled={this.props.disabled}
             value={this.props.state.rg}
@@ -454,7 +452,6 @@ class Vehicle extends Component {
               type="text"
               name="cpf"
               placeholder="Digite o sua cpf"
-              required
               onChange={this.props.onChange}
               disabled={this.props.disabled}
               value={this.props.state.cpf}
@@ -520,7 +517,6 @@ class Vehicle extends Component {
             type="text"
             name="municipality"
             placeholder="Digite o Municipio"
-            required
             onChange={this.props.onChange}
             disabled={this.props.disabled}
             value={this.props.state.municipality}
@@ -586,7 +582,6 @@ class Vehicle extends Component {
                 type="text"
                 name="complement_address"
                 placeholder="Digite o complemento"
-                required
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.complement_address}
@@ -606,7 +601,6 @@ class Vehicle extends Component {
                 type="text"
                 name="district"
                 placeholder="Digite o Bairro"
-                required
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.district}
@@ -664,6 +658,7 @@ class Vehicle extends Component {
           <Button
             color="secondary"
             style={{ marginRight: 10 }}
+            onClick={() => this.props.handlePrevForm()}
           >
             Voltar
           </Button>

@@ -87,13 +87,13 @@ export const login = (email, senha) => async (dispatch) => {
     const response = await api.post("/login", body);
 
     if (response.data.token) {
-      setToken("Token");
+      setToken(response.data.token);
       setUser(response.data.user);
       toast.success("Logado com sucesso!");
       return "Autenticado";
     } else {
-      if (response.data.mensagem) {
-        toast.error(response.data.mensagem);
+      if (response.data.message) {
+        toast.error(response.data.message);
       } else {
         toast.error("Desculpe, ocorreu algum erro contacte um administrador.");
       }
@@ -113,16 +113,18 @@ export const registerUser =
       telephone: telefone,
     };
 
-    const response = await api.post("/users", body);
+    const response = await api.post("/users", body,);
 
     // Se não tiver nenhum erro e o status for de sucesso, o cadastro foi efetuado corretamente
     if (response.status == 200 && response.originalError == null) {
       if (response.data.token) {
-        toast.success(response.data.mensagem);
-        setToken("Token");
+        toast.success(response.data.message);
+        setToken(response.data.token);
+        
+        setUser(response.data.user);
         return true;
       } else {
-        toast.warn(response.data.mensagem);
+        toast.warn(response.data.message);
         return false;
       }
       // Exibe o erro padrão enviado pelo servidor se por acaso algum campo não foi preenchido corretamente

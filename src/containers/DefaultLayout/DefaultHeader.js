@@ -16,6 +16,7 @@ const defaultProps = {};
 class DefaultHeader extends Component {
   render() {
     const user = getUser()
+    // console.log('user header:', user)
     const { children, ...attributes } = this.props;
 
     return (
@@ -38,7 +39,7 @@ class DefaultHeader extends Component {
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem header tag="div" className="text-center"><strong>Perfil</strong></DropdownItem>
-              <DropdownItem><i className="fa fa-user"></i>{user.name}</DropdownItem>
+              <DropdownItem><i className="fa fa-user"></i>{user?.name}</DropdownItem>
               {/* <DropdownItem><i className="fa fa-wrench"></i> Configurações</DropdownItem> */}
               {/* <DropdownItem divider /> */}
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-power-off"></i> Sair</DropdownItem>

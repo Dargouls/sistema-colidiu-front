@@ -1,17 +1,39 @@
 import React, { Component } from "react";
 import { FormGroup, Label, Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from "reactstrap";
+import { toast } from "react-toastify";
 
 class Confirmation extends Component {
 
   constructor(props) {
     super(props);
+    this.handleCheckInfo = this.handleCheckInfo.bind(this);
+    this.handleCheckStatus = this.handleCheckStatus.bind(this);
     this.state = {
       modal: false,
       checked: false,
+      message: '',
     }
   }
 
-  
+  handleCheckInfo() {
+    if (this.state.checked) {
+      this.props.handleSendRegister()
+    } else {
+      toast.warning("Confirme a veracidade das informações prestadas!")
+    }
+  }
+
+  handleCheckStatus() {
+    if (this.state.message !== '') {
+      this.props.handleSendStatus("Reprovado", this.state.message)
+    } else {
+      toast.warning("Escreva os motivos pela qual a ocorrência foi negada!")
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.state.checked)
+  }
 
   render() {
     return (
@@ -151,7 +173,7 @@ class Confirmation extends Component {
                     type="checkbox"
                     name="check-accept"
                     value={this.state.checked}
-                    onChange={() => this.setState({checked: !this.state.checked})}
+                    onChange={() => this.setState({ checked: !this.state.checked })}
                   />
                   <p> CONFIRMO A VERACIDADE DAS INFORMAÇÕES PRESTADAS</p>
                 </div>
@@ -175,7 +197,7 @@ class Confirmation extends Component {
                 </Button>
                 <Button
                   color="primary"
-                  onClick={() => this.props.handleSendRegister()}
+                  onClick={() => this.handleCheckInfo()}
                 >
                   Enviar
                 </Button>
@@ -209,7 +231,15 @@ class Confirmation extends Component {
 
                 <FormGroup>
                   <Label for="exampleText">Descreva o motivo pela qual foi negado</Label>
-                  <Input type="textarea" name="text" id="exampleText" rows="10" style={{ resize: 'none', overflow: 'auto' }} />
+                  <Input
+                    type="textarea"
+                    name="text"
+                    id="exampleText"
+                    rows="10"
+                    style={{ resize: 'none', overflow: 'auto' }}
+                    value={this.state.message}
+                    onChange={(e) => this.setState({ message: e.target.value })}
+                  />
                 </FormGroup>
 
               </ModalBody>
@@ -219,12 +249,10 @@ class Confirmation extends Component {
                 </Button>
                 <Button
                   color="danger"
-                  onClick={() => this.props.handleSendStatus("Reprovado")}
+                  onClick={() => this.handleCheckStatus()}
                 >
                   Confirmar Reprovação
                 </Button>
-
-
               </ModalFooter>
             </Modal>
 
@@ -246,8 +274,7 @@ class Confirmation extends Component {
                 </Button>
                 <Button
                   color="success"
-                  onClick={() => this.props.handleSendStatus("Aprovado")}
-                  disabled={!this.state.checked}
+                  onClick={() => this.props.handleSendStatus("Aprovado", "")}
                 >
                   Aprovar
                 </Button>

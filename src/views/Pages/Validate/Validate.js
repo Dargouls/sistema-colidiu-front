@@ -55,14 +55,13 @@ class Validation extends Component {
         }
     }
 
-
     async handleGetOcurrence() {
         // this.setState({loading: true})
         let ocorrence = this.props.match.params;
-        console.log('id:', ocorrence)
+        // console.log('id:', ocorrence)
         try {
             const { data } = await api.get(`/occurrences/${ocorrence?.id}`)
-            console.log('ocurrence: ', data.occurrence)
+            // console.log('ocurrence: ', data.occurrence)
             toast.success("Lista de ocorrências carregadas com sucesso!")
             this.setState({ occurrence: data.occurrence })
             this.setState({ loading: true })
@@ -72,24 +71,34 @@ class Validation extends Component {
         }
     }
 
-    async handleSendStatus(status) {
-        // console.log("Status: ", status)
-        let ocorrence = this.props.match.params;
-        // console.log('id', ocorrence)
+    async handleSendStatus(status, message) {
+        let occurrence = this.props.match.params;
+        //Altera o status da ocorrencia
         try {
-          const response = await api.put(`/occurrences/${ocorrence?.id}/status`, {
-              status: status
-          })
-          console.log('response: ', response)
-          toast.success("Lista de ocorrências carregadas com sucesso!")
-          this.props.history.push('/ocorrencias')
-          // this.setState({ occurrence: data.occurrence })
-          // this.setState({ loading: true })
+            const response = await api.put(`/occurrences/${occurrence?.id}/status`, {
+                status: status
+            })
+            if (response.status == 200) {
+                let data = {
+                    email: this.state.occurrence.email,
+                    message: status === "Aprovado" ? "Sua ocorrência foi aprovada" : `Sua ocorrência foi reprovada, pelos motivos: ${message}`,
+                    occurrence: occurrence.id
+                }
+                //Envia o email com base no status do usuario que cadastrou a ocorrencia
+                const sendEmail = await api.post("/user/sendemail", data)
+                if (sendEmail.status === 200) {
+                    toast.success(sendEmail.data.message)
+                    this.props.history.push('/ocorrencias')
+                } else {
+                    toast.error(sendEmail.data.message)
+                }
+            } else {
+                toast.error(response.data.message)
+            }
         } catch (error) {
-          toast.error('Ocorreu algum erro, por favor tente novamente mais tarde!')
-          // this.setState({ loading: true })
+            toast.error('Ocorreu algum erro, por favor tente novamente mais tarde!')
         }
-      }
+    }
 
     componentWillMount() {
         this.handleGetOcurrence()
@@ -147,7 +156,7 @@ class Validation extends Component {
                                             state={this.state.occurrence}
                                             handleNextForm={this.handleNextForm}
                                             handlePrevForm={this.handlePrevForm}
-                                            handleSendStatus={(status) => this.handleSendStatus(status) }
+                                            handleSendStatus={(status, message) => this.handleSendStatus(status, message)}
                                             disabled={true}
                                         />
                                     )}
