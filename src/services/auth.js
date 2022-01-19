@@ -12,8 +12,7 @@ export const logout = () => {
 
 export const getUser = () => JSON.parse(localStorage.getItem(USER_KEY));
 export const setUser = (user) => {
+  let newUser = JSON.stringify(user);
   localStorage.removeItem(USER_KEY);
-  console.log("user: ", user)
-  user = JSON.stringify(user);
-  localStorage.setItem(USER_KEY, user);
+  localStorage.setItem(USER_KEY, newUser);
 };

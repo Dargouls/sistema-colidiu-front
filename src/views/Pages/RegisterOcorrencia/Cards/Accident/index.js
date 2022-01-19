@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Button, FormGroup, Input, Label, FormFeedback } from "reactstrap";
+import { Col, Button, FormGroup, Input, Label, FormFeedback, Row } from "reactstrap";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -7,10 +7,12 @@ class Accident extends Component {
   constructor(props) {
     super(props);
     this.handleForm = this.handleForm.bind(this);
+    this.handleImage = this.handleImage.bind(this);
     this.handleWarning = this.handleWarning.bind(this);
     // this.handleNextForm = this.props.handleNextForm(this);
     this.state = {
       onchange: false,
+      image: [],
     };
   }
 
@@ -49,6 +51,18 @@ class Accident extends Component {
 
   componentWillMount() {
     console.log("state:", this.props.state);
+  }
+
+  handleImage(e) {
+    const newArray = [];
+    if (e.target.files) {
+      // console.log(Object.values(e.target.files))
+      Object.values(e.target.files).forEach(element => {
+        newArray.push(URL.createObjectURL(element))
+      });
+    }
+    this.setState({ image: newArray })
+    this.props.handleInputFile(e)
   }
 
   render() {
@@ -140,20 +154,30 @@ class Accident extends Component {
           <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
 
-        <FormGroup>
-          <Label>Envio de imagem</Label>
-          {/* <Input
-            disabled={this.props.disabled}
-            type="file"
-            id="file-input"
-            name="image"
-            onChange={this.props.onChange}
-            value={this.props.state.image}
-            invalid={this.props.state.image === "" && this.state.onchange}
-          /> */}
-
-          <FormFeedback>Suba uma imagem!</FormFeedback>
-        </FormGroup>
+        {!this.props.disabled &&
+          <div style={{ display: 'flex', flexDirection: 'row', marginBottom: 20 }}>
+            <FormGroup>
+              <Label>Envio de imagem</Label>
+              <Input
+                disabled={this.props.disabled}
+                type="file"
+                id="file-input"
+                name="image"
+                multiple
+                onChange={this.handleImage}
+                value={this.props.state.image}
+                invalid={this.props.state.image === "" && this.state.onchange}
+              />
+              <FormFeedback>Suba uma imagem!</FormFeedback>
+            </FormGroup>
+            <div style={{ marginLeft: -40 }}>
+              {this.state.image.map((item, index) => (
+                <img key={index} src={item} width="150" height="150" style={{ marginRight: 10 }} />
+              ))
+              }
+            </div>
+          </div>
+        }
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {this.props.disabled ? (
             <Link to="/ocorrencias">

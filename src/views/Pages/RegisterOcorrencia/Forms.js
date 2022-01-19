@@ -27,6 +27,7 @@ class Forms extends Component {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputFile = this.handleInputFile.bind(this);
     this.handleNextForm = this.handleNextForm.bind(this);
     this.handlePrevForm = this.handlePrevForm.bind(this);
     this.handleAddVehicle = this.handleAddVehicle.bind(this);
@@ -100,11 +101,15 @@ class Forms extends Component {
     this.setState({ array_witness: [...this.state.array_witness, witness] });
   }
 
+
   handleInputChange(e) {
     console.log(`Campo: ${e.target.name} || ${e.target.value}`);
     this.setState({
       [e.target.name]: e.target.value,
     });
+  }
+  handleInputFile(value) {
+    this.setState({image: value.target.values})
   }
 
   toggle() {
@@ -151,6 +156,7 @@ class Forms extends Component {
                       <Accident
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
+                        handleInputFile={(e) => this.handleInputFile(e)}
                         handleNextForm={this.handleNextForm}
                         handlePrevForm={this.handlePrevForm}
                       />
