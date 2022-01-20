@@ -77,43 +77,44 @@ class Forms extends Component {
   }
 
   async sendRegister() {
-    console.log('imgs:', this.state.images)
-    const data = new FormData;
-    data.append("city", this.state.city)
-    data.append("type_accident", this.state.type_accident)
-    data.append("zone", this.state.zone)
-    data.append("feriado", this.state.feriado)
-    Array.from(this.state.images).forEach(file => {
-      data.append('files', file);
-    });
-    data.append("type_vehicle", this.state.type_vehicle)
-    data.append("number_occupants", this.state.number_occupants)
-    data.append("state_vehicle", this.state.state_vehicle)
-    data.append("category_vehicle", this.state.category_vehicle)
-    data.append("safe_vehicle", this.state.safe_vehicle)
-    data.append("plate", this.state.plate)
-    data.append("renavam", this.state.renavam)
-    data.append("pellicle", this.state.pellicle)
-    data.append("airbag", this.state.airbag)
-    data.append("sex", this.state.sex)
-    data.append("rg", this.state.rg)
-    data.append("uf_rg", this.state.uf_rg)
-    data.append("cnh", this.state.cnh)
-    data.append("cpf", this.state.cpf)
-    data.append("birth_date", this.state.birth_date)
-    data.append("cep", this.state.cep)
-    data.append("municipality", this.state.municipality)
-    data.append("address", this.state.address)
-    data.append("number_address", this.state.number_address)
-    data.append("complement_address", this.state.complement_address)
-    data.append("district", this.state.district)
-    data.append("phone", this.state.phone)
-    data.append("email", this.state.email)
-    data.append("uf", this.state.uf)
-    data.append("array_vehicle", this.state.array_vehicle)
-    data.append("array_witness", this.state.array_witness)
+    console.log("imgs:", this.state.images);
 
-    console.log(data)
+    const data = new FormData();
+    data.append("city", this.state.city);
+    data.append("type_accident", this.state.type_accident);
+    data.append("zone", this.state.zone);
+    data.append("feriado", this.state.feriado);
+    Array.from(this.state.images).forEach((file) => {
+      data.append("files", file);
+    });
+    data.append("type_vehicle", this.state.type_vehicle);
+    data.append("number_occupants", this.state.number_occupants);
+    data.append("state_vehicle", this.state.state_vehicle);
+    data.append("category_vehicle", this.state.category_vehicle);
+    data.append("safe_vehicle", this.state.safe_vehicle);
+    data.append("plate", this.state.plate);
+    data.append("renavam", this.state.renavam);
+    data.append("pellicle", this.state.pellicle);
+    data.append("airbag", this.state.airbag);
+    data.append("sex", this.state.sex);
+    data.append("rg", this.state.rg);
+    data.append("uf_rg", this.state.uf_rg);
+    data.append("cnh", this.state.cnh);
+    data.append("cpf", this.state.cpf);
+    data.append("birth_date", this.state.birth_date);
+    data.append("cep", this.state.cep);
+    data.append("municipality", this.state.municipality);
+    data.append("address", this.state.address);
+    data.append("number_address", this.state.number_address);
+    data.append("complement_address", this.state.complement_address);
+    data.append("district", this.state.district);
+    data.append("phone", this.state.phone);
+    data.append("email", this.state.email);
+    data.append("uf", this.state.uf);
+    data.append("array_vehicle", this.state.array_vehicle);
+    data.append("array_witness", this.state.array_witness);
+
+    console.log(data);
 
     try {
       const response = await api.post("/occurrences", data);
@@ -122,7 +123,7 @@ class Forms extends Component {
         toast.success("Registro de ocorrência cadastrado com sucesso!");
         setTimeout(() => {
           this.props.history.push("/");
-        }, 3000)
+        }, 3000);
       }
     } catch {
       toast.error("Ocorreu algum erro, tente novamente!");
@@ -145,10 +146,10 @@ class Forms extends Component {
       [e.target.name]: e.target.value,
     });
   }
+
   handleInputFile(value) {
-    // console.log(URL.createObjectURL(value[0]))
-    // this.setState({listImage: value.target.files})
-    this.setState({ image: value.target.files})
+    console.log("Images", value.target.files);
+    this.setState({ images: value.target.files });
   }
 
   toggle() {
