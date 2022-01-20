@@ -56,7 +56,6 @@ class Accident extends Component {
   handleImage(e) {
     const newArray = [];
     if (e.target.files) {
-      // console.log(Object.values(e.target.files))
       Object.values(e.target.files).forEach(element => {
         newArray.push(URL.createObjectURL(element))
       });
@@ -165,7 +164,7 @@ class Accident extends Component {
                 name="image"
                 multiple
                 onChange={this.handleImage}
-                value={this.props.state.image}
+                accept="image/png, image/jpeg, image/jpg"
                 invalid={this.props.state.image === "" && this.state.onchange}
               />
               <FormFeedback>Suba uma imagem!</FormFeedback>
