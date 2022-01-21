@@ -96,6 +96,7 @@ class Forms extends Component {
     data.append("renavam", this.state.renavam);
     data.append("pellicle", this.state.pellicle);
     data.append("airbag", this.state.airbag);
+    data.append("name", this.state.name);
     data.append("sex", this.state.sex);
     data.append("rg", this.state.rg);
     data.append("uf_rg", this.state.uf_rg);
@@ -103,6 +104,7 @@ class Forms extends Component {
     data.append("cpf", this.state.cpf);
     data.append("birth_date", this.state.birth_date);
     data.append("cep", this.state.cep);
+    data.append("uf", this.state.uf);
     data.append("municipality", this.state.municipality);
     data.append("address", this.state.address);
     data.append("number_address", this.state.number_address);
@@ -110,7 +112,6 @@ class Forms extends Component {
     data.append("district", this.state.district);
     data.append("phone", this.state.phone);
     data.append("email", this.state.email);
-    data.append("uf", this.state.uf);
     data.append("array_vehicle", this.state.array_vehicle);
     data.append("array_witness", this.state.array_witness);
 

@@ -63,6 +63,7 @@ class Validation extends Component {
             const { data } = await api.get(`/occurrences/${ocorrence?.id}`)
             // console.log('ocurrence: ', data.occurrence)
             toast.success("Lista de ocorrências carregadas com sucesso!")
+            console.log(data)
             this.setState({ occurrence: data.occurrence })
             this.setState({ loading: true })
         } catch (error) {

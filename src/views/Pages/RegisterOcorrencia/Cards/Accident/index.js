@@ -177,6 +177,15 @@ class Accident extends Component {
             </div>
           </div>
         }
+
+        {this.props.disabled && this.props.state.images &&
+          <div>
+            {this.props.state.images.map((item, index) => (
+              <img key={index} src={item} width="150" height="150" style={{ marginRight: 10 }} />
+            ))
+            }
+          </div>
+        }
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {this.props.disabled ? (
             <Link to="/ocorrencias">
