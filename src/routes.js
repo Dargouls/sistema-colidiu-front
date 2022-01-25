@@ -3,6 +3,7 @@ import React from "react";
 // Componentes utilizadas na aplicação
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const RegisterOcorrencia = React.lazy(() => import("./views/Pages/RegisterOcorrencia"));
+const HistoricoVeiculo = React.lazy(() => import("./views/Pages/HistoricoVeiculo/Historico"));
 const Home = React.lazy(() => import("./views/Pages/Home/Home"));
 const ListaOcorrencia = React.lazy(() => import("./views/Pages/ListaOcorrencia/ListaOcorrencia"));
 const Validate = React.lazy(() => import("./views/Pages/Validate/Validate"));
@@ -40,6 +41,7 @@ const routes = [
   { path: "/guia", name: "Painel", component: GuiaGR },
   { path: "/colidiu", name: "Painel", component: Colidiu },
   { path: "/ocorrencia-pesquisar", name: "Painel", component: ComplementarOcorrencia },
+  { path: "/historico-registro", name: "Painel", component: HistoricoVeiculo },
   // { path: "/carrousel", name: "Painel", component: Carrousel },
   // { path: "/servicos", exact: true, name: "Serviços", component: Servicos },
   {

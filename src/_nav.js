@@ -23,7 +23,7 @@ export default {
     },
     {
       name: 'Consultar histórico do veículo',
-      url: '/base/collapses',
+      url: '/historico-registro',
       icon: 'icon-magnifier-add',
     },
   ],

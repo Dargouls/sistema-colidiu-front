@@ -168,6 +168,7 @@ class Forms extends Component {
       return { forms: prevState.forms + 1 };
     });
   }
+  
   handlePrevForm() {
     if (this.state.forms > 1) {
       this.setState({ forms: this.state.forms - 1 });
