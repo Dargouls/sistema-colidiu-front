@@ -30,11 +30,9 @@ class Historico extends Component {
 
         try {
             const response = await api.post("/renavam/occurrences", { renavam: this.state.renavam });
-            // console.log("State:", response);
-            // console.log("State:", typeof this.state.renavam);
             if (response.data.message === "Tudo foi ok!") {
                 toast.success("Registro de ocorrência encontrado com sucesso!");
-                this.setState({history: response.data.occurrences[0]})
+                this.setState({history: response.data.occurrences})
                 this.handleNextForm()
             } else {
                 toast.error(response.data.message);
@@ -97,6 +95,7 @@ class Historico extends Component {
                                             <Result
                                                 handleNextForm={this.handleNextForm}
                                                 handlePrevForm={this.handlePrevForm}
+                                                state={this.state.history}
                                             />
                                         )}
                                     </Form>

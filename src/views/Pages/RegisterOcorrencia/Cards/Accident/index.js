@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Col, Button, FormGroup, Input, Label, FormFeedback, Row } from "reactstrap";
 import { toast } from "react-toastify";
+import { getUser } from '../../../../../services/auth';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 
 class Accident extends Component {
   constructor(props) {
@@ -9,7 +12,6 @@ class Accident extends Component {
     this.handleForm = this.handleForm.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleWarning = this.handleWarning.bind(this);
-    // this.handleNextForm = this.props.handleNextForm(this);
     this.state = {
       onchange: false,
       image: [],
@@ -49,8 +51,9 @@ class Accident extends Component {
     toast.warn(`${names[type]} é obrigatório`);
   }
 
-  componentWillMount() {
-    console.log("state:", this.props.state);
+  componentDidMount() {
+    const user = getUser();
+    this.setState({ permissions: user.permissions })
   }
 
   handleImage(e) {
@@ -188,7 +191,7 @@ class Accident extends Component {
         }
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {this.props.disabled ? (
-            <Link to="/ocorrencias">
+            <Link to={getUser().permissions === 'all' ? "/ocorrencias" : "/historico-registro"}>
               <Button color="secondary" style={{ marginRight: 10 }}>
                 Voltar
               </Button>

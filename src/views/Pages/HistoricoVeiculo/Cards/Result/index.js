@@ -1,88 +1,78 @@
 import React, { Component } from "react";
-import { FormGroup, Label, Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from "reactstrap";
-import { toast } from "react-toastify";
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Row,
+    Table
+} from "reactstrap";
+import { Link } from 'react-router-dom';
 
 class Result extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
-
+            // occurrences: [],
+            // loading: false
         }
     }
 
+    // async handleGetOcurrences() {
+    //     this.setState({ loading: true })
+    //     try {
+    //         const { data } = await api.get("/occurrences")
+    //         toast.success("Lista de ocorrências carregadas com sucesso!")
+    //         this.setState({ occurrences: data.occurrences })
+    //         this.setState({ loading: true })
+    //     } catch (error) {
+    //         toast.error('Ocorreu algum erro, por favor tente novamente mais tarde!')
+    //         this.setState({ loading: true })
+    //     }
+    // }
+
+    componentDidMount() {
+        //Requisição para pegar todas as ocorrências
+        // this.handleGetOcurrences()
+        console.log("history:", this.props.state)
+    }
 
     render() {
         return (
-            <div>
-                <Label>
-                    <span style={{ fontSize: 20, fontWeight: "bold" }}>Atenção</span>
-                </Label>
+            <div className="animated fadeIn">
+                <Row>
 
-                <p>
-                   Forem encontradas registro(s) com o número do RENAVAM inserido
-                </p>
-                {/* <p>
-                    Antes de clicar em concluir confira todos os dados cadastrados neste
-                    BATEU navegando pelas ABAS/JANELAS anteriores. Caso necessário,
-                    realize as alterações ou complementações necessárias.
-                </p> */}
-
-                {/* <p>
-                    Após a conferência dos dados cadastrados ASSINALE a confirmação da
-                    veracidade das informações prestadas e clique em CONCLUIR para emitir
-                    a Guia de Recolhimento (GR).
-                </p>
-
-                <div style={{ color: "red", display: "flex", flexDirection: "column" }}>
-                    <span>Importante!</span>
-
-                    <span>
-                        Ao clicar em CANCELAR, todos os dados do registro serão excluidos do
-                        sistema, retornando assim á tela inicial.
-                    </span>
-                </div>
-                <FormGroup>
-                    <Label>
-                        <span style={{ fontSize: 20, fontWeight: "bold" }}>
-                            Resumo da Ocorrência
-                        </span>
-                    </Label>
-                </FormGroup>
-
-                <Label>
-                    <span style={{ fontSize: 20, fontWeight: "bold" }}>
-                        Dados da Pessoa e do Veículo
-                    </span>
-                </Label>
-
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <Button
-                        color="secondary"
-                        style={{ marginRight: 10 }}
-                        onClick={() => this.props.handlePrevForm()}
+                    <Table
+                        hover
+                        responsive
                     >
-                        Voltar
-                    </Button>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <Button
-                            color="secondary"
-                            style={{ marginRight: 10 }}
-                            onClick={() => alert('Cancelar registro....')}
-                        >
-                            Cancelar
-                        </Button>
-                        <Button
-                            color="primary"
-                            onClick={() => this.handleCheckInfo()}
-                        >
-                            Enviar
-                        </Button>
-                    </div>
-                </div> */}
-
-
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Veículo</th>
+                                <th>Placa</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.state && this.props.state.map((item, index) => (
+                                <tr key={index}>
+                                    <th scope="row">{index+1}</th>
+                                    <td>{item.name}</td>
+                                    <td>{item.type_vehicle}</td>
+                                    <td>{item.plate}</td>
+                                    <td>
+                                        <Link to={`/ocorrencia/${item.id}`}>
+                                            <Button>Visualizar</Button>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Row>
             </div>
         );
     }

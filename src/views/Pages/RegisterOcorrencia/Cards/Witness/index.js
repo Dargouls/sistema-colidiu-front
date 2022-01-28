@@ -7,7 +7,7 @@ import {
 } from 'reactstrap';
 
 import { toast } from "react-toastify";
-import { Link } from 'react-router-dom';
+import { getUser } from '../../../../../services/auth';
 import { estados } from '../../estados'
 
 class Witness extends Component {
@@ -556,7 +556,9 @@ class Witness extends Component {
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
-          <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
+          {getUser().permissions === "all" &&
+            <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
+          }
         </div>
       </>
     );

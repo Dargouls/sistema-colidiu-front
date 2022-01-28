@@ -105,6 +105,7 @@ class Validation extends Component {
         this.handleGetOcurrence()
     }
     render() {
+        
         return (
             <div className="animated fadeIn">
                 <Row>
