@@ -48,7 +48,7 @@ class DefaultLayout extends Component {
   componentDidMount() {
     const user = getUser()
     if (user?.permissions === "all") {
-      this.setState({items: [...this.state.items, {
+      this.setState({items: [{
         name: "Validar ocorrência",
         url: "/ocorrencias",
         icon: "icon-magnifier-add",

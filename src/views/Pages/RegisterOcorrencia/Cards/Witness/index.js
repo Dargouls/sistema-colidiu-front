@@ -32,6 +32,7 @@ class Witness extends Component {
       district_address_witness: '',
       phone_witness: '',
       email_witness: '',
+      isMoreAuthors: "false",
     }
   }
 
@@ -316,247 +317,261 @@ class Witness extends Component {
                     required
                     value={item.email_witness}
                     disabled
-
                   />
                 </FormGroup>
               </div>
             </div>
-
           </div>
         ))}
 
         {!this.props.disabled &&
           <>
-
             <FormGroup>
-              <Label>Nome da Testemunha</Label>
-              <Input
-                type="text"
-                name="name_witness"
-                placeholder='Digite o nome da Testemunha'
-                required
-                value={this.state.name_witness}
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Sexo</Label>
+              <Label>Possui testemunhas ?</Label>
               <Input
                 type="select"
-                name="sex_witness"
-                value={this.state.sex_witness}
-                onChange={this.handleInputChange}
+                name="isMoreAuthors"
+                onChange={e => this.setState({ isMoreAuthors: e.target.value })}
+                value={this.state.isMoreAuthors}
               >
-                <option></option>
-                <option>Masculino</option>
-                <option>Feminino</option>
-                <option>Não informado</option>
+                <option value='false'>Não</option>
+                <option value='true'>Sim</option>
               </Input>
             </FormGroup>
 
-            <FormGroup>
-              <Label>RG</Label>
-              <Input
-                type="text"
-                name="rg_witness"
-                placeholder='Digite o seu RG'
-                required
-                value={this.state.rg_witness}
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-
-            <div style={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between' }}>
-
-              <div style={{ width: '45%' }}>
+            {this.state.isMoreAuthors === 'true' &&
+              <>
                 <FormGroup>
-                  <Label>CPF</Label>
+                  <Label>Nome da Testemunha</Label>
                   <Input
                     type="text"
-                    name="cpf_witness"
-                    placeholder='Digite o seu CPF'
+                    name="name_witness"
+                    placeholder='Digite o nome da Testemunha'
                     required
-                    value={this.state.cpf_witness}
+                    value={this.state.name_witness}
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-              </div>
-              <div style={{ width: '45%' }}>
-                <FormGroup>
-                  <Label>Data de nascimento</Label>
-                  <Input
-                    type="date"
-                    name="birth_date_witness"
-                    required
-                    value={this.state.birth_date_witness}
-                    onChange={this.handleInputChange}
-                  />
-                </FormGroup>
-              </div>
-            </div>
-
-            <Label>
-              <span style={{ fontSize: 20, fontWeight: 'bold' }}>Endereço do Envolvido</span>
-            </Label>
-
-            <FormGroup>
-              <Label>CEP</Label>
-              <Input
-                type="text"
-                name="cep_witnesss"
-                placeholder='Digite o CEP'
-                required
-                value={this.state.cep_witnesss}
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-
-              <div style={{ width: '45%' }}>
 
                 <FormGroup>
-                  <Label>UF</Label>
+                  <Label>Sexo</Label>
                   <Input
                     type="select"
-                    name="uf_witness"
-                    placeholder="Selecione o estado"
-                    value={this.state.uf_witness}
+                    name="sex_witness"
+                    value={this.state.sex_witness}
                     onChange={this.handleInputChange}
                   >
                     <option></option>
-                    {estados.UF.map((item, index) => {
-                      return <option key={index}>{item.nome}</option>
-                    })}
+                    <option>Masculino</option>
+                    <option>Feminino</option>
+                    <option>Não informado</option>
                   </Input>
                 </FormGroup>
-              </div>
-              <div style={{ width: '45%' }}>
 
                 <FormGroup>
-                  <Label>Municipio</Label>
+                  <Label>RG</Label>
                   <Input
                     type="text"
-                    name="municipality_witness"
-                    placeholder='Digite o Municipio'
+                    name="rg_witness"
+                    placeholder='Digite o seu RG'
                     required
-                    value={this.state.municipality_witness}
+                    value={this.state.rg_witness}
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-              </div>
-            </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between' }}>
 
-              <div style={{ width: '80%' }}>
+                  <div style={{ width: '45%' }}>
+                    <FormGroup>
+                      <Label>CPF</Label>
+                      <Input
+                        type="text"
+                        name="cpf_witness"
+                        placeholder='Digite o seu CPF'
+                        required
+                        value={this.state.cpf_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
+                  <div style={{ width: '45%' }}>
+                    <FormGroup>
+                      <Label>Data de nascimento</Label>
+                      <Input
+                        type="date"
+                        name="birth_date_witness"
+                        required
+                        value={this.state.birth_date_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
+
+                <Label>
+                  <span style={{ fontSize: 20, fontWeight: 'bold' }}>Endereço do Envolvido</span>
+                </Label>
+
                 <FormGroup>
-                  <Label>Endereço</Label>
+                  <Label>CEP</Label>
                   <Input
                     type="text"
-                    name="address_witness"
-                    placeholder='Digite o Endereço'
+                    name="cep_witnesss"
+                    placeholder='Digite o CEP'
                     required
-                    value={this.state.address_witness}
+                    value={this.state.cep_witnesss}
                     onChange={this.handleInputChange}
                   />
                 </FormGroup>
-              </div>
-              <FormGroup>
-                <Label>Numero</Label>
-                <Input
-                  type="text"
-                  name="number_address_witness"
-                  placeholder='Digite o número'
-                  required
-                  value={this.state.number_address_witness}
-                  onChange={this.handleInputChange}
-                />
-              </FormGroup>
-            </div>
+
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                  <div style={{ width: '45%' }}>
+
+                    <FormGroup>
+                      <Label>UF</Label>
+                      <Input
+                        type="select"
+                        name="uf_witness"
+                        placeholder="Selecione o estado"
+                        value={this.state.uf_witness}
+                        onChange={this.handleInputChange}
+                      >
+                        <option></option>
+                        {estados.UF.map((item, index) => {
+                          return <option key={index}>{item.nome}</option>
+                        })}
+                      </Input>
+                    </FormGroup>
+                  </div>
+                  <div style={{ width: '45%' }}>
+
+                    <FormGroup>
+                      <Label>Municipio</Label>
+                      <Input
+                        type="text"
+                        name="municipality_witness"
+                        placeholder='Digite o Municipio'
+                        required
+                        value={this.state.municipality_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+
+                  <div style={{ width: '80%' }}>
+                    <FormGroup>
+                      <Label>Endereço</Label>
+                      <Input
+                        type="text"
+                        name="address_witness"
+                        placeholder='Digite o Endereço'
+                        required
+                        value={this.state.address_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
+                  <FormGroup>
+                    <Label>Numero</Label>
+                    <Input
+                      type="text"
+                      name="number_address_witness"
+                      placeholder='Digite o número'
+                      required
+                      value={this.state.number_address_witness}
+                      onChange={this.handleInputChange}
+                    />
+                  </FormGroup>
+                </div>
 
 
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
 
-              <div style={{ width: '45%' }}>
-                <FormGroup>
-                  <Label>Complemento</Label>
-                  <Input
-                    type="text"
-                    name="complement_address_witness"
-                    placeholder='Digite o complemento'
-                    required
-                    value={this.state.complement_address_witness}
-                    onChange={this.handleInputChange}
-                  />
-                </FormGroup>
-              </div>
+                  <div style={{ width: '45%' }}>
+                    <FormGroup>
+                      <Label>Complemento</Label>
+                      <Input
+                        type="text"
+                        name="complement_address_witness"
+                        placeholder='Digite o complemento'
+                        required
+                        value={this.state.complement_address_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
 
-              <div style={{ width: '45%' }}>
-                <FormGroup>
-                  <Label>Bairro</Label>
-                  <Input
-                    type="text"
-                    name="district_address_witness"
-                    placeholder='Digite o Bairro'
-                    required
-                    value={this.state.district_address_witness}
-                    onChange={this.handleInputChange}
-                  />
-                </FormGroup>
-              </div>
-            </div>
+                  <div style={{ width: '45%' }}>
+                    <FormGroup>
+                      <Label>Bairro</Label>
+                      <Input
+                        type="text"
+                        name="district_address_witness"
+                        placeholder='Digite o Bairro'
+                        required
+                        value={this.state.district_address_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
 
-              <div style={{ width: '45%' }}>
-                <FormGroup>
-                  <Label>Telefone Celular</Label>
-                  <Input
-                    type="text"
-                    name="phone_witness"
-                    placeholder='(82) 99999-9999'
-                    required
-                    value={this.state.phone_witness}
-                    onChange={this.handleInputChange}
-                  />
-                </FormGroup>
-              </div>
+                  <div style={{ width: '45%' }}>
+                    <FormGroup>
+                      <Label>Telefone Celular</Label>
+                      <Input
+                        type="text"
+                        name="phone_witness"
+                        placeholder='(82) 99999-9999'
+                        required
+                        value={this.state.phone_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
 
-              <div style={{ width: '45%' }}>
-                <FormGroup>
-                  <Label>Email</Label>
-                  <Input
-                    type="text"
-                    name="email_witness"
-                    placeholder='seuemail@email.com'
-                    required
-                    value={this.state.email_witness}
-                    onChange={this.handleInputChange}
-                  />
-                </FormGroup>
-              </div>
-            </div>
+                  <div style={{ width: '45%' }}>
+                    <FormGroup>
+                      <Label>Email</Label>
+                      <Input
+                        type="text"
+                        name="email_witness"
+                        placeholder='seuemail@email.com'
+                        required
+                        value={this.state.email_witness}
+                        onChange={this.handleInputChange}
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', marginBottom: '5%' }}>
-              <div style={{ marginRight: '5%' }}>
-                <Button
-                  color="primary"
-                  onClick={this.save}
-                >
-                  Adicionar Testemunha
-                </Button>
-              </div>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', marginBottom: '5%' }}>
+                  <div style={{ marginRight: '5%' }}>
+                    <Button
+                      color="primary"
+                      onClick={this.save}
+                    >
+                      Adicionar Testemunha
+                    </Button>
+                  </div>
 
-              <Button color="primary" onClick={this.resetInput}>Limpar</Button>
-            </div>
+                  <Button color="primary" onClick={this.resetInput}>Limpar</Button>
+                </div>
+              </>
+            }
           </>
         }
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button color="secondary" style={{ marginRight: 10 }} onClick={() => this.props.handlePrevForm()}>Voltar</Button>
-          {getUser().permissions === "all" &&
+          {(getUser().permissions === "all" || !this.props.disabled) &&
             <Button color="primary" onClick={() => this.handleForm()}>Próximo</Button>
           }
         </div>

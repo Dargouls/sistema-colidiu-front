@@ -21,7 +21,7 @@ class Welcome extends Component {
                         </p>
 
                         <p style={{ fontSize: 15 }}>
-                            2º Passo - Pague a GR e receba e-mail de confirmação.
+                            2º Passo - Validação do registro e receber email de confirmação.
                         </p>
 
                         <p style={{ fontSize: 15 }}>
