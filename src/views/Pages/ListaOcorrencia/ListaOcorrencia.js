@@ -9,17 +9,23 @@ import {
     Form,
     Row,
     Spinner,
-    Table
+    Label,
+    Table,
+    Input,
+    FormGroup
 } from "reactstrap";
-import { irect, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
 
 class Validation extends Component {
     constructor(props) {
         super(props);
+        this.filterOcccurences = this.filterOcccurences.bind(this);
         this.state = {
             occurrences: [],
+            filterOccurences: [],
+            selectOccurence: "Pendente",
             loading: false
         }
     }
@@ -29,6 +35,8 @@ class Validation extends Component {
         try {
             const { data } = await api.get("/occurrences")
             toast.success("Lista de ocorrências carregadas com sucesso!")
+            console.log(data.occurrences)
+            this.filterOcccurences(this.state.selectOccurence, data.occurrences)
             this.setState({ occurrences: data.occurrences })
             this.setState({ loading: true })
         } catch (error) {
@@ -37,9 +45,19 @@ class Validation extends Component {
         }
     }
 
+    filterOcccurences(select, data) {
+        let newList = data.filter((item) => {
+            if (item.status === select) {
+                return item;
+            }
+        })
+        console.log('filter:', newList)
+        this.setState({ filterOccurences: newList })
+    }
+
     componentDidMount() {
         //Requisição para pegar todas as ocorrências
-        this.handleGetOcurrences()
+        this.handleGetOcurrences();
     }
 
     render() {
@@ -51,8 +69,24 @@ class Validation extends Component {
                             <CardHeader>
                                 <i className="fa fa-edit"></i>Lista de ocorrências
                             </CardHeader>
-                            {/* <Collapse isOpen={this.state.collapse} id="collapseExample"> */}
                             <CardBody>
+                                <FormGroup>
+                                    <Label>Selecione um status das ocorrências:</Label>
+                                    <Input
+                                        name="select_occurrence"
+                                        type="select"
+                                        onChange={(e) => {
+                                            this.setState({ selectOccurence: e.target.value })
+                                            this.filterOcccurences(e.target.value, this.state.occurrences)
+                                        }}
+                                        value={this.state.selectOccurence}
+                                    >
+                                        <option value="Pendente">Pendente</option>
+                                        <option value="Aprovado">Aprovado</option>
+                                        <option value="Reprovado">Reprovado</option>
+                                    </Input>
+                                </FormGroup>
+
                                 <Table
                                     hover
                                     responsive
@@ -62,22 +96,28 @@ class Validation extends Component {
                                             <th>#</th>
                                             <th>Nome</th>
                                             <th>Status</th>
-                                            <th>Ação</th>
+                                            <th style={{textAlign: 'center'}}>Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.occurrences && this.state.occurrences.map((item, index) => (
+                                        {this.state.filterOccurences && this.state.filterOccurences.map((item, index) => (
                                             <tr key={index}>
-                                                <th scope="row">{item.id}</th>
+                                                <th scope="row">{index + 1}</th>
                                                 <td>{item.name}</td>
                                                 <td>{item.status}</td>
-                                                <td>
+                                                <td style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                                     <Link to={`/ocorrencia/${item.id}`}>
-                                                        <Button>Validar</Button>
+                                                        <Button>{item.status === "Pendente" ? "Validar" : "Editar" }</Button>
+                                                        {item.status === "Aprovado" && 
+                                                            <Button style={{ marginLeft: 10 }}>Imprimir</Button>
+                                                        }
                                                     </Link>
                                                 </td>
                                             </tr>
                                         ))}
+                                        {(this.state.occurrences && this.state.filterOccurences.length === 0) &&
+                                            <span>Nenhum ocorrencia encontrada!</span>
+                                        }
                                     </tbody>
                                 </Table>
                             </CardBody>

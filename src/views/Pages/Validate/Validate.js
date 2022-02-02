@@ -19,7 +19,6 @@ import {
     Confirmation
 } from "../RegisterOcorrencia/Cards/index";
 
-
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
 
@@ -31,7 +30,7 @@ class Validation extends Component {
         this.handlePrevForm = this.handlePrevForm.bind(this);
         this.state = {
             forms: 1,
-            occurrence: {}
+            occurrence: {},
         }
     }
 
@@ -105,7 +104,6 @@ class Validation extends Component {
         this.handleGetOcurrence()
     }
     render() {
-        
         return (
             <div className="animated fadeIn">
                 <Row>
@@ -116,6 +114,7 @@ class Validation extends Component {
                             </CardHeader>
                             <CardBody>
                                 <Form className="form-horizontal">
+
                                     {this.state.forms === 1 && (
                                         <Accident
                                             state={this.state.occurrence}
