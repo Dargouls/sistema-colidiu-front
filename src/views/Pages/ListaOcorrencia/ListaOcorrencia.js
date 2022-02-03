@@ -18,10 +18,13 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
 
+import { generatePDF } from '../../../utils/pdf'
+
 class Validation extends Component {
     constructor(props) {
         super(props);
         this.filterOcccurences = this.filterOcccurences.bind(this);
+        this.printOccurrence = this.printOccurrence.bind(this);
         this.state = {
             occurrences: [],
             filterOccurences: [],
@@ -53,6 +56,11 @@ class Validation extends Component {
         })
         console.log('filter:', newList)
         this.setState({ filterOccurences: newList })
+    }
+
+    printOccurrence(occurrence) {
+        console.log('occurrence:', occurrence)
+        generatePDF(occurrence);
     }
 
     componentDidMount() {
@@ -96,7 +104,7 @@ class Validation extends Component {
                                             <th>#</th>
                                             <th>Nome</th>
                                             <th>Status</th>
-                                            <th style={{textAlign: 'center'}}>Ação</th>
+                                            <th style={{ textAlign: 'center' }}>Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -105,13 +113,18 @@ class Validation extends Component {
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.name}</td>
                                                 <td>{item.status}</td>
-                                                <td style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                                <td style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                     <Link to={`/ocorrencia/${item.id}`}>
-                                                        <Button>{item.status === "Pendente" ? "Validar" : "Editar" }</Button>
-                                                        {item.status === "Aprovado" && 
-                                                            <Button style={{ marginLeft: 10 }}>Imprimir</Button>
-                                                        }
+                                                        <Button>{item.status === "Pendente" ? "Validar" : "Editar"}</Button>
                                                     </Link>
+                                                    {(item.status === "Aprovado" || item.status === "Reprovado") &&
+                                                        <Button
+                                                            style={{ marginLeft: 10 }}
+                                                            onClick={() => this.printOccurrence(item)}
+                                                        >
+                                                            Imprimir
+                                                        </Button>
+                                                    }
                                                 </td>
                                             </tr>
                                         ))}
