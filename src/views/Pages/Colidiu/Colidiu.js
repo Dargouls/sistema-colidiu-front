@@ -22,6 +22,7 @@ import { api } from "../../../services/api";
 import { toast } from "react-toastify";
 import pdf from '../../../assets/pdf/sample.pdf'
 import { getUser } from '../../../services/auth';
+import { generatePDF } from '../../../utils/pdf'
 
 class Colidiu extends Component {
   constructor(props) {
@@ -157,12 +158,14 @@ class Colidiu extends Component {
                                   <td>{item.type_vehicle}</td>
                                   <td>{item.plate}</td>
                                   <td>{item.status}</td>
-                                  <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                      <Link to={`/ocorrencia/${item.id}`}>
-                                        <Button style={{marginRight: 10}}>Visualizar</Button>
-                                      </Link>
-                                      {/* <Button style={{ marginRight: 10 }}>Visualizar</Button> */}
-                                      <Button onClick={() => this.handleViewPDF()}>Imprimir</Button>
+                                  <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Link to={`/ocorrencia/${item.id}`}>
+                                      <Button style={{ marginRight: 10 }}>Visualizar</Button>
+                                    </Link>
+                                    {/* <Button style={{ marginRight: 10 }}>Visualizar</Button> */}
+                                    {item.status !== "Pendente" &&
+                                      <Button onClick={() => generatePDF(item)}>Imprimir</Button>
+                                    }
                                   </td>
                                 </tr>
                               ))}
