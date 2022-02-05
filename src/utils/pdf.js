@@ -1,6 +1,7 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import logo from "../assets/img/brand/logo-smtt.png"
+import logo_alagoas from "../assets/img/brand/logo-alagoas.png"
 
 function getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
@@ -33,51 +34,93 @@ export async function generatePDF(occurrence) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const details = [
+        //Header
         {
-            image: await getBase64ImageFromURL(logo),
-            width: 50,
-            height: 50,
-            alignment: "center",
+            table: {
+                widths: ['auto', '*', "auto"],
+                body: [
+                    [
+                        {
+                            image: await getBase64ImageFromURL(logo),
+                            width: 40,
+                            height: 40,
+                            alignment: "center",
+                        },
+                        {
+                            alignment: "center",
+                            fontSize: 12,
+                            text: [
+                                {
+                                    text: "SMTT\n",
+                                    bold: true
+                                },
+                                {
+                                    text: "Superintendência Municipal de Transportes e Trânsito"
+                                },
+                            ]
+                        },
+                        {
+                            image: await getBase64ImageFromURL(logo_alagoas),
+                            width: 40,
+                            height: 40,
+                            alignment: "center",
+                        },
+                    ],
+                ]
+            }
         },
+        //Title
         {
-            text: "Boletim de Acidente de Trânsito",
-            bold: true,
-            fontSize: 14,
-            alignment: "center",
-            margin: [0, 15, 0, 20],
+            columns: [
+                { width: '*', text: '' },
+                {
+                    width: 'auto',
+                    table: {
+                        // headerRows: 1,
+                        widths: ["auto"],
+                        body: [
+                            [
+                                {
+                                    text: "BOLETIM DE ACIDENTE DE TRÂNSITO",
+                                    bold: true,
+                                    fontSize: 16,
+                                },
+                            ],
+                            [''],
+                        ],
+                    },
+                    margin: [0, 20, 0, 10],
+                    layout: 'headerLineOnly'
+                },
+                { width: '*', text: '' },
+            ]
         },
+        //Status
         {
-            text: [
-                {text: "Status da ocorrência: ", bold: true},
-                {text: `${occurrence.status}`, bold: true, color: occurrence.status === "Aprovado" ? "green" : "red" }
-            ],
-            margin: [0,0,0,20]
-        },
-        //Dados pessoais
-        {
-            text: "Dados pessoais:",
-            bold: true,
-            fontSize: 13
+            table: {
+                headerRows: 1,
+                widths: ["*"],
+                body: [
+                    [
+                        {
+                            text: "BOLETIM",
+                            bold: true,
+                        },
+                    ],
+                    [''],
+                ],
+            },
+            alignment: "left",
+            layout: 'headerLineOnly'
         },
         {
             alignment: "justify",
             columns: [
                 {
-                    text: `Nome: ${occurrence.name}`,
-                },
-                {
-                    text: `Sexo: ${occurrence.sex}`,
-                },
-            ],
-        },
-        {
-            alignment: "justify",
-            columns: [
-                {
-                    text: `Data de Nascimento: ${new Date(occurrence.birth_date).toLocaleDateString()}`,
-                },
-                {
-                    text: `RG: ${occurrence.rg}`,
+                    text: [
+                        { text: `Status: `, bold: true },
+                        { text: `${occurrence.status}`, color: "green", bold: true }
+                    ],
                 },
             ],
         },
@@ -85,10 +128,40 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `CPF: ${occurrence.cpf}`,
-                },
+                    text: [
+                        { text: `Data de impressão: `, bold: true },
+                        { text: `${new Date().toLocaleDateString()}` }
+                    ],
+                }
+            ],
+        },
+        {
+            table: {
+                headerRows: 1,
+                widths: ["*"],
+                body: [
+                    [
+                        {
+                            text: "NOTICIANTE",
+                            bold: true,
+                        },
+                    ],
+                    [''],
+                ],
+            },
+            alignment: "left",
+            margin: [0, 10, 0, 0],
+            layout: 'headerLineOnly'
+        },
+        {
+            alignment: "justify",
+            columns: [
                 {
-                    text: `CNH: ${occurrence.cnh}`,
+                    text: [
+                        { text: "Nome: ", bold: true },
+                        `${occurrence.name}`
+                    ]
+
                 },
             ],
         },
@@ -96,36 +169,115 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `Endereço: ${occurrence.address}, ${occurrence.number_address}, ${occurrence.district},  ${occurrence.city}-${occurrence.uf} `,
+                    text: [
+                        { text: "Data de nascimento: ", bold: true },
+                        `${new Date(String(occurrence.birth_date)).toLocaleDateString()}`
+                    ]
+                },
+                {
+                    text: [
+                        { text: "Sexo: ", bold: true },
+                        `${occurrence.sex}`
+                    ]
                 },
             ],
         },
         {
             alignment: "justify",
-            margin: [0, 0, 0, 20],
             columns: [
                 {
-                    text: `Email: ${occurrence.email}`,
+                    text: [
+                        { text: "CPF: ", bold: true },
+                        `${occurrence.cpf}`
+                    ]
                 },
                 {
-                    text: `Telefone: ${occurrence.phone}`,
+                    text: [
+                        { text: "RG: ", bold: true },
+                        `${occurrence.rg}`
+                    ]
+                },
+            ],
+        },
+        {
+            alignment: "justify",
+            columns: [
+                {
+                    text: [
+                        {
+                            text: `Endereço: `,
+                            bold: true
+                        },
+                        `${occurrence.address}, ${occurrence.number_address}, ${occurrence.district},  ${occurrence.city}-${occurrence.uf}`
+                    ]
+                },
+            ],
+        },
+        {
+            alignment: "justify",
+            columns: [
+                {
+                    text: [
+                        { text: "CNH: ", bold: true },
+                        `${occurrence.cnh}`,
+                    ]
+                },
+            ],
+        },
+        {
+            alignment: "justify",
+            columns: [
+                {
+                    text: [
+                        { text: "Email: ", bold: true },
+                        `${occurrence.email}`,
+                    ]
+                },
+
+                {
+                    text: [
+
+                        { text: "Telefone: ", bold: true },
+                        `${occurrence.phone}`,
+                    ]
                 },
             ],
         },
         //Dados do veículo
         {
-            text: "Dados do veículo:",
-            bold: true,
-            fontSize: 13,
+            table: {
+                headerRows: 1,
+                widths: ["*"],
+                body: [
+                    [
+                        {
+                            text: "VEÍCULO",
+                            bold: true,
+                        },
+                    ],
+                    [''],
+                ],
+            },
+            alignment: "left",
+            margin: [0, 10, 0, 0],
+            layout: 'headerLineOnly'
         },
         {
             alignment: "justify",
             columns: [
                 {
-                    text: `Tipo do veículo: ${occurrence.type_vehicle}`,
+                    text: [
+
+                        { text: "Tipo do veículo: ", bold: true },
+                        `${occurrence.type_vehicle}`,
+                    ]
                 },
                 {
-                    text: `Número de ocupantes: ${occurrence.number_occupants}`,
+                    text: [
+
+                        { text: "Número de ocupantes:", bold: true },
+                        `${occurrence.number_occupants}`,
+                    ]
                 },
             ],
         },
@@ -133,10 +285,18 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `Placa: ${occurrence.plate}`,
+                    text: [
+
+                        { text: "Placa: ", bold: true },
+                        `${occurrence.plate}`,
+                    ],
                 },
                 {
-                    text: `Renavam: ${occurrence.renavam}`,
+                    text: [
+
+                        { text: "Renavam: ", bold: true },
+                        `${occurrence.renavam}`,
+                    ],
                 },
             ],
         },
@@ -144,7 +304,10 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `Veículo no momento do ato: ${occurrence.state_vehicle}`,
+                    text: [
+                        { text: "Veículo no momento do ato: ", bold: true },
+                        `${occurrence.state_vehicle}`,
+                    ],
                 },
             ],
         },
@@ -152,7 +315,10 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `Categoria: ${occurrence.category_vehicle}`,
+                    text: [
+                        { text: "Categoria: ", bold: true },
+                        `${occurrence.category_vehicle}`,
+                    ],
                 },
             ],
         },
@@ -160,36 +326,60 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `Possui seguro: ${occurrence.safe_vehicle}`,
+                    text: [
+                        { text: "Possui seguro: ", bold: true },
+                        `${occurrence.safe_vehicle}`,
+                    ],
                 },
+
                 {
-                    text: `Posssui película: ${occurrence.pellicle}`,
+                    text: [
+                        { text: "Posssui película: ", bold: true },
+                        `${occurrence.pellicle}`,
+                    ],
                 },
             ],
         },
         {
             alignment: "justify",
-            margin: [0, 0, 0, 20],
             columns: [
                 {
-                    text: `Acionou o Airbag: ${occurrence.airbag}`,
+                    text: [
+                        { text: "Acionou o Airbag: ", bold: true },
+                        `${occurrence.airbag}`,
+                    ],
                 },
+
             ],
         },
         //Dados da ocorrencia
         {
-            text: "Dados da ocorrencia:",
-            bold: true,
-            fontSize: 13
+            table: {
+                headerRows: 1,
+                widths: ["*"],
+                body: [
+                    [
+                        {
+                            text: "OCORRÊNCIA",
+                            bold: true,
+                        },
+                    ],
+                    [''],
+                ],
+            },
+            alignment: "left",
+            margin: [0, 10, 0, 0],
+            layout: 'headerLineOnly'
         },
+        
         {
             alignment: "justify",
             columns: [
                 {
-                    text: `Cidade: ${occurrence.city}`,
-                },
-                {
-                    text: `Tipo de acidente: ${occurrence.type_accident}`,
+                    text: [
+                        {text: "Cidade: ", bold: true},
+                        `${occurrence.city}`
+                    ],
                 },
             ],
         },
@@ -197,10 +387,27 @@ export async function generatePDF(occurrence) {
             alignment: "justify",
             columns: [
                 {
-                    text: `Zona: ${occurrence.zone}`,
+                    text: [
+                        {text: "Tipo de acidente: ", bold: true},
+                        `${occurrence.type_accident}`
+                    ],
+                },
+            ],
+        },
+        {
+            alignment: "justify",
+            columns: [
+                {
+                    text: [
+                        {text: "Zona: ", bold: true},
+                        `${occurrence.zone}`
+                    ],
                 },
                 {
-                    text: `Feriado: ${occurrence.feriado}`,
+                    text: [
+                        {text: "Feriado: ", bold: true},
+                        `${occurrence.feriado}`
+                    ],
                 },
             ],
         },
@@ -210,9 +417,9 @@ export async function generatePDF(occurrence) {
     const docDefinition = {
         pageSize: "A4",
         defaultStyle: {
-            fontSize: 12,
+            fontSize: 11,
         },
-        pageMargins: [80, 20, 80, 30],
+        pageMargins: [45, 20, 45, 30],
         content: [details],
         footer: (currentPage, pageCount) => {
             return {
@@ -224,8 +431,5 @@ export async function generatePDF(occurrence) {
             };
         },
     };
-
-
-
     pdfMake.createPdf(docDefinition).open();
 }
