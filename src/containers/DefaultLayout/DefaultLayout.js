@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { irect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
-import {getUser} from '../../services/auth';
+import { getUser } from '../../services/auth';
 
 
 import {
@@ -39,7 +39,7 @@ class DefaultLayout extends Component {
       items: navigation.items,
     };
   }
-  
+
   signOut(e) {
     e.preventDefault()
     logout()
@@ -48,11 +48,20 @@ class DefaultLayout extends Component {
   componentDidMount() {
     const user = getUser()
     if (user?.permissions === "all") {
-      this.setState({items: [{
-        name: "Validar ocorrência",
-        url: "/ocorrencias",
-        icon: "icon-magnifier-add",
-      }]})
+      this.setState({
+        items: [
+          {
+            name: "Dashboard",
+            url: "/dashboard",
+            icon: "icon-magnifier-add",
+          },
+          {
+            name: "Validar ocorrência",
+            url: "/ocorrencias",
+            icon: "icon-magnifier-add",
+          },
+        ]
+      })
     }
   }
   render() {
@@ -68,7 +77,7 @@ class DefaultLayout extends Component {
             <AppSidebarHeader style={{ background: '#263238' }} />
             <AppSidebarForm style={{ background: '#263238' }} />
             <Suspense style={{ background: '#263238' }}>
-              <AppSidebarNav navConfig={{items: this.state.items}} {...this.props} router={router} style={{ backgroundColor: "#263238" }} />
+              <AppSidebarNav navConfig={{ items: this.state.items }} {...this.props} router={router} style={{ backgroundColor: "#263238" }} />
             </Suspense>
             <AppSidebarFooter style={{ backgroundColor: "#263238" }} />
             <AppSidebarMinimizer style={{ background: '#263238' }} />

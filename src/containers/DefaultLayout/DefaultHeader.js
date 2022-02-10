@@ -16,7 +16,6 @@ const defaultProps = {};
 class DefaultHeader extends Component {
   render() {
     const user = getUser()
-    // console.log('user header:', user)
     const { children, ...attributes } = this.props;
 
     return (
