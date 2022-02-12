@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import ReactDOM from 'react-dom';
 import {
   Button,
@@ -17,6 +18,7 @@ import { Column } from '@ant-design/plots';
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
 import axios from "axios"
+import Map from '../../../components/Map'
 
 const teste = [
   { "month": "JAN", "type": "Com envolvidos", "value": 14500 },
@@ -31,6 +33,8 @@ const teste = [
   { "month": "NOV", "type": "Sem envolvidos", "value": 16000 },
   { "month": "DEZ", "type": "Sem envolvidos", "value": 6000 },
 ]
+const position = [-9.6170575,-35.7725202]
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -74,25 +78,30 @@ class Dashboard extends Component {
       columnStyle: {
         radius: [20, 20, 0, 0],
       },
-      color:['#FBC210','#263238'],
+      color: ['#FBC210', '#263238'],
     }
     return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col xs="12">
-            <Card>
-              <CardHeader>
-                <i className="fa fa-edit"></i>Dashboard
-              </CardHeader>
-              {/* <Collapse isOpen={this.state.collapse} id="collapseExample"> */}
-                <CardBody>
-                  <Column {...config} />
-                </CardBody>
-              {/* </Collapse> */}
-            </Card>
-          </Col>
-        </Row>
-      </div>
+        <Map
+          position={position}
+          zoom={3}
+        />
+      // <div className="animated fadeIn">
+      //   <Row>
+      //     <Col xs="12">
+      //       <Card>
+      //         <CardHeader>
+      //           <i className="fa fa-edit"></i>Dashboard
+      //         </CardHeader>
+      //         {/* <Collapse isOpen={this.state.collapse} id="collapseExample"> */}
+      //         <CardBody>
+      //           {/* <Column {...config} /> */}
+
+      //         </CardBody>
+      //         {/* </Collapse> */}
+      //       </Card>
+      //     </Col>
+      //   </Row>
+      // </div>
     );
   }
 }
