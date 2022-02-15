@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { getUser } from '../../../../../services/auth';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+import Map from '../../../../../components/Map'
 
 class Accident extends Component {
   constructor(props) {
@@ -82,6 +82,9 @@ class Accident extends Component {
             value={this.props.state.city}
             onChange={this.props.onChange}
           />
+        </FormGroup>
+        <FormGroup>
+          <Map />
         </FormGroup>
 
         <FormGroup>
