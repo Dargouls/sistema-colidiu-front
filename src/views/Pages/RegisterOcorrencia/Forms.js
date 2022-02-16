@@ -28,6 +28,7 @@ class Forms extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputFile = this.handleInputFile.bind(this);
+    this.handleSetAddress = this.handleSetAddress.bind(this);
     this.handleNextForm = this.handleNextForm.bind(this);
     this.handlePrevForm = this.handlePrevForm.bind(this);
     this.handleAddVehicle = this.handleAddVehicle.bind(this);
@@ -41,7 +42,9 @@ class Forms extends Component {
       timeout: 300,
       forms: 1,
       nextPage: false,
-      city: "Maceió",
+      address_occurrence: "",
+      lat_occurrence: "",
+      lng_occurrence: "",
       type_accident: "",
       zone: "",
       feriado: "",
@@ -80,7 +83,9 @@ class Forms extends Component {
     console.log("imgs:", this.state.images);
 
     const data = new FormData();
-    data.append("city", this.state.city);
+    data.append("address_occurrence", this.state.address_occurrence);
+    data.append("lat_occurrence", this.state.lat_occurrence);
+    data.append("lng_occurrence", this.state.lng_occurrence);
     data.append("type_accident", this.state.type_accident);
     data.append("zone", this.state.zone);
     data.append("feriado", this.state.feriado);
@@ -147,9 +152,21 @@ class Forms extends Component {
       [e.target.name]: e.target.value,
     });
   }
+  handleSetAddress(address) {
+    console.log("address:", address)
+    this.setState({
+      address_occurrence: address.address_occurrence,
+    });
+    this.setState({
+      lat_occurrence: address.lat,
+    });
+    this.setState({
+      lng_occurrence: address.lng
+    });
+  }
 
   handleInputFile(value) {
-    console.log("Images", value.target.files);
+    // console.log("Images", value.target.files);
     this.setState({ images: value.target.files });
   }
 
@@ -168,7 +185,7 @@ class Forms extends Component {
       return { forms: prevState.forms + 1 };
     });
   }
-  
+
   handlePrevForm() {
     if (this.state.forms > 1) {
       this.setState({ forms: this.state.forms - 1 });
@@ -198,6 +215,7 @@ class Forms extends Component {
                       <Accident
                         state={this.state}
                         onChange={(e) => this.handleInputChange(e)}
+                        onChangeAddress={(address) => this.handleSetAddress(address)}
                         handleInputFile={(e) => this.handleInputFile(e)}
                         handleNextForm={this.handleNextForm}
                         handlePrevForm={this.handlePrevForm}

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { GoogleMap, LoadScript, StandaloneSearchBox, useGoogleMap, Marker } from '@react-google-maps/api';
 import "./styles.css";
+import Geocode from "react-geocode";
 
 class Map extends Component {
     constructor(props) {
         super(props);
+        Geocode.setApiKey("AIzaSyCvHYx39Zfk2YWp6lWWMxok6fDqtHiM1Pc");
         this.state = {
             searchBox: null,
             map: {},
@@ -20,15 +22,36 @@ class Map extends Component {
     }
     onPlacesChanged() {
         const places = this.state.searchBox.getPlaces();
-        console.log("places", places)
         const place = places[0];
-        console.log("place", place)
         const location = {
-            lat: place.geometry.location.lat() || 0,
-            lng: place.geometry.location.lng() || 0,
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
         }
-        console.log("location", location)
+        const address={
+            address_occurrence: place.formatted_address,
+            lat_occurence: String(location.lat),
+            lng_occurence: String(location.lng),
+        }
+        this.props.onChange(address);
         this.setState({ map: location });
+    }
+
+    onGeoLocation(lat, lng) {
+        Geocode
+            .fromLatLng(lat, lng)
+            .then((response) => {
+                const address = response.results[0].formatted_address;
+                const newAddress={
+                    address_occurrence: address,
+                    lat_occurence: lat,
+                    lng_occurence: lng,
+                }
+                this.props.onChange(newAddress);
+            },
+                (error) => {
+                    console.error(error);
+                }
+            );
     }
 
     render() {
@@ -40,6 +63,7 @@ class Map extends Component {
                 >
                     <GoogleMap
                         onLoad={() => this.onLoadMap()}
+                        // yesIWantToUseGoogleMapApiInternals
                         mapContainerStyle={{
                             width: '850px',
                             height: "400px",
@@ -71,18 +95,12 @@ class Map extends Component {
                                     const lat = latLng.lat();
                                     const lng = latLng.lng();
 
+                                    this.onGeoLocation(lat, lng)
+
+
                                     console.log(`Cords: ${lat} || ${lng}`)
+                                    // console.log("places:", places)
                                 }}
-                            // onDraggableChanged={(e) => console.log(e)}
-                            // onClick={(e) => console.log(e)}
-                            // onDrag={(e) => console.log(e.latLng)}
-                            // onPositionChanged={(e) => console.log("position:", e)}
-                            // options={{ 
-                            //     label: {
-                            //         text: "teste",
-                            //         className: "Teste"
-                            //     }
-                            // }}
                             />
                         </div>
                     </GoogleMap>

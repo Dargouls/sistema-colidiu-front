@@ -5,6 +5,7 @@ import { getUser } from '../../../../../services/auth';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Map from '../../../../../components/Map'
+import "./styles.css"
 
 class Accident extends Component {
   constructor(props) {
@@ -71,20 +72,20 @@ class Accident extends Component {
     return (
       <>
         <FormGroup>
-          <Label htmlFor="name">Cidade</Label>
-          <Input
-            name="city"
-            type="text"
-            id="city_input"
-            placeholder="Digite o nome da cidade"
-            required
-            disabled
-            value={this.props.state.city}
-            onChange={this.props.onChange}
+          <Label>Endereço da ocorrência</Label>
+          <Map
+            onChange={this.props.onChangeAddress}
           />
         </FormGroup>
-        <FormGroup>
-          <Map />
+        <FormGroup className="formItem">
+          <Label>Endereço</Label>
+          <Input
+            name="address_occurrence"
+            type="text"
+            required
+            disabled
+            value={this.props.state.address_occurrence}
+          />
         </FormGroup>
 
         <FormGroup>
