@@ -80,7 +80,10 @@ class Forms extends Component {
   }
 
   async sendRegister() {
-    console.log("imgs:", this.state.images);
+
+    console.log("enviando dados...");
+    console.log("lat:", this.state.lat_occurrence);
+    console.log("lng:", this.state.lng_occurrence);
 
     const data = new FormData();
     data.append("address_occurrence", this.state.address_occurrence);
@@ -156,12 +159,8 @@ class Forms extends Component {
     console.log("address:", address)
     this.setState({
       address_occurrence: address.address_occurrence,
-    });
-    this.setState({
-      lat_occurrence: address.lat,
-    });
-    this.setState({
-      lng_occurrence: address.lng
+      lat_occurrence: address.lat_occurrence,
+      lng_occurrence: address.lng_occurrence
     });
   }
 

@@ -13,6 +13,7 @@ class Map extends Component {
 
         };
     }
+
     onLoad(search) {
         console.log("search:", search)
         this.setState({ searchBox: search })
@@ -27,10 +28,10 @@ class Map extends Component {
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng(),
         }
-        const address={
+        const address = {
             address_occurrence: place.formatted_address,
-            lat_occurence: String(location.lat),
-            lng_occurence: String(location.lng),
+            lat_occurrence: String(location.lat),
+            lng_occurrence: String(location.lng),
         }
         this.props.onChange(address);
         this.setState({ map: location });
@@ -41,7 +42,7 @@ class Map extends Component {
             .fromLatLng(lat, lng)
             .then((response) => {
                 const address = response.results[0].formatted_address;
-                const newAddress={
+                const newAddress = {
                     address_occurrence: address,
                     lat_occurence: lat,
                     lng_occurence: lng,

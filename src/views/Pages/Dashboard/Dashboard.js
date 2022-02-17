@@ -63,9 +63,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.handleSearchOccurrence();
-
   }
-
 
   render() {
 
@@ -81,27 +79,24 @@ class Dashboard extends Component {
       color: ['#FBC210', '#263238'],
     }
     return (
-        <Map
-          position={position}
-          zoom={3}
-        />
-      // <div className="animated fadeIn">
-      //   <Row>
-      //     <Col xs="12">
-      //       <Card>
-      //         <CardHeader>
-      //           <i className="fa fa-edit"></i>Dashboard
-      //         </CardHeader>
-      //         {/* <Collapse isOpen={this.state.collapse} id="collapseExample"> */}
-      //         <CardBody>
-      //           {/* <Column {...config} /> */}
+        
+      <div className="animated fadeIn">
+        <Row>
+          <Col xs="12">
+            <Card>
+              <CardHeader>
+                <i className="fa fa-edit"></i>Dashboard
+              </CardHeader>
+              {/* <Collapse isOpen={this.state.collapse} id="collapseExample"> */}
+              <CardBody>
+                <Column {...config} />
 
-      //         </CardBody>
-      //         {/* </Collapse> */}
-      //       </Card>
-      //     </Col>
-      //   </Row>
-      // </div>
+              </CardBody>
+              {/* </Collapse> */}
+            </Card>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

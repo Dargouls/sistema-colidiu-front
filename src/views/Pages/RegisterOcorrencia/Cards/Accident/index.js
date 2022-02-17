@@ -71,12 +71,14 @@ class Accident extends Component {
   render() {
     return (
       <>
+          {!this.props.disabled &&
         <FormGroup>
           <Label>Endereço da ocorrência</Label>
-          <Map
-            onChange={this.props.onChangeAddress}
-          />
+            <Map
+              onChange={this.props.onChangeAddress}
+            />
         </FormGroup>
+          }
         <FormGroup className="formItem">
           <Label>Endereço</Label>
           <Input
