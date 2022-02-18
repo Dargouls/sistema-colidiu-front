@@ -45,15 +45,15 @@ class Confirmation extends Component {
             </Label>
 
             <p>
-              Antes de clicar em concluir confira todos os dados cadastrados neste
-              BATEU navegando pelas ABAS/JANELAS anteriores. Caso necessário,
+              Antes de clicar em concluir confira todos os dados cadastrados 
+              navegando pelas ABAS/JANELAS anteriores. Caso necessário,
               realize as alterações ou complementações necessárias.
             </p>
 
             <p>
               Após a conferência dos dados cadastrados ASSINALE a confirmação da
-              veracidade das informações prestadas e clique em CONCLUIR para emitir
-              a Guia de Recolhimento (GR).
+              veracidade das informações prestadas e clique em CONCLUIR para cadastrar
+              sua ocorrência.
             </p>
 
             <div style={{ color: "red", display: "flex", flexDirection: "column" }}>

@@ -194,12 +194,13 @@ class Vehicle extends Component {
             <option></option>
             <option>Automóvel</option>
             <option>Bicicleta</option>
-            <option>Caminhão</option>
-            <option>Charrete</option>
+            {/* <option>Caminhão</option> */}
+            {/* <option>Charrete</option> */}
             <option>Motocicleta</option>
-            <option>Patinete</option>
-            <option>Patins</option>
+            {/* <option>Patinete</option> */}
+            {/* <option>Patins</option> */}
             <option>Ônibus</option>
+            <option>Outros</option>
           </Input>
 
           <FormFeedback>Preencha o campo!</FormFeedback>
@@ -283,6 +284,7 @@ class Vehicle extends Component {
 
           <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
+
         <FormGroup>
           <Label>Placa</Label>
           <Input
@@ -350,6 +352,7 @@ class Vehicle extends Component {
 
           <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
+
 
         <Label>
           <span style={{ fontSize: 20, fontWeight: "bold" }}>Seus dados</span>
