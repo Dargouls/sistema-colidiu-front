@@ -25,6 +25,10 @@ class Accident extends Component {
     let data = this.props.state;
 
     //adicioanr os dados
+    if (data.address_occurrence === "") {
+      this.handleWarning("address_occurrence");
+      return;
+    }
     if (data.type_accident === "") {
       this.handleWarning("type_accident");
       return;
@@ -43,6 +47,7 @@ class Accident extends Component {
 
   handleWarning(type) {
     const names = {
+      address_occurrence: "Endereço da ocorrência",
       type_accident: "Tipo de acidente",
       zone: "Zona",
       feriado: "Feriado",

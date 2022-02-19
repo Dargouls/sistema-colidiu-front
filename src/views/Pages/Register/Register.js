@@ -26,7 +26,7 @@ import {
   resetCamposUsuario,
   changeNomeUsuario,
   changeCpfUsuario,
-  changeRgUsuario,
+  // changeRgUsuario,
   changeEmailUsuario,
   changeSenhaUsuario,
   changeConfirmarSenhaUsuario,
@@ -44,7 +44,7 @@ class Register extends Component {
       user: {
         cpf: "",
         nome: "",
-        rg: "",
+        // rg: "",
         email: "",
         senha: "",
         confirmarSenha: "",
@@ -53,7 +53,7 @@ class Register extends Component {
       validation: {
         cpf: "",
         nome: "",
-        rg: "",
+        // rg: "",
         email: "",
         senha: "",
         confirmarSenha: "",
@@ -107,14 +107,14 @@ class Register extends Component {
     if (this.state.user.senha !== this.state.user.confirmarSenha) {
       return toast.warning("Senhas digitadas não são correspondentes!")
     }
-    const { cpf, nome, rg, email, senha, confirmarSenha, telefone } =
+    const { cpf, nome, email, senha, confirmarSenha, telefone } =
       this.state.user;
 
     this.setState({ loading: !this.state.loading })
     let register = await this.props.registerUser(
       nome,
       cpf,
-      rg,
+      "",
       email,
       senha,
       confirmarSenha,
@@ -241,7 +241,7 @@ class Register extends Component {
                       />
                       <FormFeedback>{this.props.msgEmailInvalid}</FormFeedback>
                     </InputGroup>
-                    <InputGroup className="mb-3">
+                    {/* <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-user"></i>
@@ -260,7 +260,7 @@ class Register extends Component {
                         valid={this.state.validation.rg === "sucess"}
                       />
                       <FormFeedback>{this.props.msgRgInvalid}</FormFeedback>
-                    </InputGroup>
+                    </InputGroup> */}
 
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -335,7 +335,7 @@ class Register extends Component {
 const mapStateToProps = (state) => ({
   nome: state.UsuarioReducer.nome,
   cpf: state.UsuarioReducer.cpf,
-  rg: state.UsuarioReducer.rg,
+  // rg: state.UsuarioReducer.rg,
   email: state.UsuarioReducer.email,
   senha: state.UsuarioReducer.senha,
   confirmarSenha: state.UsuarioReducer.confirmarSenha,
@@ -343,7 +343,7 @@ const mapStateToProps = (state) => ({
 
   msgNomeInvalid: state.UsuarioReducer.msgNomeInvalid,
   msgCpfInvalid: state.UsuarioReducer.msgCpfInvalid,
-  msgRgInvalid: state.UsuarioReducer.msgRgInvalid,
+  // msgRgInvalid: state.UsuarioReducer.msgRgInvalid,
   msgEmailInvalid: state.UsuarioReducer.msgEmailInvalid,
   msgSenhaInvalid: state.UsuarioReducer.msgSenhaInvalid,
   msgConfirmarSenhaInvalid: state.UsuarioReducer.msgConfirmarSenhaInvalid,
@@ -355,7 +355,7 @@ const mapActionToProps = {
   resetCamposUsuario,
   changeNomeUsuario,
   changeCpfUsuario,
-  changeRgUsuario,
+  // changeRgUsuario,
   changeEmailUsuario,
   changeSenhaUsuario,
   changeConfirmarSenhaUsuario,

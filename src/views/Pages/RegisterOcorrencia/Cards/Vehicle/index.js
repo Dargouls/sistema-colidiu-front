@@ -118,10 +118,10 @@ class Vehicle extends Component {
       this.handleWarning("number_address");
       return;
     }
-    if (data.complement_address === "") {
-      this.handleWarning("complement_address");
-      return;
-    }
+    // if (data.complement_address === "") {
+    //   this.handleWarning("complement_address");
+    //   return;
+    // }
     if (data.district === "") {
       this.handleWarning("district");
       return;
@@ -162,7 +162,7 @@ class Vehicle extends Component {
       municipality: "Seu municipío",
       address: "Seu endereço",
       number_address: "O número do endereço",
-      complement_address: "Complemento do endeço",
+      // complement_address: "Complemento do endeço",
       district: "O bairro",
       phone: "O telefone",
       email: "O e-mail",
@@ -170,6 +170,8 @@ class Vehicle extends Component {
 
     toast.warn(`${names[type]} é obrigatório`);
   }
+
+
 
   render() {
     return (
@@ -455,8 +457,7 @@ class Vehicle extends Component {
               type="text"
               name="cpf"
               placeholder="Digite o sua cpf"
-              onChange={this.props.onChange}
-              disabled={this.props.disabled}
+              disabled
               value={this.props.state.cpf}
               invalid={this.props.state.cpf === "" && this.state.onchange}
             />
@@ -479,6 +480,48 @@ class Vehicle extends Component {
 
             <FormFeedback>Preencha o campo!</FormFeedback>
           </FormGroup>
+
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ width: "45%" }}>
+            <FormGroup>
+              <Label>Telefone Celular</Label>
+              <Input
+                type="text"
+                name="phone"
+                placeholder="(82) 99999-9999"
+                onChange={this.props.onChange}
+                disabled={this.props.disabled}
+                value={this.props.state.phone}
+                invalid={this.props.state.phone === "" && this.state.onchange}
+              />
+
+              <FormFeedback>Preencha o campo!</FormFeedback>
+            </FormGroup>
+          </div>
+
+          <div style={{ width: "45%" }}>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                type="text"
+                name="email"
+                placeholder="seuemail@email.com"
+                onChange={this.props.onChange}
+                disabled={this.props.disabled}
+                value={this.props.state.email}
+                invalid={this.props.state.email === "" && this.state.onchange}
+              />
+              <FormFeedback>Preencha o campo!</FormFeedback>
+            </FormGroup>
+          </div>
         </div>
 
         <Label>
@@ -588,10 +631,10 @@ class Vehicle extends Component {
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.complement_address}
-                invalid={
-                  this.props.state.complement_address === "" &&
-                  this.state.onchange
-                }
+              // invalid={
+              //   this.props.state.complement_address === "" &&
+              //   this.state.onchange
+              // }
               />
               <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
@@ -615,47 +658,7 @@ class Vehicle extends Component {
             </FormGroup>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ width: "45%" }}>
-            <FormGroup>
-              <Label>Telefone Celular</Label>
-              <Input
-                type="text"
-                name="phone"
-                placeholder="(82) 99999-9999"
-                onChange={this.props.onChange}
-                disabled={this.props.disabled}
-                value={this.props.state.phone}
-                invalid={this.props.state.phone === "" && this.state.onchange}
-              />
 
-              <FormFeedback>Preencha o campo!</FormFeedback>
-            </FormGroup>
-          </div>
-
-          <div style={{ width: "45%" }}>
-            <FormGroup>
-              <Label>Email</Label>
-              <Input
-                type="text"
-                name="email"
-                placeholder="seuemail@email.com"
-                onChange={this.props.onChange}
-                disabled={this.props.disabled}
-                value={this.props.state.email}
-                invalid={this.props.state.email === "" && this.state.onchange}
-              />
-              <FormFeedback>Preencha o campo!</FormFeedback>
-            </FormGroup>
-          </div>
-        </div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
 
           <Button

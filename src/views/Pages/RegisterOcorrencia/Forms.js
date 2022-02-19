@@ -10,7 +10,7 @@ import {
   Row,
   Spinner,
 } from "reactstrap";
-
+import { getUser } from "../../../services/auth";
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
 import {
@@ -21,6 +21,7 @@ import {
   Witness,
 } from "./Cards/index";
 import Confirmation from "./Cards/Confirmation";
+
 
 class Forms extends Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class Forms extends Component {
       rg: "",
       uf_rg: "",
       cnh: "",
-      cpf: "",
+      cpf: getUser()?.cpf,
       birth_date: "",
       cep: "",
       uf: "",
