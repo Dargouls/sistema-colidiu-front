@@ -8,7 +8,7 @@ import {
   FormFeedback,
 
 } from "reactstrap";
-
+import InputMask from "react-input-mask";
 import { estados } from "../../estados";
 import { toast } from "react-toastify";
 
@@ -493,15 +493,22 @@ class Vehicle extends Component {
           <div style={{ width: "45%" }}>
             <FormGroup>
               <Label>Telefone Celular</Label>
-              <Input
-                type="text"
-                name="phone"
-                placeholder="(82) 99999-9999"
+              <InputMask
+                mask="(99) 99999-9999"
                 onChange={this.props.onChange}
-                disabled={this.props.disabled}
                 value={this.props.state.phone}
-                invalid={this.props.state.phone === "" && this.state.onchange}
-              />
+              >
+                {(inputProps) => (
+                  <Input
+                    {...inputProps}
+                    type="text"
+                    name="phone"
+                    placeholder="(82) 99999-9999"
+                    disabled={this.props.disabled}
+                    invalid={this.props.state.phone === "" && this.state.onchange}
+                  />
+                )}
+              </InputMask>
 
               <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
@@ -530,15 +537,24 @@ class Vehicle extends Component {
 
         <FormGroup>
           <Label>CEP</Label>
-          <Input
-            type="text"
-            name="cep"
-            placeholder="Digite o CEP"
+          <InputMask
+            mask="99999-999"
+            maskChar=""
             onChange={this.props.onChange}
-            disabled={this.props.disabled}
             value={this.props.state.cep}
-            invalid={this.props.state.cep === "" && this.state.onchange}
-          />
+          >
+            {(inputProps) => (
+
+              <Input
+                {...inputProps}
+                type="text"
+                name="cep"
+                placeholder="Digite o CEP"
+                disabled={this.props.disabled}
+                invalid={this.props.state.cep === "" && this.state.onchange}
+              />
+            )}
+          </InputMask>
 
           <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>

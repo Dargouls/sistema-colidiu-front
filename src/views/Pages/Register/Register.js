@@ -65,23 +65,34 @@ class Register extends Component {
   }
 
   handleChange(event, position) {
-    // Validação e-mail
-    if (this.state.user.email) {
+
+    if (position === "cpf") {
       this.setState({
         ...this.state,
         validation: {
           ...this.state.validation,
-          email: validEmail(this.state.user.email) ? "sucess" : "error",
+          cpf: isValidCPF(event.target.value) ? "sucess" : "error",
+        },
+      });
+    }
+    // Validação e-mail
+    if (position === "email") {
+      this.setState({
+        ...this.state,
+        validation: {
+          ...this.state.validation,
+          email: validEmail(event.target.value) ? "sucess" : "error",
         },
       });
     }
 
-    if (this.state.user.telefone) {
+
+    if (position === "telefone") {
       this.setState({
         ...this.state,
         validation: {
           ...this.state.validation,
-          telefone: validTelfone(this.state.user.telefone) ? "sucess" : "error",
+          telefone: validTelfone(event.target.value) ? "sucess" : "error",
         },
       });
     }
@@ -104,6 +115,13 @@ class Register extends Component {
 
   _registerUser = async (e) => {
     e.preventDefault();
+
+    const validation = Object.values(this.state.validation).some(item => item === "error");
+
+    if(validation){
+      return toast.error("Verifique os campos destacados em vermelho!")
+    }
+
     if (this.state.user.senha !== this.state.user.confirmarSenha) {
       return toast.warning("Senhas digitadas não são correspondentes!")
     }
@@ -158,19 +176,29 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input
-                        type="text"
+                      <InputMask
+                        mask="999.999.999-99"
+                        maskChar=""
                         required
-                        placeholder="CPF"
-                        autoComplete="CPF"
                         value={this.state.user.cpf}
                         onChange={(event) => {
                           this.handleChange(event, "cpf");
                         }}
-                        invalid={this.state.validation.cpf === "error"}
-                        valid={this.state.validation.cpf === "sucess"}
-                      />
-                      <FormFeedback>Campo inválido!</FormFeedback>
+                      >
+                        {(inputProps) => (
+                          <Input
+                            {...inputProps}
+                            type="text"
+                            placeholder="CPF"
+                            autoComplete="CPF"
+                            invalid={this.state.validation.cpf === "error"}
+                            valid={this.state.validation.cpf === "sucess"}
+                          />
+                        )}
+                      </InputMask>
+                      <FormFeedback>
+                        {this.props.msgCpfInvalid}
+                      </FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -199,7 +227,7 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <InputMask
-                        mask="(99)99999-9999"
+                        mask="(99) 99999-9999"
                         value={this.state.user.telefone}
                         onChange={(event) => {
                           this.handleChange(event, "telefone");
@@ -367,7 +395,7 @@ export default connect(mapStateToProps, mapActionToProps)(Register);
 // Verifica se o telefone é válido
 const validTelfone = (telefone) => {
   let regexp = new RegExp(
-    "^\\([0-9]{2}\\)(([0-9]{5}-[0-9]{4})|([0-9]{5}-[0-9]{3}))$"
+    "^\\([0-9]{2}\\)(([0-9]{5}-[0-9]{4})|([0-9]{5}-[0-9]{4}))$"
   );
 
   return regexp.test(telefone);
@@ -376,3 +404,13 @@ const validTelfone = (telefone) => {
 const validEmail = (email) => {
   return email.includes("@");
 };
+
+const isValidCPF = (cpf) => {
+  if (typeof cpf !== 'string') return false
+  cpf = cpf.replace(/[^\d]+/g, '')
+  if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false
+  cpf = cpf.split('').map(el => +el)
+  const rest = (count) => (cpf.slice(0, count - 12)
+    .reduce((soma, el, index) => (soma + el * (count - index)), 0) * 10) % 11 % 10
+  return rest(10) === cpf[9] && rest(11) === cpf[10]
+}

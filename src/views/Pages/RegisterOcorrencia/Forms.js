@@ -13,6 +13,7 @@ import {
 import { getUser } from "../../../services/auth";
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
+import axios from 'axios'
 import {
   Welcome,
   Accident,
@@ -27,6 +28,7 @@ class Forms extends Component {
   constructor(props) {
     super(props);
 
+    this.handleGetCEP = this.handleGetCEP.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputFile = this.handleInputFile.bind(this);
     this.handleSetAddress = this.handleSetAddress.bind(this);
@@ -73,8 +75,8 @@ class Forms extends Component {
       number_address: "",
       complement_address: "",
       district: "",
-      phone: "",
-      email: "",
+      phone: getUser()?.telephone,
+      email: getUser()?.email,
       array_vehicle: [],
       array_witness: [],
     };
@@ -150,7 +152,37 @@ class Forms extends Component {
     this.setState({ array_witness: [...this.state.array_witness, witness] });
   }
 
+
+  async handleGetCEP(cepAddress) {
+    try {
+      const { data } = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cepAddress}`);
+      const { state, city, neighborhood, street } = data;
+
+      this.setState({
+        uf: state,
+        municipality: city,
+        district: neighborhood,
+        address: street,
+      })
+
+      toast.success("Dados do CEP encontrados com sucesso!");
+    } catch (error) {
+      this.setState({
+        uf: "",
+        municipality: "",
+        district: "",
+        address: "",
+      });
+      toast.error("Erro ao buscar dados do CEP");
+    }
+  }
+
   handleInputChange(e) {
+    if (e.target?.name === "cep" && e.target?.value.length === 9) {
+      console.log("CEP:", e.target.value)
+      this.handleGetCEP(e.target?.value)
+    }
+
     console.log(`Campo: ${e.target.name} || ${e.target.value}`);
     this.setState({
       [e.target.name]: e.target.value,
@@ -166,7 +198,6 @@ class Forms extends Component {
   }
 
   handleInputFile(value) {
-    // console.log("Images", value.target.files);
     this.setState({ images: value.target.files });
   }
 
@@ -194,12 +225,15 @@ class Forms extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log(getUser())
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
         <Row>
           <Col xs="12">
-            {/* <Fade timeout={this.state.timeout} in={this.state.fadeIn}> */}
             <Card>
               <CardHeader>
                 <i className="fa fa-edit"></i>Registro de ocorrência
@@ -263,7 +297,6 @@ class Forms extends Component {
                 </CardBody>
               </Collapse>
             </Card>
-            {/* </Fade> */}
           </Col>
         </Row>
       </div>
