@@ -497,6 +497,7 @@ class Vehicle extends Component {
                 mask="(99) 99999-9999"
                 onChange={this.props.onChange}
                 value={this.props.state.phone}
+                disabled={this.props.disabled}
               >
                 {(inputProps) => (
                   <Input
@@ -504,7 +505,7 @@ class Vehicle extends Component {
                     type="text"
                     name="phone"
                     placeholder="(82) 99999-9999"
-                    disabled={this.props.disabled}
+                    
                     invalid={this.props.state.phone === "" && this.state.onchange}
                   />
                 )}
@@ -542,6 +543,7 @@ class Vehicle extends Component {
             maskChar=""
             onChange={this.props.onChange}
             value={this.props.state.cep}
+            disabled={this.props.disabled}
           >
             {(inputProps) => (
 
@@ -550,7 +552,7 @@ class Vehicle extends Component {
                 type="text"
                 name="cep"
                 placeholder="Digite o CEP"
-                disabled={this.props.disabled}
+                
                 invalid={this.props.state.cep === "" && this.state.onchange}
               />
             )}
