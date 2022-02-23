@@ -2,6 +2,7 @@ import React from "react";
 
 // Componentes utilizadas na aplicação
 const Dashboard = React.lazy(() => import("./views/Pages/Dashboard/Dashboard"))
+const MapaCalor = React.lazy(() => import("./views/Pages/MapaCalor/MapaCalor"))
 const RegisterOcorrencia = React.lazy(() => import("./views/Pages/RegisterOcorrencia"));
 const HistoricoVeiculo = React.lazy(() => import("./views/Pages/HistoricoVeiculo/Historico"));
 const Home = React.lazy(() => import("./views/Pages/Home/Home"));
@@ -35,6 +36,7 @@ const routes = [
   { path: "/inicio", name: "Home" , componet: Home},
   { path: "/dashboard", name: "Painel", component: Dashboard },
   { path: "/registro-ocorrencia", name: "Painel", component: RegisterOcorrencia },
+  { path: "/mapa-calor", name: "Painel", component: MapaCalor },
   { path: "/ocorrencias", name: "Painel", component: ListaOcorrencia},
   { path: "/ocorrencia/:id", name: "Painel", component: Validate},
 

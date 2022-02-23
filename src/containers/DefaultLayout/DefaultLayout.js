@@ -60,6 +60,11 @@ class DefaultLayout extends Component {
             url: "/ocorrencias",
             icon: "icon-magnifier-add",
           },
+          {
+            name: "Mapa de Calor",
+            url: "/mapa-calor",
+            icon: "icon-magnifier-add",
+          },
         ]
       })
     }

@@ -118,7 +118,7 @@ class Register extends Component {
 
     const validation = Object.values(this.state.validation).some(item => item === "error");
 
-    if(validation){
+    if (validation) {
       return toast.error("Verifique os campos destacados em vermelho!")
     }
 
@@ -395,9 +395,8 @@ export default connect(mapStateToProps, mapActionToProps)(Register);
 // Verifica se o telefone é válido
 const validTelfone = (telefone) => {
   let regexp = new RegExp(
-    "^\\([0-9]{2}\\)(([0-9]{5}-[0-9]{4})|([0-9]{5}-[0-9]{4}))$"
+    "^\\([0-9]{2}\\)\\s(([0-9]{5}-[0-9]{4})|([0-9]{5}-[0-9]{4}))$"
   );
-
   return regexp.test(telefone);
 };
 // Verifica se o email é válido
