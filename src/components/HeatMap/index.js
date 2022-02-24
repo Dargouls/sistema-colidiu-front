@@ -37,6 +37,7 @@ class HeatMap extends Component {
                     lng: item.lng_occurrence
                 }
             ))
+            console.log("new:", newArray)
             this.setState({
                 heatmapPoints: newArray
             })

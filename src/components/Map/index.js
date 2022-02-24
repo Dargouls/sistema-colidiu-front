@@ -15,7 +15,6 @@ class Map extends Component {
     }
 
     onLoad(search) {
-        console.log("search:", search)
         this.setState({ searchBox: search })
     }
     onLoadMap(map) {
@@ -44,8 +43,8 @@ class Map extends Component {
                 const address = response.results[0].formatted_address;
                 const newAddress = {
                     address_occurrence: address,
-                    lat_occurence: lat,
-                    lng_occurence: lng,
+                    lat_occurrence: String(lat),
+                    lng_occurrence: String(lng),
                 }
                 this.props.onChange(newAddress);
             },
@@ -64,7 +63,7 @@ class Map extends Component {
                 >
                     <GoogleMap
                         onLoad={() => this.onLoadMap()}
-                        // yesIWantToUseGoogleMapApiInternals
+                        yesIWantToUseGoogleMapApiInternals
                         mapContainerStyle={{
                             width: '850px',
                             height: "400px",

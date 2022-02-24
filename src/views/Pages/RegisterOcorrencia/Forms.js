@@ -85,6 +85,7 @@ class Forms extends Component {
   async sendRegister() {
 
     console.log("enviando dados...");
+    console.log("lat:", this.state.address);
     console.log("lat:", this.state.lat_occurrence);
     console.log("lng:", this.state.lng_occurrence);
 
