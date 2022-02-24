@@ -1,7 +1,13 @@
+//Libraries
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+import LoadingOverlay from 'react-loading-overlay';
+//Components
+//Services
 import { api } from "../../services/api";
+//Styles
 import './styles.css'
+
 
 class HeatMap extends Component {
     static defaultProps = {
@@ -9,18 +15,15 @@ class HeatMap extends Component {
             lat: -9.6660417,
             lng: -35.7352167
         },
-        zoom: 12
+        zoom: 14
     }
 
     constructor(props) {
         super(props)
         this.state = {
             heatmapVisible: true,
-            heatmapPoints: [
-                {lat: '-9.6660417', lng: '-35.7352167'},
-                {lat: '-9.661096299999999', lng: '-35.6973906'},
-                {lat: '-9.6660417', lng: '-35.7352167'}
-            ],
+            heatmapPoints: [],
+            loading: false
         }
     }
 
@@ -28,33 +31,17 @@ class HeatMap extends Component {
         this.setState({ loading: true })
         try {
             const { data } = await api.get("/locations/occurrences")
-            // toast.success("Lista de ocorrências carregadas com sucesso!")
-            console.log("New points:", data.occurrences)
-
-            let newArray = data.occurrences.map((item) => {
-                if ((item.lng_occurrence !== "" && item.lng_occurrence !== "undefined") || (item.lat_occurrence !== "" && item.lat_occurrence !== "undefined")) {
-                    return { lat: item?.lat_occurrence, lng: item?.lng_occurrence }
+            let newArray = data.occurrences.map((item) => (
+                {
+                    lat: item.lat_occurrence,
+                    lng: item.lng_occurrence
                 }
-                // return null;
+            ))
+            this.setState({
+                heatmapPoints: newArray
             })
-
-            console.log("new:", newArray)
-            // this.setState({
-            //     heatmapPoints: [...this.state.heatmapPoints, {
-            //         lat: -9.6660417,
-            //         lng: -35.7352167
-            //     }]
-            // })
-
-            // 
-
-            // this.filterOcccurences(this.state.selectOccurence, data.occurrences)
-            // this.setState({ occurrences: data.occurrences })
-            // this.setState({ loading: true })
-        } catch (error) {
-            // toast.error('Ocorreu algum erro, por favor tente novamente mais tarde!')
-            // this.setState({ loading: true })
-        }
+            this.setState({ loading: false })
+        } catch (error) { }
     }
 
     componentDidMount() {
@@ -64,25 +51,33 @@ class HeatMap extends Component {
     render() {
         const apiKey = { key: 'AIzaSyB30ANnmngcT67sprBdpq2UphR3y5zat-o' }
         const heatMapData = {
-            positions: this.state.heatmapPoints || [],
+            positions: this.state.heatmapPoints,
             options: {
                 radius: 20,
                 opacity: 0.6
             }
         }
-
         return (
-            <div style={{ height: '100vh', width: '100%' }}>
-                <GoogleMapReact
-                    ref={(el) => this._googleMap = el}
-                    bootstrapURLKeys={apiKey}
-                    defaultCenter={this.props.center}
-                    defaultZoom={this.props.zoom}
-                    heatmapLibrary={true}
-                    heatmap={heatMapData}
-                >
-                </GoogleMapReact>
-            </div>
+            <LoadingOverlay
+                active={this.state.loading}
+                spinner
+                text='Carregando dados...'
+            >
+                <div style={{ height: '100vh', width: '100%' }}>
+                    {this.state.loading ?
+                        <></>
+                        :
+                        <GoogleMapReact
+                            ref={(el) => this._googleMap = el}
+                            bootstrapURLKeys={apiKey}
+                            defaultCenter={this.props.center}
+                            defaultZoom={this.props.zoom}
+                            heatmapLibrary={true}
+                            heatmap={heatMapData}
+                        />
+                    }
+                </div>
+            </LoadingOverlay>
         )
     }
 }

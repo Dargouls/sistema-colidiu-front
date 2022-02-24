@@ -32,6 +32,7 @@ function getBase64ImageFromURL(url) {
 
 export async function generatePDF(occurrence) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    console.log("occurrence", occurrence)
 
     const details = [
         //Header
@@ -208,7 +209,7 @@ export async function generatePDF(occurrence) {
                             text: `Endereço: `,
                             bold: true
                         },
-                        `${occurrence.address}, ${occurrence.number_address}, ${occurrence.district},  ${occurrence.city}-${occurrence.uf}`
+                        `${occurrence.address}, ${occurrence.number_address}, ${occurrence.district},  ${occurrence.municipality}-${occurrence.uf}`
                     ]
                 },
             ],
