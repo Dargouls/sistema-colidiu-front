@@ -40,6 +40,7 @@ class Forms extends Component {
     this.toggle = this.toggle.bind(this);
     this.toggleFade = this.toggleFade.bind(this);
     this.state = {
+      loading: false,
       collapse: true,
       fadeIn: true,
       timeout: 300,
@@ -83,11 +84,11 @@ class Forms extends Component {
   }
 
   async sendRegister() {
-
-    console.log("enviando dados...");
-    console.log("lat:", this.state.address);
-    console.log("lat:", this.state.lat_occurrence);
-    console.log("lng:", this.state.lng_occurrence);
+    this.setState({loading: true})
+    //console.log("enviando dados...");
+    //console.log("lat:", this.state.address);
+    //console.log("lat:", this.state.lat_occurrence);
+    //console.log("lng:", this.state.lng_occurrence);
 
     const data = new FormData();
     data.append("address_occurrence", this.state.address_occurrence);
@@ -127,29 +128,31 @@ class Forms extends Component {
     data.append("array_vehicle", this.state.array_vehicle);
     data.append("array_witness", this.state.array_witness);
 
-    console.log(data);
+    //console.log(data);
 
     try {
       const response = await api.post("/occurrences", data);
-      console.log("State:", response);
+      //console.log("State:", response);
       if (response.data.message) {
+        this.setState({loading: false})
         toast.success("Registro de ocorrência cadastrado com sucesso!");
         setTimeout(() => {
           this.props.history.push("/");
-        }, 3000);
+        }, 2000);
       }
     } catch {
+      this.setState({loading: false})
       toast.error("Ocorreu algum erro, tente novamente!");
     }
   }
 
   handleAddVehicle(vehicle) {
-    console.log("ArrayVehicle:", [...this.state.array_vehicle, vehicle]);
+    //console.log("ArrayVehicle:", [...this.state.array_vehicle, vehicle]);
     this.setState({ array_vehicle: [...this.state.array_vehicle, vehicle] });
   }
 
   handleAddWitness(witness) {
-    console.log("ArrayWitness:", [...this.state.array_witness, witness]);
+    //console.log("ArrayWitness:", [...this.state.array_witness, witness]);
     this.setState({ array_witness: [...this.state.array_witness, witness] });
   }
 
@@ -180,17 +183,17 @@ class Forms extends Component {
 
   handleInputChange(e) {
     if (e.target?.name === "cep" && e.target?.value.length === 9) {
-      console.log("CEP:", e.target.value)
+      //console.log("CEP:", e.target.value)
       this.handleGetCEP(e.target?.value)
     }
 
-    console.log(`Campo: ${e.target.name} || ${e.target.value}`);
+    //console.log(`Campo: ${e.target.name} || ${e.target.value}`);
     this.setState({
       [e.target.name]: e.target.value,
     });
   }
   handleSetAddress(address) {
-    console.log("address:", address)
+    ////console.log("address:", address)
     this.setState({
       address_occurrence: address.address_occurrence,
       lat_occurrence: address.lat_occurrence,
@@ -227,7 +230,7 @@ class Forms extends Component {
   }
 
   componentDidMount() {
-    console.log(getUser())
+    //console.log(getUser())
   }
 
   render() {
@@ -289,6 +292,7 @@ class Forms extends Component {
                     {this.state.forms === 6 && (
                       <Confirmation
                         state={this.state}
+                        loading={this.state.loading}
                         onChange={(e) => this.handleInputChange(e)}
                         handleSendRegister={this.sendRegister}
                         handlePrevForm={this.handlePrevForm}

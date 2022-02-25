@@ -379,7 +379,7 @@ export async function generatePDF(occurrence) {
                 {
                     text: [
                         {text: "Cidade: ", bold: true},
-                        `${occurrence.city}`
+                        `Maceió`
                     ],
                 },
             ],

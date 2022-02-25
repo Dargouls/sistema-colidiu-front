@@ -60,6 +60,7 @@ class Accident extends Component {
   componentDidMount() {
     const user = getUser();
     this.setState({ permissions: user.permissions })
+    console.log('image', this.state.image)
   }
 
   handleImage(e) {

@@ -109,6 +109,11 @@ class MoreInformation extends Component {
         });
     }
 
+
+    componentDidMount() {
+        console.log("data:", this.props.state)
+    }
+
     render() {
         return (
             <>

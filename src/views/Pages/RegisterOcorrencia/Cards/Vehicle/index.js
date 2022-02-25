@@ -174,6 +174,8 @@ class Vehicle extends Component {
 
 
   render() {
+    const vehiclesArray = ["Automóvel", "Motocicleta", "Ônibus"]
+
     return (
       <Form>
         <Label>
@@ -286,74 +288,77 @@ class Vehicle extends Component {
 
           <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
+        {vehiclesArray.some((item) => this.props?.state.type_vehicle?.includes(item)) &&
+          <>
+            <FormGroup>
+              <Label>Placa</Label>
+              <Input
+                type="text"
+                name="plate"
+                placeholder="Digite a placa do veículo"
+                onChange={this.props.onChange}
+                disabled={this.props.disabled}
+                value={this.props.state.plate}
+                invalid={
+                  this.props.state.plate === "" && this.state.onchange
+                }
+              />
+              <FormFeedback>Preencha o campo!</FormFeedback>
+            </FormGroup>
+            <FormGroup>
+              <Label>Renavam</Label>
+              <Input
+                type="text"
+                name="renavam"
+                placeholder="Digite o RENAVAM do veículo"
+                onChange={this.props.onChange}
+                disabled={this.props.disabled}
+                value={this.props.state.renavam}
+                invalid={
+                  this.props.state.renavam === "" && this.state.onchange
+                }
+              />
+              <FormFeedback>Preencha o campo!</FormFeedback>
+            </FormGroup>
+            <FormGroup>
+              <Label>Possui Pelicula?</Label>
+              <Input
+                type="select"
+                name="pellicle"
+                onChange={this.props.onChange}
+                disabled={this.props.disabled}
+                value={this.props.state.pellicle}
+                invalid={
+                  this.props.state.pellicle === "" && this.state.onchange
+                }
+              >
+                <option></option>
+                <option>Sim</option>
+                <option>Não</option>
+              </Input>
+              <FormFeedback>Preencha o campo!</FormFeedback>
+            </FormGroup>
+            <FormGroup>
+              <Label>Acionou o Airbag?</Label>
+              <Input
+                type="select"
+                name="airbag"
+                onChange={this.props.onChange}
+                disabled={this.props.disabled}
+                value={this.props.state.airbag}
+                invalid={
+                  this.props.state.airbag === "" && this.state.onchange
+                }
+              >
+                <option></option>
+                <option>Sim</option>
+                <option>Não</option>
+              </Input>
 
-        <FormGroup>
-          <Label>Placa</Label>
-          <Input
-            type="text"
-            name="plate"
-            placeholder="Digite a placa do veículo"
-            onChange={this.props.onChange}
-            disabled={this.props.disabled}
-            value={this.props.state.plate}
-            invalid={
-              this.props.state.plate === "" && this.state.onchange
-            }
-          />
-          <FormFeedback>Preencha o campo!</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-          <Label>Renavam</Label>
-          <Input
-            type="text"
-            name="renavam"
-            placeholder="Digite o RENAVAM do veículo"
-            onChange={this.props.onChange}
-            disabled={this.props.disabled}
-            value={this.props.state.renavam}
-            invalid={
-              this.props.state.renavam === "" && this.state.onchange
-            }
-          />
-          <FormFeedback>Preencha o campo!</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-          <Label>Possui Pelicula?</Label>
-          <Input
-            type="select"
-            name="pellicle"
-            onChange={this.props.onChange}
-            disabled={this.props.disabled}
-            value={this.props.state.pellicle}
-            invalid={
-              this.props.state.pellicle === "" && this.state.onchange
-            }
-          >
-            <option></option>
-            <option>Sim</option>
-            <option>Não</option>
-          </Input>
-          <FormFeedback>Preencha o campo!</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-          <Label>Acionou o Airbag?</Label>
-          <Input
-            type="select"
-            name="airbag"
-            onChange={this.props.onChange}
-            disabled={this.props.disabled}
-            value={this.props.state.airbag}
-            invalid={
-              this.props.state.airbag === "" && this.state.onchange
-            }
-          >
-            <option></option>
-            <option>Sim</option>
-            <option>Não</option>
-          </Input>
-
-          <FormFeedback>Preencha o campo!</FormFeedback>
-        </FormGroup>
+              <FormFeedback>Preencha o campo!</FormFeedback>
+            </FormGroup>
+          </>
+        }
 
 
         <Label>
@@ -505,7 +510,7 @@ class Vehicle extends Component {
                     type="text"
                     name="phone"
                     placeholder="(82) 99999-9999"
-                    
+
                     invalid={this.props.state.phone === "" && this.state.onchange}
                   />
                 )}
@@ -552,7 +557,7 @@ class Vehicle extends Component {
                 type="text"
                 name="cep"
                 placeholder="Digite o CEP"
-                
+
                 invalid={this.props.state.cep === "" && this.state.onchange}
               />
             )}

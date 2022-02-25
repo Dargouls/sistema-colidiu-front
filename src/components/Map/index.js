@@ -59,7 +59,7 @@ class Map extends Component {
             <div>
                 <LoadScript
                     googleMapsApiKey={"AIzaSyCB6sKMYgKpNuzYx1NXrajQjZezxpqryXE"}
-                    libraries={["places"]}
+                    libraries={["places", "geometry"]}
                 >
                     <GoogleMap
                         onLoad={() => this.onLoadMap()}
