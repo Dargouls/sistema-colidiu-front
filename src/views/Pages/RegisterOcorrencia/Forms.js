@@ -84,64 +84,71 @@ class Forms extends Component {
   }
 
   async sendRegister() {
-    this.setState({loading: true})
+    this.setState({ loading: true })
     //console.log("enviando dados...");
     //console.log("lat:", this.state.address);
     //console.log("lat:", this.state.lat_occurrence);
     //console.log("lng:", this.state.lng_occurrence);
 
     const data = new FormData();
-    data.append("address_occurrence", this.state.address_occurrence);
-    data.append("lat_occurrence", this.state.lat_occurrence);
-    data.append("lng_occurrence", this.state.lng_occurrence);
-    data.append("type_accident", this.state.type_accident);
-    data.append("zone", this.state.zone);
-    data.append("feriado", this.state.feriado);
     Array.from(this.state.images).forEach((file) => {
       data.append("files", file);
     });
-    data.append("type_vehicle", this.state.type_vehicle);
-    data.append("number_occupants", this.state.number_occupants);
-    data.append("state_vehicle", this.state.state_vehicle);
-    data.append("category_vehicle", this.state.category_vehicle);
-    data.append("safe_vehicle", this.state.safe_vehicle);
-    data.append("plate", this.state.plate);
-    data.append("renavam", this.state.renavam);
-    data.append("pellicle", this.state.pellicle);
-    data.append("airbag", this.state.airbag);
-    data.append("name", this.state.name);
-    data.append("sex", this.state.sex);
-    data.append("rg", this.state.rg);
-    data.append("uf_rg", this.state.uf_rg);
-    data.append("cnh", this.state.cnh);
-    data.append("cpf", this.state.cpf);
-    data.append("birth_date", this.state.birth_date);
-    data.append("cep", this.state.cep);
-    data.append("uf", this.state.uf);
-    data.append("municipality", this.state.municipality);
-    data.append("address", this.state.address);
-    data.append("number_address", this.state.number_address);
-    data.append("complement_address", this.state.complement_address);
-    data.append("district", this.state.district);
-    data.append("phone", this.state.phone);
-    data.append("email", this.state.email);
-    data.append("array_vehicle", this.state.array_vehicle);
-    data.append("array_witness", this.state.array_witness);
 
-    //console.log(data);
+    let newOcorrence = {
+      address_occurrence: this.state.address_occurrence,
+      lat_occurrence: this.state.lat_occurrence,
+      lng_occurrence: this.state.lng_occurrence,
+      type_accident: this.state.type_accident,
+      zone: this.state.zone,
+      feriado: this.state.feriado,
+      type_vehicle: this.state.type_vehicle,
+      number_occupants: this.state.number_occupants,
+      state_vehicle: this.state.state_vehicle,
+      category_vehicle: this.state.category_vehicle,
+      safe_vehicle: this.state.safe_vehicle,
+      plate: this.state.plate,
+      renavam: this.state.renavam,
+      pellicle: this.state.pellicle,
+      airbag: this.state.airbag,
+      name: this.state.name,
+      sex: this.state.sex,
+      rg: this.state.rg,
+      uf_rg: this.state.uf_rg,
+      cnh: this.state.cnh,
+      cpf: this.state.cpf,
+      birth_date: this.state.birth_date,
+      cep: this.state.cep,
+      uf: this.state.uf,
+      municipality: this.state.municipality,
+      address: this.state.address,
+      number_address: this.state.number_address,
+      complement_address: this.state.complement_address,
+      district: this.state.district,
+      phone: this.state.phone,
+      email: this.state.email,
+      array_vehicle: this.state.array_vehicle,
+      array_witness: this.state.array_witness,
+    }
+
+    // console.log(data);
 
     try {
-      const response = await api.post("/occurrences", data);
-      //console.log("State:", response);
-      if (response.data.message) {
-        this.setState({loading: false})
-        toast.success("Registro de ocorrência cadastrado com sucesso!");
-        setTimeout(() => {
-          this.props.history.push("/");
-        }, 2000);
+      const response = await api.post("/occurrences", newOcorrence);
+      console.log("State:", response);
+      if (response?.data?.message && response?.data?.occurrence_id) {
+        data.append("occurrence_id", response?.data?.occurrence_id);
+        const response = await api.put("/occurrences/upload", data);
+
       }
+      console.log("response:", response)
+      this.setState({ loading: false })
+      toast.success("Registro de ocorrência cadastrado com sucesso!");
+      setTimeout(() => {
+        this.props.history.push("/");
+      }, 2000);
     } catch {
-      this.setState({loading: false})
+      this.setState({ loading: false })
       toast.error("Ocorreu algum erro, tente novamente!");
     }
   }
