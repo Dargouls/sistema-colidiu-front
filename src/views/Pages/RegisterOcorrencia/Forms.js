@@ -137,8 +137,8 @@ class Forms extends Component {
       const response = await api.post("/occurrences", newOcorrence);
       console.log("State:", response);
       if (response?.data?.message && response?.data?.occurrence_id) {
-        data.append("occurrence_id", response?.data?.occurrence_id);
-        const response = await api.put("/occurrences/upload", data);
+        data.append("occurrence_id", response.data.occurrence_id);
+        const responseUpload = await api.put("/occurrences/upload", data);
 
       }
       console.log("response:", response)
