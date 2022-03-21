@@ -22,5 +22,5 @@ import axios from "axios";
 // import { create } from 'apisauce';
 
 export const api = axios.create({
-  baseURL: "https://back-colidiu.herokuapp.com",
+  baseURL: "http://colidiu.luizcarlosvilela.com.br",
 });
