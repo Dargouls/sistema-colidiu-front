@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Button, FormGroup, Input, Label, FormFeedback, Row } from "reactstrap";
+import { Col, Button, FormGroup, Input, Label, FormFeedback, Row, TextArea } from "reactstrap";
 import { toast } from "react-toastify";
 import { getUser } from '../../../../../services/auth';
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ class Accident extends Component {
     this.state = {
       onchange: false,
       image: [],
+      checked: false
     };
   }
 
@@ -77,14 +78,14 @@ class Accident extends Component {
   render() {
     return (
       <>
-          {!this.props.disabled &&
-        <FormGroup>
-          <Label>Endereço da ocorrência</Label>
+        {!this.props.disabled &&
+          <FormGroup>
+            <Label>Endereço da ocorrência</Label>
             <Map
               onChange={this.props.onChangeAddress}
             />
-        </FormGroup>
-          }
+          </FormGroup>
+        }
         <FormGroup className="formItem">
           <Label>Endereço</Label>
           <Input
@@ -95,6 +96,34 @@ class Accident extends Component {
             value={this.props.state.address_occurrence}
           />
         </FormGroup>
+
+        <FormGroup className="formItem">
+          <Label>O acidente foi em algum cruzamento?</Label>
+
+          <input
+            type="checkbox"
+            name="check-accept"
+            style={{ margin: '5px 10px' }}
+            value={this.state.checked}
+            onChange={() => this.setState({ checked: !this.state.checked })}
+          />
+
+
+        </FormGroup>
+
+        {this.state.checked &&
+          <FormGroup className="formItem">
+            <Label>Digite o endereço de ambas as ruas</Label>
+            <Input
+              name="address_crossing"
+              type="textarea"
+              required
+              rows={4}
+              value={this.props.state.address_crossing}
+              onChange={this.props.onChange}
+            />
+          </FormGroup>
+        }
 
         <FormGroup>
           <Label>Tipo de acidente</Label>

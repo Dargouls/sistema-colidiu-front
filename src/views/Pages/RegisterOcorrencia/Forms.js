@@ -47,6 +47,7 @@ class Forms extends Component {
       forms: 1,
       nextPage: false,
       address_occurrence: "",
+      address_crossing: "",
       lat_occurrence: "",
       lng_occurrence: "",
       type_accident: "",
