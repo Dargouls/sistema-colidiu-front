@@ -377,7 +377,7 @@ class Forms extends Component {
                       {this.state.forms == 4 && 
                         <>
                           <Label>
-                            <span style={{fontSize: 20, fontWeight: 'bold'}}>Dados dos demais Veículos (adicione até 3 veículos com exceção do que foi informado na aba "Veículo e Você")</span>
+                            <span style={{fontSize: 20, fontWeight: 'bold'}}>Dados dos demais Veículos (adicione até 5 veículos com exceção do que foi informado na aba "Veículo e Você")</span>
                           </Label>
 
                           <FormGroup>

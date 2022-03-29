@@ -118,7 +118,7 @@ class MoreInformation extends Component {
         return (
             <>
                 <Label>
-                    <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados dos demais Veículos (adicione até 3 veículos com exceção do que foi informado na aba "Veículo e Você")</span>
+                    <span style={{ fontSize: 20, fontWeight: 'bold' }}>Dados dos demais Veículos (adicione até 5 veículos com exceção do que foi informado na aba "Veículo e Você")</span>
                 </Label>
                 {this.props.state.array_vehicle.map((item, index) => (
                     <div key={index} style={{ marginTop: '20px', paddingTop: '30px', borderWidth: 0, borderTopWidth: 3, borderColor: '#c3c3c3', borderStyle: 'dotted ', overflow: 'auto', height: 200 }}>
@@ -315,7 +315,7 @@ class MoreInformation extends Component {
                                         placeholder='Digite nome'
                                         required
                                         value={item.name}
-                                        disabled
+                                        // disabled
                                         disabled={this.data_conductor}
                                     />
                                 </FormGroup>

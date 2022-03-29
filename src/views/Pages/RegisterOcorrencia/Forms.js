@@ -53,6 +53,7 @@ class Forms extends Component {
       type_accident: "",
       zone: "",
       feriado: "",
+      description_occurrence: "",
       images: [],
       type_vehicle: "",
       number_occupants: "",
@@ -98,11 +99,13 @@ class Forms extends Component {
 
     let newOcorrence = {
       address_occurrence: this.state.address_occurrence,
+      address_crossing: this.state.address_crossing,
       lat_occurrence: this.state.lat_occurrence,
       lng_occurrence: this.state.lng_occurrence,
       type_accident: this.state.type_accident,
       zone: this.state.zone,
       feriado: this.state.feriado,
+      description_occurrence: this.state.description_occurrence,
       type_vehicle: this.state.type_vehicle,
       number_occupants: this.state.number_occupants,
       state_vehicle: this.state.state_vehicle,
@@ -140,6 +143,7 @@ class Forms extends Component {
       if (response?.data?.message && response?.data?.occurrence_id) {
         data.append("occurrence_id", response.data.occurrence_id);
         const responseUpload = await api.put("/occurrences/upload", data);
+        console.log("upload message:", responseUpload)
 
       }
       console.log("response:", response)

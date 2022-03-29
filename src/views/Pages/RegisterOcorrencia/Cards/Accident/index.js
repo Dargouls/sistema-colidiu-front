@@ -42,6 +42,10 @@ class Accident extends Component {
       this.handleWarning("feriado");
       return;
     }
+    if (data.description_occurrence === "") {
+      this.handleWarning("description_occurrence");
+      return;
+    }
 
     this.props.handleNextForm();
   }
@@ -53,6 +57,7 @@ class Accident extends Component {
       zone: "Zona",
       feriado: "Feriado",
       image: "Imagem",
+    description_occurrence: "Descrição do acidente"
     };
 
     toast.warn(`${names[type]} é obrigatório`);
@@ -107,17 +112,17 @@ class Accident extends Component {
             value={this.state.checked}
             onChange={() => this.setState({ checked: !this.state.checked })}
           />
-
-
         </FormGroup>
-
+        
         {this.state.checked &&
           <FormGroup className="formItem">
             <Label>Digite o endereço de ambas as ruas</Label>
             <Input
+              style={{ resize: 'none' }}
               name="address_crossing"
               type="textarea"
               required
+              disabled={this.props.disabled}
               rows={4}
               value={this.props.state.address_crossing}
               onChange={this.props.onChange}
@@ -195,6 +200,21 @@ class Accident extends Component {
           </Input>
 
           <FormFeedback>Preencha o campo!</FormFeedback>
+        </FormGroup>
+
+        <FormGroup className="formItem">
+          <Label>Descreva como foi o acidente</Label>
+          <Input
+            style={{ resize: 'none' }}
+            name="description_occurrence"
+            type="textarea"
+            required
+            rows={4}
+            resize
+            disabled={this.props.disabled}
+            value={this.props.state.description_occurrence}
+            onChange={this.props.onChange}
+          />
         </FormGroup>
 
         {!this.props.disabled &&
