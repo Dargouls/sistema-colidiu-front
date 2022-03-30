@@ -57,7 +57,7 @@ class Accident extends Component {
       zone: "Zona",
       feriado: "Feriado",
       image: "Imagem",
-    description_occurrence: "Descrição do acidente"
+      description_occurrence: "Descrição do acidente"
     };
 
     toast.warn(`${names[type]} é obrigatório`);
@@ -101,20 +101,36 @@ class Accident extends Component {
             value={this.props.state.address_occurrence}
           />
         </FormGroup>
+        {!this.props.disabled &&
+          <FormGroup className="formItem">
+            <Label>O acidente foi em algum cruzamento?</Label>
+            <input
+              type="checkbox"
+              name="check-accept"
+              style={{ margin: '5px 10px' }}
+              value={this.state.checked}
+              onChange={() => this.setState({ checked: !this.state.checked })}
+            />
+          </FormGroup>
+        }
 
-        <FormGroup className="formItem">
-          <Label>O acidente foi em algum cruzamento?</Label>
-
-          <input
-            type="checkbox"
-            name="check-accept"
-            style={{ margin: '5px 10px' }}
-            value={this.state.checked}
-            onChange={() => this.setState({ checked: !this.state.checked })}
-          />
-        </FormGroup>
-        
         {this.state.checked &&
+          <FormGroup className="formItem">
+            <Label>Digite o endereço de ambas as ruas</Label>
+            <Input
+              style={{ resize: 'none' }}
+              name="address_crossing"
+              type="textarea"
+              required
+              disabled={this.props.disabled}
+              rows={4}
+              value={this.props.state.address_crossing}
+              onChange={this.props.onChange}
+            />
+          </FormGroup>
+        }
+
+        {(this.props.disabled && this.props.state.address_crossing) &&
           <FormGroup className="formItem">
             <Label>Digite o endereço de ambas as ruas</Label>
             <Input

@@ -87,11 +87,7 @@ class Forms extends Component {
 
   async sendRegister() {
     this.setState({ loading: true })
-    //console.log("enviando dados...");
-    //console.log("lat:", this.state.address);
-    //console.log("lat:", this.state.lat_occurrence);
-    //console.log("lng:", this.state.lng_occurrence);
-
+    
     const data = new FormData();
     Array.from(this.state.images).forEach((file) => {
       data.append("files", file);
