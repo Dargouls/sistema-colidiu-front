@@ -62,7 +62,10 @@ class MoreInformation extends Component {
     }
 
     save() {
-        this.props.setState(this.state);
+
+        const { isMoreAuthors, ...vehicle } = this.state
+
+        this.props.setState(vehicle);
         toast.success("Dados inseridos com sucesso!")
         this.resetInput();
     }

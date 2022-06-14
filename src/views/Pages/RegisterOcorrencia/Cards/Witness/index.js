@@ -48,7 +48,10 @@ class Witness extends Component {
   }
 
   save() {
-    this.props.setState(this.state);
+    const { isMoreAuthors, ...witness } = this.state
+
+
+    this.props.setState(witness);
     toast.success("Dados inseridos com successo!")
     this.resetInputs();
   }

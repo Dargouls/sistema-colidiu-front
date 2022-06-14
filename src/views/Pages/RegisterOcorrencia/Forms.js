@@ -134,6 +134,7 @@ class Forms extends Component {
     // console.log(data);
 
     try {
+      console.log('newOcorrence: ', newOcorrence)
       const response = await api.post("/occurrences", newOcorrence);
       console.log("State:", response);
 
