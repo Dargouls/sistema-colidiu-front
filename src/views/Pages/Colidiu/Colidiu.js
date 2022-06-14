@@ -90,7 +90,6 @@ class Colidiu extends Component {
     try {
       const { data } = await api.post("/cpf/occurrences", params)
       if (data.occurrences) {
-        console.log(data)
         this.setState({ occurrence: data.occurrences })
         this.setState({ loading: !this.state.loading })
         // return toast.success("Ocorrência encontrada com sucesso!")
@@ -128,7 +127,6 @@ class Colidiu extends Component {
                 </CardHeader>
                 <Collapse isOpen={this.state.collapse} id="collapseExample">
                   <CardBody>
-
                     {
                       this.state.occurrence.length === 0 ?
                         <Alert color="warning">

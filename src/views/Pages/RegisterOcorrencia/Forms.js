@@ -87,7 +87,7 @@ class Forms extends Component {
 
   async sendRegister() {
     this.setState({ loading: true })
-    
+
     const data = new FormData();
     Array.from(this.state.images).forEach((file) => {
       data.append("files", file);
@@ -136,12 +136,14 @@ class Forms extends Component {
     try {
       const response = await api.post("/occurrences", newOcorrence);
       console.log("State:", response);
-      if (response?.data?.message && response?.data?.occurrence_id) {
-        data.append("occurrence_id", response.data.occurrence_id);
-        const responseUpload = await api.put("/occurrences/upload", data);
-        console.log("upload message:", responseUpload)
 
-      }
+
+      // if (response?.data?.message && response?.data?.occurrence_id) {
+      //   data.append("occurrence_id", response.data.occurrence_id);
+      //   const responseUpload = await api.put("/occurrences/upload", data);
+      //   console.log("upload message:", responseUpload)
+
+      // }
       console.log("response:", response)
       this.setState({ loading: false })
       toast.success("Registro de ocorrência cadastrado com sucesso!");

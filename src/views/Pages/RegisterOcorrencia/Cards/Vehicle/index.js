@@ -198,11 +198,7 @@ class Vehicle extends Component {
             <option></option>
             <option>Automóvel</option>
             <option>Bicicleta</option>
-            {/* <option>Caminhão</option> */}
-            {/* <option>Charrete</option> */}
             <option>Motocicleta</option>
-            {/* <option>Patinete</option> */}
-            {/* <option>Patins</option> */}
             <option>Ônibus</option>
             <option>Outros</option>
           </Input>
@@ -360,7 +356,6 @@ class Vehicle extends Component {
           </>
         }
 
-
         <Label>
           <span style={{ fontSize: 20, fontWeight: "bold" }}>Seus dados</span>
         </Label>
@@ -482,7 +477,6 @@ class Vehicle extends Component {
                 this.props.state.birth_date === "" && this.state.onchange
               }
             />
-
             <FormFeedback>Preencha o campo!</FormFeedback>
           </FormGroup>
 
@@ -510,7 +504,6 @@ class Vehicle extends Component {
                     type="text"
                     name="phone"
                     placeholder="(82) 99999-9999"
-
                     invalid={this.props.state.phone === "" && this.state.onchange}
                   />
                 )}
@@ -551,13 +544,11 @@ class Vehicle extends Component {
             disabled={this.props.disabled}
           >
             {(inputProps) => (
-
               <Input
                 {...inputProps}
                 type="text"
                 name="cep"
                 placeholder="Digite o CEP"
-
                 invalid={this.props.state.cep === "" && this.state.onchange}
               />
             )}
@@ -621,7 +612,7 @@ class Vehicle extends Component {
             </FormGroup>
           </div>
           <FormGroup>
-            <Label>Numero</Label>
+            <Label>Número</Label>
             <Input
               type="text"
               name="number_address"

@@ -50,11 +50,11 @@ class DefaultLayout extends Component {
     if (user?.permissions === "all") {
       this.setState({
         items: [
-          {
-            name: "Dashboard",
-            url: "/dashboard",
-            icon: "icon-magnifier-add",
-          },
+          // {
+          //   name: "Dashboard",
+          //   url: "/dashboard",
+          //   icon: "icon-magnifier-add",
+          // },
           {
             name: "Validar ocorrência",
             url: "/ocorrencias",

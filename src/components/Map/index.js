@@ -10,7 +10,6 @@ class Map extends Component {
         this.state = {
             searchBox: null,
             map: {},
-
         };
     }
 
