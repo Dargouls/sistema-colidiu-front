@@ -6,12 +6,12 @@ import {
   Input,
   Label,
   FormFeedback,
-
 } from "reactstrap";
 import InputMask from "react-input-mask";
 import { estados } from "../../estados";
 import { toast } from "react-toastify";
 
+import "../styles.css";
 class Vehicle extends Component {
   constructor(props) {
     super(props);
@@ -171,10 +171,8 @@ class Vehicle extends Component {
     toast.warn(`${names[type]} é obrigatório`);
   }
 
-
-
   render() {
-    const vehiclesArray = ["Automóvel", "Motocicleta", "Ônibus"]
+    const vehiclesArray = ["Automóvel", "Motocicleta", "Ônibus"];
 
     return (
       <Form>
@@ -284,7 +282,9 @@ class Vehicle extends Component {
 
           <FormFeedback>Preencha o campo!</FormFeedback>
         </FormGroup>
-        {vehiclesArray.some((item) => this.props?.state.type_vehicle?.includes(item)) &&
+        {vehiclesArray.some((item) =>
+          this.props?.state.type_vehicle?.includes(item)
+        ) && (
           <>
             <FormGroup>
               <Label>Placa</Label>
@@ -295,9 +295,7 @@ class Vehicle extends Component {
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.plate}
-                invalid={
-                  this.props.state.plate === "" && this.state.onchange
-                }
+                invalid={this.props.state.plate === "" && this.state.onchange}
               />
               <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
@@ -310,9 +308,7 @@ class Vehicle extends Component {
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.renavam}
-                invalid={
-                  this.props.state.renavam === "" && this.state.onchange
-                }
+                invalid={this.props.state.renavam === "" && this.state.onchange}
               />
               <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
@@ -342,9 +338,7 @@ class Vehicle extends Component {
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.airbag}
-                invalid={
-                  this.props.state.airbag === "" && this.state.onchange
-                }
+                invalid={this.props.state.airbag === "" && this.state.onchange}
               >
                 <option></option>
                 <option>Sim</option>
@@ -354,7 +348,7 @@ class Vehicle extends Component {
               <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
           </>
-        }
+        )}
 
         <Label>
           <span style={{ fontSize: 20, fontWeight: "bold" }}>Seus dados</span>
@@ -479,7 +473,6 @@ class Vehicle extends Component {
             />
             <FormFeedback>Preencha o campo!</FormFeedback>
           </FormGroup>
-
         </div>
         <div
           style={{
@@ -504,7 +497,9 @@ class Vehicle extends Component {
                     type="text"
                     name="phone"
                     placeholder="(82) 99999-9999"
-                    invalid={this.props.state.phone === "" && this.state.onchange}
+                    invalid={
+                      this.props.state.phone === "" && this.state.onchange
+                    }
                   />
                 )}
               </InputMask>
@@ -564,7 +559,8 @@ class Vehicle extends Component {
             name="uf"
             placeholder="Digite o Estado"
             onChange={this.props.onChange}
-            disabled={this.props.disabled}
+            disabled
+            //={this.props.disabled}
             value={this.props.state.uf}
             invalid={this.props.state.uf === "" && this.state.onchange}
           />
@@ -578,7 +574,8 @@ class Vehicle extends Component {
             name="municipality"
             placeholder="Digite o Municipio"
             onChange={this.props.onChange}
-            disabled={this.props.disabled}
+            disabled
+            //={this.props.disabled}
             value={this.props.state.municipality}
             invalid={
               this.props.state.municipality === "" && this.state.onchange
@@ -603,7 +600,8 @@ class Vehicle extends Component {
                 name="address"
                 placeholder="Digite o Endereço"
                 onChange={this.props.onChange}
-                disabled={this.props.disabled}
+                disabled
+                //={this.props.disabled}
                 value={this.props.state.address}
                 invalid={this.props.state.address === "" && this.state.onchange}
               />
@@ -645,10 +643,10 @@ class Vehicle extends Component {
                 onChange={this.props.onChange}
                 disabled={this.props.disabled}
                 value={this.props.state.complement_address}
-              // invalid={
-              //   this.props.state.complement_address === "" &&
-              //   this.state.onchange
-              // }
+                // invalid={
+                //   this.props.state.complement_address === "" &&
+                //   this.state.onchange
+                // }
               />
               <FormFeedback>Preencha o campo!</FormFeedback>
             </FormGroup>
@@ -662,7 +660,8 @@ class Vehicle extends Component {
                 name="district"
                 placeholder="Digite o Bairro"
                 onChange={this.props.onChange}
-                disabled={this.props.disabled}
+                disabled
+                //={this.props.disabled}
                 value={this.props.state.district}
                 invalid={
                   this.props.state.district === "" && this.state.onchange
@@ -674,7 +673,6 @@ class Vehicle extends Component {
         </div>
 
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-
           <Button
             color="secondary"
             style={{ marginRight: 10 }}

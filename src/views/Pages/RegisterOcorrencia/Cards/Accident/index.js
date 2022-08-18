@@ -1,12 +1,22 @@
 import React, { Component } from "react";
-import { Col, Button, FormGroup, Input, Label, FormFeedback, Row, TextArea } from "reactstrap";
+import {
+  Col,
+  Button,
+  FormGroup,
+  Input,
+  Label,
+  FormFeedback,
+  Row,
+  TextArea,
+} from "reactstrap";
 import { toast } from "react-toastify";
-import { getUser } from '../../../../../services/auth';
+import { getUser } from "../../../../../services/auth";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import Map from '../../../../../components/Map'
-import "./styles.css"
+import Map from "../../../../../components/Map";
+import "./styles.css";
 
+import "../styles.css";
 class Accident extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +26,7 @@ class Accident extends Component {
     this.state = {
       onchange: false,
       image: [],
-      checked: false
+      checked: false,
     };
   }
 
@@ -57,7 +67,7 @@ class Accident extends Component {
       zone: "Zona",
       feriado: "Feriado",
       image: "Imagem",
-      description_occurrence: "Descrição do acidente"
+      description_occurrence: "Descrição do acidente",
     };
 
     toast.warn(`${names[type]} é obrigatório`);
@@ -65,32 +75,30 @@ class Accident extends Component {
 
   componentDidMount() {
     const user = getUser();
-    this.setState({ permissions: user.permissions })
-    console.log('image', this.state.image)
+    this.setState({ permissions: user.permissions });
+    console.log("image", this.state.image);
   }
 
   handleImage(e) {
     const newArray = [];
     if (e.target.files) {
-      Object.values(e.target.files).forEach(element => {
-        newArray.push(URL.createObjectURL(element))
+      Object.values(e.target.files).forEach((element) => {
+        newArray.push(URL.createObjectURL(element));
       });
     }
-    this.setState({ image: newArray })
-    this.props.handleInputFile(e)
+    this.setState({ image: newArray });
+    this.props.handleInputFile(e);
   }
 
   render() {
     return (
       <>
-        {!this.props.disabled &&
+        {!this.props.disabled && (
           <FormGroup>
             <Label>Endereço da ocorrência</Label>
-            <Map
-              onChange={this.props.onChangeAddress}
-            />
+            <Map onChange={this.props.onChangeAddress} />
           </FormGroup>
-        }
+        )}
         <FormGroup className="formItem">
           <Label>Endereço</Label>
           <Input
@@ -101,24 +109,24 @@ class Accident extends Component {
             value={this.props.state.address_occurrence}
           />
         </FormGroup>
-        {!this.props.disabled &&
+        {!this.props.disabled && (
           <FormGroup className="formItem">
             <Label>O acidente foi em algum cruzamento?</Label>
             <input
               type="checkbox"
               name="check-accept"
-              style={{ margin: '5px 10px' }}
+              style={{ margin: "5px 10px" }}
               value={this.state.checked}
               onChange={() => this.setState({ checked: !this.state.checked })}
             />
           </FormGroup>
-        }
+        )}
 
-        {this.state.checked &&
+        {this.state.checked && (
           <FormGroup className="formItem">
             <Label>Digite o endereço de ambas as ruas</Label>
             <Input
-              style={{ resize: 'none' }}
+              style={{ resize: "none" }}
               name="address_crossing"
               type="textarea"
               required
@@ -128,13 +136,13 @@ class Accident extends Component {
               onChange={this.props.onChange}
             />
           </FormGroup>
-        }
+        )}
 
-        {(this.props.disabled && this.props.state.address_crossing) &&
+        {this.props.disabled && this.props.state.address_crossing && (
           <FormGroup className="formItem">
             <Label>Digite o endereço de ambas as ruas</Label>
             <Input
-              style={{ resize: 'none' }}
+              style={{ resize: "none" }}
               name="address_crossing"
               type="textarea"
               required
@@ -144,7 +152,7 @@ class Accident extends Component {
               onChange={this.props.onChange}
             />
           </FormGroup>
-        }
+        )}
 
         <FormGroup>
           <Label>Tipo de acidente</Label>
@@ -221,7 +229,7 @@ class Accident extends Component {
         <FormGroup className="formItem">
           <Label>Descreva como foi o acidente</Label>
           <Input
-            style={{ resize: 'none' }}
+            style={{ resize: "none" }}
             name="description_occurrence"
             type="textarea"
             required
@@ -233,8 +241,10 @@ class Accident extends Component {
           />
         </FormGroup>
 
-        {!this.props.disabled &&
-          <div style={{ display: 'flex', flexDirection: 'row', marginBottom: 20 }}>
+        {!this.props.disabled && (
+          <div
+            style={{ display: "flex", flexDirection: "row", marginBottom: 20 }}
+          >
             <FormGroup>
               <Label>Envio de imagem</Label>
               <Input
@@ -251,24 +261,40 @@ class Accident extends Component {
             </FormGroup>
             <div style={{ marginLeft: -40 }}>
               {this.state.image.map((item, index) => (
-                <img key={index} src={item} width="150" height="150" style={{ marginRight: 10 }} />
-              ))
-              }
+                <img
+                  key={index}
+                  src={item}
+                  width="150"
+                  height="150"
+                  style={{ marginRight: 10 }}
+                />
+              ))}
             </div>
           </div>
-        }
+        )}
 
-        {this.props.disabled && this.props.state.images &&
+        {this.props.disabled && this.props.state.images && (
           <div>
             {this.props.state.images.map((item, index) => (
-              <img key={index} src={item} width="150" height="150" style={{ marginRight: 10 }} />
-            ))
-            }
+              <img
+                key={index}
+                src={item}
+                width="150"
+                height="150"
+                style={{ marginRight: 10 }}
+              />
+            ))}
           </div>
-        }
+        )}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {this.props.disabled ? (
-            <Link to={getUser().permissions === 'all' ? "/ocorrencias" : "/historico-registro"}>
+            <Link
+              to={
+                getUser().permissions === "all"
+                  ? "/ocorrencias"
+                  : "/historico-registro"
+              }
+            >
               <Button color="secondary" style={{ marginRight: 10 }}>
                 Voltar
               </Button>

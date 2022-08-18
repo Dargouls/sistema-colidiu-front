@@ -12,7 +12,7 @@ import {
   InputGroupAddon,
   InputGroupText,
   Row,
-  Spinner
+  Spinner,
 } from "reactstrap";
 import { Link, Redirect, Switch } from "react-router-dom";
 
@@ -65,7 +65,6 @@ class Register extends Component {
   }
 
   handleChange(event, position) {
-
     if (position === "cpf") {
       this.setState({
         ...this.state,
@@ -85,7 +84,6 @@ class Register extends Component {
         },
       });
     }
-
 
     if (position === "telefone") {
       this.setState({
@@ -116,19 +114,20 @@ class Register extends Component {
   _registerUser = async (e) => {
     e.preventDefault();
 
-    const validation = Object.values(this.state.validation).some(item => item === "error");
+    const validation = Object.values(this.state.validation).some(
+      (item) => item === "error"
+    );
 
     if (validation) {
-      return toast.error("Verifique os campos destacados em vermelho!")
+      return toast.error("Verifique os campos destacados em vermelho!");
     }
 
     if (this.state.user.senha !== this.state.user.confirmarSenha) {
-      return toast.warning("Senhas digitadas não são correspondentes!")
+      return toast.warning("Senhas digitadas não são correspondentes!");
     }
     const { cpf, nome, email, senha, confirmarSenha, telefone } =
       this.state.user;
 
-    this.setState({ loading: !this.state.loading })
     let register = await this.props.registerUser(
       nome,
       cpf,
@@ -139,8 +138,10 @@ class Register extends Component {
       telefone
     );
     if (register) {
-      this.setState({ loading: !this.state.loading })
+      this.setState({ loading: !this.state.loading });
       this.props.history.push("/");
+    } else {
+      this.setState({ loading: false }); //Caso o registro tenha falhado, não irá chamar Spinner
     }
   };
 
@@ -196,9 +197,7 @@ class Register extends Component {
                           />
                         )}
                       </InputMask>
-                      <FormFeedback>
-                        {this.props.msgCpfInvalid}
-                      </FormFeedback>
+                      <FormFeedback>{this.props.msgCpfInvalid}</FormFeedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -336,11 +335,18 @@ class Register extends Component {
                         {this.props.msgConfirmarSenhaInvalid}
                       </FormFeedback>
                     </InputGroup>
-                    {this.state.loading ?
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
+                    {this.state.loading ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: 10,
+                        }}
+                      >
                         <Spinner />
                       </div>
-                      :
+                    ) : (
                       <Button
                         type="submit"
                         style={{ backgroundColor: "#263238", color: "#FFF" }}
@@ -348,7 +354,7 @@ class Register extends Component {
                       >
                         Criar Conta
                       </Button>
-                    }
+                    )}
                   </Form>
                 </CardBody>
               </Card>
@@ -405,11 +411,16 @@ const validEmail = (email) => {
 };
 
 const isValidCPF = (cpf) => {
-  if (typeof cpf !== 'string') return false
-  cpf = cpf.replace(/[^\d]+/g, '')
-  if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false
-  cpf = cpf.split('').map(el => +el)
-  const rest = (count) => (cpf.slice(0, count - 12)
-    .reduce((soma, el, index) => (soma + el * (count - index)), 0) * 10) % 11 % 10
-  return rest(10) === cpf[9] && rest(11) === cpf[10]
-}
+  if (typeof cpf !== "string") return false;
+  cpf = cpf.replace(/[^\d]+/g, "");
+  if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false;
+  cpf = cpf.split("").map((el) => +el);
+  const rest = (count) =>
+    ((cpf
+      .slice(0, count - 12)
+      .reduce((soma, el, index) => soma + el * (count - index), 0) *
+      10) %
+      11) %
+    10;
+  return rest(10) === cpf[9] && rest(11) === cpf[10];
+};

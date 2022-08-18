@@ -1,10 +1,20 @@
 import React, { Component } from "react";
-import { FormGroup, Label, Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from "reactstrap";
+import {
+  FormGroup,
+  Label,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
+} from "reactstrap";
 import { toast } from "react-toastify";
-import LoadingOverlay from 'react-loading-overlay';
+import LoadingOverlay from "react-loading-overlay";
+
+import "../styles.css";
 
 class Confirmation extends Component {
-
   constructor(props) {
     super(props);
     this.handleCheckInfo = this.handleCheckInfo.bind(this);
@@ -12,28 +22,28 @@ class Confirmation extends Component {
     this.state = {
       modal: false,
       checked: false,
-      message: '',
-    }
+      message: "",
+    };
   }
 
   handleCheckInfo() {
     if (this.state.checked) {
-      this.props.handleSendRegister()
+      this.props.handleSendRegister();
     } else {
-      toast.warning("Confirme a veracidade das informações prestadas!")
+      toast.warning("Confirme a veracidade das informações prestadas!");
     }
   }
 
   handleCheckStatus() {
-    if (this.state.message !== '') {
-      this.props.handleSendStatus("Reprovado", this.state.message)
+    if (this.state.message !== "") {
+      this.props.handleSendStatus("Reprovado", this.state.message);
     } else {
-      toast.warning("Escreva os motivos pela qual a ocorrência foi negada!")
+      toast.warning("Escreva os motivos pela qual a ocorrência foi negada!");
     }
   }
 
   componentDidMount() {
-    console.log(this.state.checked)
+    console.log(this.state.checked);
   }
 
   render() {
@@ -41,13 +51,15 @@ class Confirmation extends Component {
       <LoadingOverlay
         active={this.props.loading}
         spinner
-        text='Enviando dados...'
+        text="Enviando dados..."
       >
         <div>
-          {!this.props.disabled ?
+          {!this.props.disabled ? (
             <>
               <Label>
-                <span style={{ fontSize: 20, fontWeight: "bold" }}>Atenção</span>
+                <span style={{ fontSize: 20, fontWeight: "bold" }}>
+                  Atenção
+                </span>
               </Label>
 
               <p>
@@ -57,17 +69,23 @@ class Confirmation extends Component {
               </p>
 
               <p>
-                Após a conferência dos dados cadastrados ASSINALE a confirmação da
-                veracidade das informações prestadas e clique em CONCLUIR para cadastrar
-                sua ocorrência.
+                Após a conferência dos dados cadastrados ASSINALE a confirmação
+                da veracidade das informações prestadas e clique em CONCLUIR
+                para cadastrar sua ocorrência.
               </p>
 
-              <div style={{ color: "red", display: "flex", flexDirection: "column" }}>
+              <div
+                style={{
+                  color: "red",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <span>Importante!</span>
 
                 <span>
-                  Ao clicar em CANCELAR, todos os dados do registro serão excluidos do
-                  sistema, retornando assim á tela inicial.
+                  Ao clicar em CANCELAR, todos os dados do registro serão
+                  excluidos do sistema, retornando assim á tela inicial.
                 </span>
               </div>
               <FormGroup>
@@ -85,8 +103,15 @@ class Confirmation extends Component {
               </Label>
 
               <FormGroup>
-                <div style={{ display: 'flex', flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "80%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <Label>{`Tipo do Veículo: ${this.props.state.type_vehicle}`}</Label>
                     <Label>{`Nº Ocupantes: ${this.props.state.number_occupants}`}</Label>
                     <Label>{`Carga: `}</Label>
@@ -98,7 +123,7 @@ class Confirmation extends Component {
                     <Label>{`Telefone Celular: ${this.props.state.phone}`}</Label>
                     <Label>{`E-mail: ${this.props.state.email}`}</Label>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <Label>{`Placa: ${this.props.state.plate}`}</Label>
                     <Label>{`Possuia Pelicula? ${this.props.state.pellicle}`}</Label>
                     <Label>{`Acionou Air-bag? ${this.props.state.airbag}`}</Label>
@@ -107,7 +132,7 @@ class Confirmation extends Component {
                     {/* <Label>Número</Label>
                   <Label>Telefone Residencial</Label> */}
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <Label>{`Renavam ${this.props.state.renavam}`}</Label>
                     <Label>{`Veículo no momento do fato: ${this.props.state.state_vehicle}`}</Label>
                     <Label>{`Possui Seguro? : ${this.props.state.safe_vehicle}`}</Label>
@@ -121,8 +146,7 @@ class Confirmation extends Component {
               </FormGroup>
 
               <FormGroup>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-
+                <div style={{ display: "flex", flexDirection: "column" }}>
                   <Label>
                     <span style={{ fontSize: 20, fontWeight: "bold" }}>
                       Veículos
@@ -133,9 +157,8 @@ class Confirmation extends Component {
                 </div>
               </FormGroup>
               <FormGroup>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
                   <Label>
-
                     <span style={{ fontSize: 20, fontWeight: "bold" }}>
                       Testemunhas
                     </span>
@@ -173,13 +196,21 @@ class Confirmation extends Component {
               </FormGroup> */}
 
               <FormGroup>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "baseline",
+                    }}
+                  >
                     <input
                       type="checkbox"
                       name="check-accept"
                       value={this.state.checked}
-                      onChange={() => this.setState({ checked: !this.state.checked })}
+                      onChange={() =>
+                        this.setState({ checked: !this.state.checked })
+                      }
                     />
                     <p> CONFIRMO A VERACIDADE DAS INFORMAÇÕES PRESTADAS</p>
                   </div>
@@ -193,11 +224,11 @@ class Confirmation extends Component {
                 >
                   Voltar
                 </Button>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Button
-                    color="secondary"
+                    color="danger"
                     style={{ marginRight: 10 }}
-                    onClick={() => alert('Cancelar registro....')}
+                    onClick={() => alert("Cancelar registro....")}
                   >
                     Cancelar
                   </Button>
@@ -209,48 +240,57 @@ class Confirmation extends Component {
                   </Button>
                 </div>
               </div>
-
             </>
-            :
+          ) : (
             <>
               <Label>
-                <span style={{ fontSize: 20, fontWeight: "bold" }}>Atenção</span>
+                <span style={{ fontSize: 20, fontWeight: "bold" }}>
+                  Atenção
+                </span>
               </Label>
 
               <p>
-                Antes de clicar em "Aprovar" ou "Reprovar" confira todos os dados cadastrados neste
-                BATEU navegando pelas ABAS/JANELAS anteriores.
+                Antes de clicar em "Aprovar" ou "Reprovar" confira todos os
+                dados cadastrados neste BATEU navegando pelas ABAS/JANELAS
+                anteriores.
               </p>
 
               <p>
-                Após a conferência dos dados cadastrados CLIQUE na opção correspondente a análise realizada.
+                Após a conferência dos dados cadastrados CLIQUE na opção
+                correspondente a análise realizada.
               </p>
 
               <Modal
                 isOpen={this.state.modal}
-              // toggle={function noRefCheck() { }}
+                // toggle={function noRefCheck() { }}
               >
-                <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>
+                <ModalHeader
+                  toggle={() => this.setState({ modal: !this.state.modal })}
+                >
                   Justificativa
                 </ModalHeader>
                 <ModalBody>
-
                   <FormGroup>
-                    <Label for="exampleText">Descreva o motivo pela qual foi negado</Label>
+                    <Label for="exampleText">
+                      Descreva o motivo pela qual foi negado
+                    </Label>
                     <Input
                       type="textarea"
                       name="text"
                       id="exampleText"
                       rows="10"
-                      style={{ resize: 'none', overflow: 'auto' }}
+                      style={{ resize: "none", overflow: "auto" }}
                       value={this.state.message}
-                      onChange={(e) => this.setState({ message: e.target.value })}
+                      onChange={(e) =>
+                        this.setState({ message: e.target.value })
+                      }
                     />
                   </FormGroup>
-
                 </ModalBody>
                 <ModalFooter>
-                  <Button onClick={() => this.setState({ modal: !this.state.modal })}>
+                  <Button
+                    onClick={() => this.setState({ modal: !this.state.modal })}
+                  >
                     Cancelar
                   </Button>
                   <Button
@@ -270,7 +310,7 @@ class Confirmation extends Component {
                 >
                   Voltar
                 </Button>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Button
                     color="danger"
                     style={{ marginRight: 10 }}
@@ -287,7 +327,7 @@ class Confirmation extends Component {
                 </div>
               </div>
             </>
-          }
+          )}
         </div>
       </LoadingOverlay>
     );
